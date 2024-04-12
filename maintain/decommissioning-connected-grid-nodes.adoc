@@ -1,0 +1,130 @@
+---
+permalink: maintain/decommissioning-connected-grid-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission, connected nodes, decommission node 
+summary: Você pode desativar e remover permanentemente nós que estão conetados à grade. 
+---
+= Desativar os nós de grade conetados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode desativar e remover permanentemente nós que estão conetados à grade.
+
+.Antes de começar
+* Você entende os requisitos e link:considerations-for-decommissioning-grid-nodes.html["considerações para a desativação de nós de grade"].
+* Você reuniu todos os materiais necessários.
+* Você garantiu que nenhum trabalho de reparo de dados está ativo.
+* Você confirmou que a recuperação do nó de storage não está em andamento em nenhum lugar da grade. Se estiver, aguarde até que qualquer reconstrução do Cassandra executada como parte da recuperação esteja concluída. Você pode então prosseguir com a desativação.
+* Você garantiu que outros procedimentos de manutenção não serão executados enquanto o procedimento de desativação do nó estiver em execução, a menos que o procedimento de desativação do nó esteja pausado.
+* Você tem a senha de provisionamento.
+* Os nós de grade estão conetados.
+* A coluna *Decommission possible* para o nó ou nós que você deseja desativar inclui uma marca de seleção verde.
++
+
+NOTE: A desativação não será iniciada se um ou mais volumes estiverem offline (desmontados) ou se estiverem online (montados), mas em estado de erro.
+
++
+
+NOTE: Se um ou mais volumes ficarem offline enquanto uma desativação estiver em andamento, o processo de desativação será concluído depois que esses volumes voltarem a estar online.
+
+* Todos os nós da grade têm a saúde normal (verde) image:../media/icon_alert_green_checkmark.png["ícone de marca de verificação verde"]. Se você vir um desses ícones na coluna *Saúde*, tente resolver o problema:
++
+[cols="1a,1a,3a"]
+|===
+| Ícone | Cor | Gravidade 
+
+
+ a| 
+image:../media/icon_alarm_yellow_notice.gif["ícone quadrado amarelo"]
+ a| 
+Amarelo
+ a| 
+Aviso
+
+
+
+ a| 
+image:../media/icon_alert_yellow_minor.png["ícone de diamante laranja claro"]
+ a| 
+Laranja claro
+ a| 
+Menor
+
+
+
+ a| 
+image:../media/icon_alert_orange_major.png["ícone de diamante laranja escuro"]
+ a| 
+Laranja escuro
+ a| 
+Maior
+
+
+
+ a| 
+image:../media/icon_alert_red_critical.png["ícone vermelho x"]
+ a| 
+Vermelho
+ a| 
+Crítico
+
+|===
+* Se você desativou anteriormente um nó de storage desconetado, todos os trabalhos de reparo de dados foram concluídos com êxito. link:checking-data-repair-jobs.html["Verifique os trabalhos de reparação de dados"]Consulte .
+
+
+
+IMPORTANT: Não remova a máquina virtual de um nó de grade ou outros recursos até que seja instruído a fazê-lo neste procedimento.
+
+.Passos
+. Na página Decommission Nodes, marque a caixa de seleção para cada nó de grade que você deseja desativar.
+. Introduza a frase-passe de aprovisionamento.
++
+O botão *Start Decommission* está ativado.
+
+. Clique em *Start Decommission*.
+. Revise a lista de nós na caixa de diálogo de confirmação e clique em *OK*.
++
+O procedimento de desativação do nó é iniciado e o progresso é exibido para cada nó. Durante o procedimento, um novo pacote de recuperação é gerado para mostrar a alteração da configuração da grade.
+
++
+image::../media/decommission_nodes_procedure_in_progress.png[captura de tela da desativação do nó em andamento]
+
++
+
+IMPORTANT: Não coloque um nó de armazenamento offline após o início do procedimento de desativação. Alterar o estado pode resultar em algum conteúdo não ser copiado para outros locais.
+
+. Assim que o novo pacote de recuperação estiver disponível, clique no link ou selecione *MAINTENANCE* > *System* > *Recovery package* para acessar a página Recovery Package. Em seguida, baixe o `.zip` arquivo.
++
+Consulte as instruções para link:downloading-recovery-package.html["Transferir o pacote de recuperação"].
+
++
+
+NOTE: Baixe o pacote de recuperação o mais rápido possível para garantir que você possa recuperar sua grade se algo der errado durante o procedimento de desativação.
+
+. Monitore periodicamente a página Decommission Nodes para garantir que todos os nós selecionados sejam desativados com êxito.
++
+Os nós de storage podem levar dias ou semanas para serem desativados. Quando todas as tarefas estiverem concluídas, a lista de seleção de nós é reexibida com uma mensagem de sucesso.
+
++
+image::../media/decommission_nodes_procedure_complete.png[captura de tela mostrando que a desativação está concluída]
+
+. Siga o passo apropriado para a sua plataforma. Por exemplo:
++
+** * Linux*: Você pode querer desanexar os volumes e excluir os arquivos de configuração de nó criados durante a instalação.
+** *VMware*: Você pode querer usar a opção "Excluir do disco" do vCenter para excluir a máquina virtual. Você também pode precisar excluir quaisquer discos de dados que sejam independentes da máquina virtual.
+** *StorageGRID Appliance*: O nó appliance reverte automaticamente para um estado não implantado, onde você pode acessar o Instalador de dispositivos StorageGRID. Pode desligar o aparelho ou adicioná-lo a outro sistema StorageGRID.
+
+
+
+
+Siga estas etapas depois de concluir o procedimento de desativação do nó:
+
+* Certifique-se de que as unidades do nó de grade desativado estão limpas. Utilize uma ferramenta ou serviço de limpeza de dados disponíveis no mercado para remover dados das unidades de forma permanente e segura.
+* Se você desativou um nó de dispositivo e os dados do dispositivo foram protegidos usando criptografia de nó, use o Instalador de dispositivos StorageGRID para limpar a configuração do servidor de gerenciamento de chaves (limpar KMS). Você deve limpar a configuração do KMS se quiser adicionar o dispositivo a outra grade. Para obter instruções, link:../commonhardware/monitoring-node-encryption-in-maintenance-mode.html["Monitore a criptografia do nó no modo de manutenção"]consulte .
+
+
+.Informações relacionadas
+link:../rhel/index.html["Instale o Red Hat Enterprise Linux ou CentOS"]

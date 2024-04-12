@@ -1,0 +1,49 @@
+---
+permalink: vmware/index.html 
+sidebar: sidebar 
+keywords: vmware 
+summary: A instalação de um sistema StorageGRID em um ambiente VMware inclui três etapas principais. 
+---
+= Instalar o VMware: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A instalação de um sistema StorageGRID em um ambiente VMware inclui três etapas principais.
+
+. *Preparação*: Durante o Planejamento e a preparação, você executa as seguintes tarefas:
++
+** Saiba mais sobre os requisitos de hardware, software, máquina virtual, armazenamento e desempenho do StorageGRID.
+** Saiba mais sobre os detalhes do link:../network/index.html["Rede StorageGRID"] para que você possa configurar sua rede adequadamente.
+** Identifique e prepare os servidores físicos que você planeja usar para hospedar seus nós de grade do StorageGRID.
+** Nos servidores que você preparou:
++
+*** Instale o VMware vSphere Hypervisor
+*** Configure os hosts ESX
+*** Instalar e configurar o VMware vSphere e o vCenter
+
+
+
+
+. *Implantação*: Implante nós de grade usando o VMware vSphere Web Client. Quando você implementa nós de grade, eles são criados como parte do sistema StorageGRID e conetados a uma ou mais redes.
++
+.. Use o VMware vSphere Web Client, um arquivo .vmdk e um conjunto de modelos de arquivo .ovf para implantar os nós baseados em software como máquinas virtuais (VMs) nos servidores preparados na etapa 1.
+.. Use o Instalador de dispositivos StorageGRID para implantar nós de dispositivos StorageGRID.
++
+
+NOTE: As instruções de instalação e integração específicas de hardware não estão incluídas no procedimento de instalação do StorageGRID. Para saber como instalar dispositivos StorageGRID, consulte link:../installconfig/index.html["Início rápido para instalação de hardware"] para localizar as instruções do seu aparelho.
+
+
+
+. *Configuração*: Quando todos os nós tiverem sido implantados, use o Gerenciador de Grade para configurar a grade e concluir a instalação.
+
+
+Essas instruções recomendam uma abordagem padrão para implantar e configurar um sistema StorageGRID em um ambiente VMware. Consulte também as informações sobre as seguintes abordagens alternativas:
+
+* Use o script deploy-vsphere-ovftool.sh Bash (disponível no arquivo de instalação) para implantar nós de grade no VMware vSphere.
+* Automatize a implantação e configuração do sistema StorageGRID usando um script de configuração Python (fornecido no arquivo de instalação).
+* Automatize a implantação e a configuração dos nós de grade do dispositivo com um script de configuração Python (disponível no arquivo de instalação ou no instalador do dispositivo StorageGRID).
+* Se você é um desenvolvedor avançado de implantações do StorageGRID, use as APIS REST de instalação para automatizar a instalação de nós de grade do StorageGRID.
+

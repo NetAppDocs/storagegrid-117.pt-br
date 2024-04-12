@@ -1,0 +1,46 @@
+---
+permalink: admin/changing-browser-session-timeout-interface.html 
+sidebar: sidebar 
+keywords: browser inactivity timeout, inactive users 
+summary: Você pode controlar se os usuários do Grid Manager e do Tenant Manager estão desconetados se estiverem inativos por mais de um determinado período de tempo. 
+---
+= Alterar o tempo limite de inatividade do navegador
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode controlar se os usuários do Grid Manager e do Tenant Manager estão desconetados se estiverem inativos por mais de um determinado período de tempo.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você tem permissão de acesso root.
+
+
+.Sobre esta tarefa
+O tempo limite de inatividade do navegador é predefinido para 15 minutos. Se o navegador de um usuário não estiver ativo por esse período de tempo, o usuário será desconetado.
+
+Conforme necessário, você pode aumentar ou diminuir o período de tempo limite definindo a opção *Sair de usuários inativos após*.
+
+O tempo limite de inatividade do navegador também é controlado pelo seguinte:
+
+* Um temporizador StorageGRID separado, não configurável, incluído para a segurança do sistema. Por padrão, o token de autenticação de cada usuário expira 16 horas após o login do usuário. Quando a autenticação de um usuário expira, esse usuário é automaticamente desconetado, mesmo que o tempo limite de inatividade do navegador esteja desativado ou o valor do tempo limite do navegador não tenha sido atingido. Para renovar o token, o usuário deve entrar novamente.
+* Configurações de tempo limite para o provedor de identidade, supondo que o logon único (SSO) esteja ativado para o StorageGRID.
++
+Se o SSO estiver ativado e o navegador de um usuário expirar, o usuário deverá inserir novamente suas credenciais SSO para acessar o StorageGRID novamente. link:configuring-sso.html["Configurar o logon único"]Consulte .
+
+
+
+.Passos
+. Selecione *CONFIGURATION* > *Security* > *Security settings*.
+. Selecione a guia *tempo limite de inatividade do navegador*.
+. No campo *Sair de usuários inativos após*, especifique um período de tempo limite do navegador entre 60 segundos e 7 dias.
++
+Você pode especificar o período de tempo limite do navegador em segundos, minutos, horas ou dias.
+
+. Selecione *Guardar*. Se um navegador estiver inativo durante o período de tempo especificado, o usuário será desconetado do Gerenciador de Grade ou do Gerenciador de Tenant.
++
+A nova configuração não afeta os usuários conetados atualmente. Os usuários devem entrar novamente ou atualizar seus navegadores para que a nova configuração de tempo limite entre em vigor.
+
+

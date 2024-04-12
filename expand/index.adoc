@@ -1,0 +1,37 @@
+---
+permalink: expand/index.html 
+sidebar: sidebar 
+keywords: expand grid 
+summary: Use estas instruções para expandir a capacidade ou as funcionalidades do sistema StorageGRID sem interromper as operações do sistema. 
+---
+= Expanda sua grade: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Use estas instruções para expandir a capacidade ou as funcionalidades do sistema StorageGRID sem interromper as operações do sistema.
+
+
+
+== Sobre estas instruções
+
+Essas instruções descrevem como executar uma expansão do StorageGRID para adicionar volumes de storage a nós de storage, novos nós de grade a um local existente ou a um local novo inteiro.
+
+Estas instruções destinam-se ao pessoal técnico responsável pela configuração e suporte do sistema StorageGRID após a instalação.
+
+
+
+== Fluxo de trabalho de expansão
+
+A razão pela qual você está executando a expansão determina quantos novos nós de cada tipo você deve adicionar e o local desses novos nós. Por exemplo, há requisitos de nó diferentes se você estiver executando uma expansão para aumentar a capacidade de storage, adicionar capacidade de metadados ou adicionar redundância ou novos recursos.
+
+Como mostrado no fluxo de trabalho, as etapas para executar uma expansão dependem da adição de volumes de storage a um nó de storage, da adição de novos nós a um site existente ou da adição de um novo site. Em todos os casos, você pode executar a expansão sem interromper a operação do sistema atual.
+
+As etapas para adicionar nós também dependem se você está adicionando dispositivos StorageGRID ou hosts executando VMware ou Linux.
+
+
+NOTE: "Linux" refere-se a uma implantação Red Hat Enterprise Linux, Ubuntu, CentOS ou Debian. Utilize o https://imt.netapp.com/matrix/#welcome["Ferramenta de Matriz de interoperabilidade NetApp (IMT)"^] para obter uma lista de versões suportadas.
+
+image::../media/expansion_workflow.png[fluxograma mostrando a visão geral do processo de expansão]

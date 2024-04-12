@@ -1,0 +1,35 @@
+---
+permalink: upgrade/impact-of-upgrade-on-groups-and-user-accounts.html 
+sidebar: sidebar 
+keywords: upgrade, permissions 
+summary: Você deve entender o impactos da atualização do StorageGRID para que possa atualizar grupos e contas de usuário adequadamente após a conclusão da atualização. 
+---
+= Impacto de uma atualização em grupos e contas de usuários
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve entender o impactos da atualização do StorageGRID para que possa atualizar grupos e contas de usuário adequadamente após a conclusão da atualização.
+
+
+
+== Alterações nas permissões e opções de grupo
+
+Depois de atualizar para o StorageGRID 11,7, atribua opcionalmente a seguinte nova permissão aos grupos de usuários de locatário.
+
+[cols="1a,2a"]
+|===
+| Permissão | Descrição 
+
+
+ a| 
+Gerenciador de locatários > Gerenciar objetos com o Console S3
+ a| 
+Quando combinada com a permissão Gerenciar todos os buckets, essa permissão permite que os usuários acessem o link:../tenant/use-s3-console.html["Console experimental S3"] da página Buckets.
+
+Os usuários que têm essa permissão, mas que não têm a permissão Gerenciar todos os buckets, ainda podem navegar diretamente para o experimental S3 Console.
+
+|===
+link:../tenant/tenant-management-permissions.html["Permissões de gerenciamento do locatário"]Consulte .

@@ -1,0 +1,156 @@
+---
+permalink: installconfig/cabling-appliance-sgf6112.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6100, cabling, wiring, connecting, cable, wire, connect, SGF6112 
+summary: Ligue a porta de gestão do dispositivo ao computador portátil de serviço e ligue as portas de rede do dispositivo à rede de grelha e à rede de cliente opcional para StorageGRID. 
+---
+= Aparelho de cabo (SGF6112)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ligue a porta de gestão do dispositivo ao computador portátil de serviço e ligue as portas de rede do dispositivo à rede de grelha e à rede de cliente opcional para StorageGRID.
+
+.Antes de começar
+* Você tem um cabo Ethernet RJ-45 para conetar a porta de gerenciamento.
+* Tem uma das seguintes opções para as portas de rede. Estes itens não são fornecidos com o aparelho.
++
+** Um a quatro cabos Twinax para ligar as quatro portas de rede.
+** Um a quatro transcetores SFP ou SFP28G se você planeja usar cabos óticos para as portas.
+
+
+
+
+
+CAUTION: *Risco de exposição à radiação laser* -- não desmonte nem remova qualquer parte de um transcetor SFP. Você pode estar exposto à radiação laser.
+
+.Sobre esta tarefa
+As figuras a seguir mostram as portas na parte de trás do SGF6112.
+
+image::../media/sgf6112_connections.png[SGF6112 conetores traseiros]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo de porta | Utilização 
+
+
+ a| 
+1
+ a| 
+Porta de gerenciamento BMC no dispositivo
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga-se à rede onde acede à interface BMC.
+
+
+
+ a| 
+2
+ a| 
+Quatro portas de rede 10/25-GbE no dispositivo
+ a| 
+ a| 
+Conete-se à rede de grade e à rede de cliente para StorageGRID.
+
+
+
+ a| 
+3
+ a| 
+Porta de rede de administração no dispositivo (identificada como P1 na figura)
+ a| 
+1 GbE (RJ-45)
+
+*Importante:* esta porta opera apenas a 1/10-GbE (RJ-45) e não suporta velocidades de 100 megabits.
+ a| 
+Liga o dispositivo à rede de administração para StorageGRID.
+
+
+
+ a| 
+ a| 
+Porta RJ-45 mais à direita no aparelho
+ a| 
+1 GbE (RJ-45)
+
+*Importante:* esta porta opera apenas a 1/10-GbE (RJ-45) e não suporta velocidades de 100 megabits.
+ a| 
+* Pode ser ligado com a porta de gerenciamento 1 se você quiser uma conexão redundante com a rede de administração.
+* Pode ser deixado desconetado e disponível para acesso local temporário (IP 169.254.0.1).
+* Durante a instalação, pode ser utilizado para ligar o dispositivo a um computador portátil de serviço se os endereços IP atribuídos por DHCP não estiverem disponíveis.
+
+
+|===
+.Passos
+. Conete a porta de gerenciamento BMC do dispositivo à rede de gerenciamento, usando um cabo Ethernet.
++
+Embora essa conexão seja opcional, recomenda-se facilitar o suporte.
+
+. Ligue as portas de rede do aparelho aos comutadores de rede adequados, utilizando cabos Twinax ou cabos óticos e transcetores.
++
+[NOTE]
+====
+Todas as quatro portas de rede devem usar a mesma velocidade de link.
+
+[cols="2a,2a"]
+|===
+| Velocidade da ligação de SGF6112 (GbE) | Equipamento necessário 
+
+
+ a| 
+10
+ a| 
+Transceptor SFP
+
+
+
+ a| 
+25
+ a| 
+Transcetor SFP28
+
+|===
+====
++
+** Se você planeja usar o modo de ligação de porta fixa (padrão), conete as portas à rede StorageGRID e às redes de clientes, conforme mostrado na tabela.
++
+[cols="1a,2a"]
+|===
+| Porta | Liga a... 
+
+
+ a| 
+Porta 1
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 2
+ a| 
+Rede de rede
+
+
+
+ a| 
+Porta 3
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 4
+ a| 
+Rede de rede
+
+|===
+** Se você planeja usar o modo de ligação de porta agregada, conete uma ou mais portas de rede a um ou mais switches. Você deve conetar pelo menos duas das quatro portas para evitar ter um único ponto de falha. Se você usar mais de um switch para uma única ligação LACP, os switches devem suportar MLAG ou equivalente.
+
+
+. Se pretender utilizar a rede de administração para StorageGRID, ligue a porta de rede de administração do dispositivo à rede de administração, utilizando um cabo Ethernet.
+

@@ -1,0 +1,31 @@
+---
+permalink: installconfig/connecting-power-cords-and-applying-power-sgf6112.html 
+sidebar: sidebar 
+keywords: storagegrid, sgf6112, wire, wiring, cabling, cable, Connecting, connect, power cords, power, applying power, apply power, turn on, power up, ac, ac power 
+summary: Depois de ligar os cabos de rede, está pronto para ligar a alimentação ao aparelho. 
+---
+= Conete os cabos de alimentação e ligue a alimentação (SGF6112)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depois de ligar os cabos de rede, está pronto para ligar a alimentação ao aparelho.
+
+.Passos
+. Ligue um cabo de alimentação a cada uma das duas fontes de alimentação do aparelho.
+. Conete esses dois cabos de alimentação a duas unidades de distribuição de energia (PDUs) diferentes no gabinete ou no rack.
+. Se o botão liga/desliga na parte frontal do aparelho não estiver aceso a azul, prima o botão para ligar o aparelho.
++
+Não prima novamente o botão de alimentação durante o processo de ativação.
+
++
+O LED na fonte de alimentação deve estar aceso a verde sem piscar.
+
+. Se ocorrerem erros, corrija quaisquer problemas.
+. Coloque a moldura frontal no aparelho, se tiver sido removida.
+
+
+.Informações relacionadas
+link:viewing-status-indicators.html["Ver indicadores de estado"]

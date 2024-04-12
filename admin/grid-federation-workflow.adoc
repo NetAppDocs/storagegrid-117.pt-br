@@ -1,0 +1,27 @@
+---
+permalink: admin/grid-federation-workflow.html 
+sidebar: sidebar 
+keywords: grid federation workflow, cross-grid replication, account clone, cgr, disaster recovery 
+summary: Como administrador de grade, você deve coordenar de perto com os usuários do locatário para estabelecer e usar uma conexão de federação de grade entre dois sistemas StorageGRID para clone de conta e replicação entre grade. 
+---
+= Fluxo de trabalho de federação de grade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Como administrador de grade, você deve coordenar de perto com os usuários do locatário para estabelecer e usar uma conexão de federação de grade entre dois sistemas StorageGRID para clone de conta e replicação entre grade.
+
+O diagrama de fluxo de trabalho mostra as etapas de alto nível que administradores de grade e usuários de locatário executarão para estabelecer uma conexão de federação de grade entre duas grades e configurar o clone de conta e a replicação entre grade.
+
+Depois de criar uma conexão de federação de grade entre duas grades, o administrador de grade cria uma ou mais novas contas de locatário e atribui uma permissão para determinar quem pode usar a conexão. Quando o novo locatário é salvo, o StorageGRID cria automaticamente um locatário idêntico na outra grade.
+
+Depois que o novo locatário estiver disponível em ambas as grades, os usuários do locatário poderão executar estas operações:
+
+* Na grade de origem do locatário, crie novos usuários e grupos de locatários, que são clonados automaticamente para a grade de destino do locatário.
+* A partir da grade de origem do locatário, crie novas chaves de acesso S3, que podem ser opcionalmente clonadas para a grade de destino do locatário.
+* Crie novos buckets em ambas as grades e, opcionalmente, habilite a replicação entre grades em uma direção ou em ambas as direções.
+
+
+image:../media/grid-federation-workflow.png["Fluxo de trabalho de federação de grade"]

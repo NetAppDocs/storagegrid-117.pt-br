@@ -1,0 +1,18 @@
+---
+permalink: maintain/site-decommissioning.html 
+sidebar: sidebar 
+keywords: site decommission 
+summary: Talvez seja necessário remover um site de data center do sistema StorageGRID. Para remover um site, você deve desativá-lo. 
+---
+= Desativação do site: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário remover um site de data center do sistema StorageGRID. Para remover um site, você deve desativá-lo.
+
+O fluxograma mostra as etapas de alto nível para a desativação de um local.
+
+image::../media/overview_decommission_site.png[Visão geral: Site de desativação]

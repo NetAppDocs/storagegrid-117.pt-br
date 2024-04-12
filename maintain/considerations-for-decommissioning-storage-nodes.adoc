@@ -1,0 +1,37 @@
+---
+permalink: maintain/considerations-for-decommissioning-storage-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission 
+summary: Se você pretende desativar um nó de storage, deve entender como o StorageGRID gerencia os dados e os metadados do objeto nesse nó. 
+---
+= Considerações para desativação do nó de storage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você pretende desativar um nó de storage, deve entender como o StorageGRID gerencia os dados e os metadados do objeto nesse nó.
+
+As considerações e restrições a seguir se aplicam ao descomissionamento de nós de storage:
+
+* O sistema deve, em todos os momentos, incluir nós de armazenamento suficientes para satisfazer os requisitos operacionais, incluindo o quórum de ADC e a política de ILM ativa. Para satisfazer essa restrição, talvez seja necessário adicionar um novo nó de armazenamento em uma operação de expansão antes de poder desativar um nó de armazenamento existente.
+* Se o nó de storage for desconetado ao desativá-lo, o sistema deverá reconstruir os dados usando dados dos nós de storage conetados, o que pode resultar em perda de dados.
+* Quando você remove um nó de armazenamento, grandes volumes de dados de objeto devem ser transferidos pela rede. Embora essas transferências não devam afetar as operações normais do sistema, elas podem ter um impactos na quantidade total de largura de banda de rede consumida pelo sistema StorageGRID.
+* As tarefas associadas à desativação do nó de storage recebem uma prioridade menor do que as tarefas associadas às operações normais do sistema. Isso significa que a desativação não interfere nas operações normais do sistema StorageGRID e não precisa ser programada para um período de inatividade do sistema. Como a desativação é realizada em segundo plano, é difícil estimar quanto tempo o processo levará para ser concluído. Em geral, a desativação termina mais rapidamente quando o sistema está silencioso ou se apenas um nó de armazenamento está sendo removido de cada vez.
+* Pode levar dias ou semanas para desativar um nó de storage. Planeie este procedimento em conformidade. Embora o processo de desativação seja projetado para não impactar as operações do sistema, ele pode limitar outros procedimentos. Em geral, você deve executar quaisquer atualizações ou expansões planeadas do sistema antes de remover nós de grade.
+* Os procedimentos de desativação que envolvem nós de storage podem ser pausados durante determinados estágios para permitir que outros procedimentos de manutenção sejam executados, se necessário, e retomados assim que forem concluídos.
+* Não é possível executar operações de reparo de dados em nenhum nó de grade quando uma tarefa de desativação está em execução.
+* Você não deve fazer alterações na política de ILM enquanto um nó de storage estiver sendo desativado.
+* Quando você remove um nó de storage, os dados no nó são migrados para outros nós de grade; no entanto, esses dados não são completamente removidos do nó de grade desativado. Para remover dados de forma permanente e segura, você deve limpar as unidades do nó de grade desativado após o procedimento de desativação ser concluído.
+* Quando você desativa um nó de armazenamento, os seguintes alertas e alarmes podem ser enviados e você pode receber notificações de e-mail e SNMP relacionadas:
++
+** *Não é possível se comunicar com o alerta node*. Esse alerta é acionado quando você desativa um nó de armazenamento que inclui o serviço ADC. O alerta é resolvido quando a operação de desativação é concluída.
+** Alarme VSTU (Estado da verificação do objeto). Este alarme de nível de aviso indica que o nó de armazenamento está a entrar no modo de manutenção durante o processo de desativação.
+** Alarme CASA (Data Store Status). Esse alarme de nível principal indica que o banco de dados Cassandra está caindo porque os serviços pararam.
+
+
+
+
+.Informações relacionadas
+link:restoring-object-data-to-storage-volume.html["Restaure os dados de objetos para o volume de storage"]

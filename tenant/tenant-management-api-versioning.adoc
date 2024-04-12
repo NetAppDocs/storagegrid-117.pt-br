@@ -1,0 +1,79 @@
+---
+permalink: tenant/tenant-management-api-versioning.html 
+sidebar: sidebar 
+keywords: tenant management api version 
+summary: A API de gerenciamento do locatário usa o controle de versão para oferecer suporte a atualizações sem interrupções. 
+---
+= Controle de versão da API de gerenciamento de locatário
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A API de gerenciamento do locatário usa o controle de versão para oferecer suporte a atualizações sem interrupções.
+
+Por exemplo, este URL de solicitação especifica a versão 3 da API.
+
+`https://_hostname_or_ip_address_/api/v3/authorize`
+
+A versão principal da API de Gerenciamento do Tenant é desfocada quando são feitas alterações que são _não compatíveis_ com versões mais antigas. A versão menor da API de Gerenciamento do Tenant é desfocada quando são feitas alterações que _são compatíveis_ com versões mais antigas. As alterações compatíveis incluem a adição de novos endpoints ou novas propriedades. O exemplo a seguir ilustra como a versão da API é carregada com base no tipo de alterações feitas.
+
+[cols="2a,1a,1a"]
+|===
+| Tipo de alteração para API | Versão antiga | Nova versão 
+
+
+ a| 
+Compatível com versões mais antigas
+ a| 
+2,1
+ a| 
+2,2
+
+
+
+ a| 
+Não compatível com versões mais antigas
+ a| 
+2,1
+ a| 
+3,0
+
+|===
+Quando o software StorageGRID é instalado pela primeira vez, apenas a versão mais recente da API de gerenciamento de locatário é ativada. No entanto, quando o StorageGRID é atualizado para uma nova versão de recurso, você continua a ter acesso à versão mais antiga da API para pelo menos uma versão de recurso do StorageGRID.
+
+As solicitações desatualizadas são marcadas como obsoletas das seguintes maneiras:
+
+* O cabeçalho de resposta é "Deprecated: True"
+* O corpo de resposta JSON inclui "obsoleto": True
+
+
+
+
+== Determine quais versões de API são suportadas na versão atual
+
+Use a seguinte solicitação de API para retornar uma lista das principais versões da API suportada:
+
+[listing]
+----
+GET https://{{IP-Address}}/api/versions
+{
+  "responseTime": "2019-01-10T20:41:00.845Z",
+  "status": "success",
+  "apiVersion": "3.0",
+  "data": [
+    2,
+    3
+  ]
+}
+----
+
+
+== Especifique a versão da API para solicitação
+
+Você pode especificar a versão da API usando um parâmetro de caminho (`/api/v3`) ou um cabeçalho (`Api-Version: 3`). Se você fornecer ambos os valores, o valor do cabeçalho substitui o valor do caminho.
+
+`curl \https://<IP-Address>/api/v3/grid/accounts`
+
+`curl -H "Api-Version: 3" \https://<IP-Address>/api/grid/accounts`

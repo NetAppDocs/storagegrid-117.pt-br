@@ -1,0 +1,166 @@
+---
+permalink: s3/configuring-tenant-accounts-and-connections.html 
+sidebar: sidebar 
+keywords: configuring, tenant, connections 
+summary: Configurar o StorageGRID para aceitar conexões de aplicativos cliente requer a criação de uma ou mais contas de locatário e a configuração das conexões. 
+---
+= Configurar contas de inquilino e conexões
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Configurar o StorageGRID para aceitar conexões de aplicativos cliente requer a criação de uma ou mais contas de locatário e a configuração das conexões.
+
+
+
+== Criar e configurar contas de locatário do S3
+
+Uma conta de locatário S3 é necessária antes que os clientes API S3D possam armazenar e recuperar objetos no StorageGRID. Cada conta de locatário tem seu próprio ID de conta, grupos, usuários, buckets e objetos.
+
+As contas de locatário do S3 são criadas por um administrador de grade do StorageGRID usando o Gerenciador de grade ou a API de gerenciamento de grade. link:../admin/managing-tenants.html["Gerenciar locatários"]Consulte para obter detalhes. Depois que uma conta de locatário do S3 for criada, os usuários do locatário poderão acessar o Gerenciador do locatário para gerenciar grupos, usuários, chaves de acesso e buckets. link:../tenant/index.html["Use uma conta de locatário"]Consulte para obter detalhes.
+
+
+TIP: Embora os usuários de locatários do S3 possam criar e gerenciar chaves de acesso do S3 e buckets com o Gerenciador de locatários, eles precisam usar um aplicativo cliente do S3 para obter e gerenciar objetos. link:../s3/index.html["USE A API REST DO S3"]Consulte para obter detalhes.
+
+
+
+== Como configurar conexões de cliente
+
+Um administrador de grade faz escolhas de configuração que afetam a forma como os clientes S3 se conetam ao StorageGRID para armazenar e recuperar dados. Existem quatro etapas básicas para conetar o StorageGRID a qualquer aplicativo S3:
+
+* Execute tarefas de pré-requisito no StorageGRID, com base na forma como o aplicativo cliente se conetará ao StorageGRID.
+* Use StorageGRID para obter os valores que o aplicativo precisa para se conetar à grade. Você pode link:../admin/use-s3-setup-wizard.html["Utilize o assistente de configuração S3"]ou configurar cada entidade StorageGRID manualmente.
+* Use o aplicativo S3 para concluir a conexão com o StorageGRID. Crie entradas DNS para associar endereços IP a qualquer nome de domínio que você pretende usar.
+* Executar tarefas contínuas na aplicação e no StorageGRID para gerenciar e monitorar o storage de objetos ao longo do tempo.
+
+
+Para obter detalhes sobre essas etapas, link:../admin/configuring-client-connections.html["Configurar conexões de cliente"]consulte .
+
+
+
+=== Informações necessárias para conexões do cliente
+
+Para armazenar ou recuperar objetos, os aplicativos cliente S3 se conetam ao serviço Load Balancer, que está incluído em todos os nós de administração e nós de gateway, ou ao serviço LDR (roteador de distribuição local), que está incluído em todos os nós de armazenamento.
+
+Os aplicativos clientes podem se conetar ao StorageGRID usando o endereço IP de um nó de grade e o número da porta do serviço nesse nó. Como opção, você pode criar grupos de alta disponibilidade (HA) de nós de balanceamento de carga para fornecer conexões altamente disponíveis que usam endereços IP virtual (VIP). Se você quiser se conetar ao StorageGRID usando um nome de domínio totalmente qualificado (FQDN) em vez de um endereço IP ou VIP, você pode configurar entradas de DNS.
+
+Consulte link:../admin/summary-ip-addresses-and-ports-for-client-connections.html["Resumo: Endereços IP e portas para conexões de clientes"] para obter mais informações.
+
+
+
+=== Decida usar conexões HTTPS ou HTTP
+
+Quando as conexões de cliente são feitas usando um endpoint de Load Balancer, as conexões devem ser feitas usando o protocolo (HTTP ou HTTPS) especificado para esse endpoint. Para usar HTTP para conexões de cliente aos nós de armazenamento, você deve habilitar seu uso.
+
+Por padrão, quando os aplicativos cliente se conetam a nós de storage, eles devem usar HTTPS criptografado para todas as conexões. Opcionalmente, você pode habilitar conexões HTTP menos seguras selecionando *CONFIGURATION* > *Security settings* > *Network and Objects* > *Enable HTTP for Storage Node Connections* no Grid Manager. Por exemplo, um aplicativo cliente pode usar HTTP ao testar a conexão com um nó de armazenamento em um ambiente que não seja de produção.
+
+
+CAUTION: Tenha cuidado ao ativar o HTTP para uma grade de produção porque as solicitações e respostas serão enviadas sem criptografia.
+
+.Informações relacionadas
+link:../admin/index.html["Administrar o StorageGRID"]
+
+link:benefits-of-active-idle-and-concurrent-http-connections.html["Benefícios de conexões HTTP ativas, ociosas e simultâneas"]
+
+
+
+== S3 nomes de domínio de endpoint para solicitações S3
+
+Antes de poder usar nomes de domínio de endpoint S3 para solicitações de cliente, um administrador do StorageGRID deve configurar o sistema para aceitar conexões que usam nomes de domínio de endpoint S3 em solicitações de estilo de caminho S3 e S3 de estilo hospedado virtual.
+
+.Sobre esta tarefa
+Para permitir que você use S3 solicitações de estilo hospedadas virtuais, um administrador de grade deve executar as seguintes tarefas:
+
+* Use o Gerenciador de Grade para adicionar os nomes de domínio de endpoint S3 ao sistema StorageGRID.
+* Certifique-se de que o certificado que o cliente usa para conexões HTTPS com o StorageGRID está assinado para todos os nomes de domínio que o cliente requer.
++
+Por exemplo, se o endpoint do domínio de endpoint do serviço API S3 for `s3.company.com`, o administrador de grade deve garantir que o certificado usado para conexões HTTPS tenha `s3.company.com` como o Nome Comum do assunto e no nome alternativo do assunto e no nome alternativo do assunto `*.s3.company.com`.
+
+* link:../maintain/configuring-dns-servers.html["Configure o servidor DNS"] Usado pelo cliente para incluir Registros DNS que correspondem aos nomes de domínio de endpoint S3, incluindo todos os Registros curinga necessários.
+
+
+Se o cliente se conetar usando o serviço Load Balancer, o certificado que o administrador da grade configura é o certificado para o ponto de extremidade do balanceador de carga que o cliente usa.
+
+
+NOTE: Cada ponto de extremidade do balanceador de carga tem seu próprio certificado e cada ponto de extremidade pode ser configurado para reconhecer diferentes nomes de domínio de endpoint S3.
+
+Se o cliente se conetar a nós de storage, o certificado que o administrador de grade configura é o único certificado de servidor personalizado usado para a grade.
+
+Consulte as instruções para link:../admin/index.html["Administrando o StorageGRID"]obter mais informações.
+
+Depois que essas etapas forem concluídas, você poderá usar solicitações virtuais de estilo hospedado.
+
+
+
+== Teste a configuração da API REST do S3
+
+Você pode usar a interface de linha de comando (AWS CLI) do Amazon Web Services para testar sua conexão com o sistema e verificar se é possível ler e gravar objetos no sistema.
+
+.Antes de começar
+* Você baixou e instalou a AWS CLI do https://aws.amazon.com/cli["aws.amazon.com/cli"^].
+* Você criou uma conta de locatário S3 no sistema StorageGRID.
+* Você criou uma chave de acesso na conta de locatário.
+
+
+.Passos
+. Configure as configurações da AWS CLI para usar a conta criada no sistema StorageGRID:
++
+.. Entre no modo de configuração: `aws configure`
+.. Introduza a ID da chave de acesso para a conta que criou.
+.. Introduza a chave de acesso secreta para a conta que criou.
+.. Digite a região padrão a ser usada, por exemplo, US-East-1.
+.. Digite o formato de saída padrão a ser usado ou pressione *Enter* para selecionar JSON.
+
+
+. Crie um bucket.
++
+Este exemplo pressupõe que você tenha configurado um endpoint do balanceador de carga para usar o endereço IP 10.96.101.17 e a porta 10443.
+
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443
+--no-verify-ssl create-bucket --bucket testbucket
+----
++
+Se o bucket for criado com êxito, a localização do bucket será retornada, como visto no exemplo a seguir:
+
++
+[listing]
+----
+"Location": "/testbucket"
+----
+. Carregue um objeto.
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+put-object --bucket testbucket --key s3.pdf --body C:\s3-test\upload\s3.pdf
+----
++
+Se o objeto for carregado com sucesso, um Etag é retornado que é um hash dos dados do objeto.
+
+. Liste o conteúdo do bucket para verificar se o objeto foi carregado.
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+list-objects --bucket testbucket
+----
+. Exclua o objeto.
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+delete-object --bucket testbucket --key s3.pdf
+----
+. Elimine o balde.
++
+[listing]
+----
+aws s3api --endpoint-url https://10.96.101.17:10443 --no-verify-ssl
+delete-bucket --bucket testbucket
+----
+

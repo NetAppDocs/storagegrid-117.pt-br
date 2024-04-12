@@ -1,0 +1,28 @@
+---
+permalink: installconfig/connecting-power-cords-and-applying-power-sg100-and-sg1000.html 
+sidebar: sidebar 
+keywords: storagegrid, sg100, sg1000, gateway node, admin node, wiring, cabling, cable, Connecting, connect, power cords, power, applying power, apply power, turn on, power up, ac, ac power 
+summary: Depois de ligar os cabos de rede, está pronto para ligar a alimentação ao aparelho. 
+---
+= Conete os cabos de energia e ligue a energia (SG100 e SG1000)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depois de ligar os cabos de rede, está pronto para ligar a alimentação ao aparelho.
+
+.Passos
+. Ligue um cabo de alimentação a cada uma das duas fontes de alimentação do aparelho.
+. Conete esses dois cabos de alimentação a duas unidades de distribuição de energia (PDUs) diferentes no gabinete ou no rack.
+. Se o botão liga/desliga na parte frontal do aparelho não estiver aceso a azul, prima o botão para ligar o aparelho.
++
+Não prima novamente o botão de alimentação durante o processo de ativação.
+
+. Se ocorrerem erros, corrija quaisquer problemas.
+. Coloque a moldura frontal no aparelho, se tiver sido removida.
+
+
+.Informações relacionadas
+link:viewing-status-indicators.html["Ver indicadores de estado"]

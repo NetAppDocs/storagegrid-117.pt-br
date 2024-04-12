@@ -1,0 +1,74 @@
+---
+permalink: installconfig/optional-enabling-node-encryption.html 
+sidebar: sidebar 
+keywords: node encryption, encryption, kms, key management server 
+summary: 'Se você habilitar a criptografia de nó, os discos no seu dispositivo podem ser protegidos pela criptografia segura do servidor de gerenciamento de chaves (KMS) contra perda física ou remoção do site. Você deve selecionar e ativar a criptografia de nó durante a instalação do dispositivo. Não é possível desativar a criptografia de nó após o início do processo de criptografia KMS.' 
+---
+= Opcional: Ative a criptografia de nó
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você ativar a criptografia de nó, os discos do seu dispositivo podem ser protegidos pela criptografia de servidor de gerenciamento de chaves (KMS) seguro contra perda física ou remoção do site. Você deve selecionar e ativar a criptografia de nó durante a instalação do dispositivo. Não é possível desativar a criptografia de nó após o início do processo de criptografia KMS.
+
+Se você estiver usando o ConfigBuilder para gerar um arquivo JSON, você poderá habilitar a criptografia de nó automaticamente. link:automating-appliance-installation-and-configuration.html["Automatize a instalação e a configuração do dispositivo"]Consulte .
+
+.Antes de começar
+Reveja as informações link:../admin/kms-configuring.html["Configurando o KMS"]sobre o .
+
+.Sobre esta tarefa
+Um dispositivo com criptografia de nó ativada se coneta ao servidor de gerenciamento de chaves externas (KMS) configurado para o site StorageGRID. Cada cluster KMS (ou KMS) gerencia as chaves de criptografia para todos os nós de dispositivo no local. Essas chaves criptografam e descriptografam os dados em cada disco em um dispositivo que tem criptografia de nó ativada.
+
+Um KMS pode ser configurado no Gerenciador de Grade antes ou depois que o dispositivo é instalado no StorageGRID. Consulte as informações sobre a configuração do KMS e do appliance nas instruções de administração do StorageGRID para obter detalhes adicionais.
+
+* Se um KMS for configurado antes de instalar o dispositivo, a criptografia controlada pelo KMS será iniciada quando você ativar a criptografia de nó no dispositivo e adicioná-la a um site do StorageGRID onde o KMS está configurado.
+* Se um KMS não for configurado antes de instalar o dispositivo, a criptografia controlada por KMS é executada em cada dispositivo que tem criptografia de nó ativada assim que um KMS é configurado e disponível para o site que contém o nó do dispositivo.
+
+
+
+IMPORTANT: Quando um dispositivo é instalado com criptografia de nó ativada, uma chave temporária é atribuída. Os dados no dispositivo não são protegidos até que o dispositivo esteja conetado ao sistema de gerenciamento de chaves (KMS) e uma chave de segurança KMS esteja definida. Consulte https://docs.netapp.com/us-en/storagegrid-117/admin/kms-overview-of-kms-and-appliance-configuration.html["Descrição geral da configuração do dispositivo KMS"^] para obter informações adicionais.
+
+Sem a chave KMS necessária para descriptografar o disco, os dados no dispositivo não podem ser recuperados e são efetivamente perdidos. Este é o caso sempre que a chave de descriptografia não pode ser recuperada do KMS. A chave fica inacessível se um cliente limpar a configuração do KMS, uma chave KMS expira, a conexão com o KMS é perdida ou o dispositivo é removido do sistema StorageGRID onde suas chaves KMS são instaladas.
+
+.Passos
+. Abra um navegador e insira um dos endereços IP do controlador de computação do dispositivo.
++
+`*https://_Controller_IP_:8443*`
+
++
+`_Controller_IP_` É o endereço IP do controlador de computação (não o controlador de storage) em qualquer uma das três redes StorageGRID.
+
++
+A página inicial do instalador do dispositivo StorageGRID é exibida.
+
++
+
+IMPORTANT: Depois que o dispositivo tiver sido criptografado com uma chave KMS, os discos do appliance não podem ser descriptografados sem usar a mesma chave KMS.
+
+. Selecione *Configure hardware* > *Node Encryption*.
++
+image::../media/kms_fde_enabled.png[KMS FDE ativado]
+
+. Selecione *Ativar criptografia de nó*.
++
+Antes da instalação do dispositivo, você pode limpar *Ativar criptografia de nó* sem risco de perda de dados. Quando a instalação começa, o nó appliance acessa as chaves de criptografia KMS no sistema StorageGRID e inicia a criptografia de disco. Não é possível desativar a criptografia de nó depois que o dispositivo é instalado.
+
++
+
+IMPORTANT: Depois de adicionar um dispositivo que tenha a criptografia de nó ativada a um site do StorageGRID que tenha um KMS, você não pode parar de usar a criptografia KMS para o nó.
+
+. Selecione *Guardar*.
+. Implante o dispositivo como um nó no sistema StorageGRID.
++
+A encriptação controlada POR KMS começa quando o dispositivo acede às chaves KMS configuradas para o seu site StorageGRID. O instalador exibe mensagens de progresso durante o processo de criptografia KMS, o que pode levar alguns minutos, dependendo do número de volumes de disco no dispositivo.
+
++
+
+NOTE: Os dispositivos são configurados inicialmente com uma chave de criptografia aleatória não KMS atribuída a cada volume de disco. Os discos são criptografados usando essa chave de criptografia temporária, que não é segura, até que o dispositivo que tem criptografia de nó habilitada acesse as chaves KMS configuradas para o site do StorageGRID.
+
+
+
+.Depois de terminar
+Você pode exibir o status da criptografia do nó, os detalhes do KMS e os certificados em uso quando o nó do dispositivo está no modo de manutenção. Consulte link:../commonhardware/monitoring-node-encryption-in-maintenance-mode.html["Monitore a criptografia do nó no modo de manutenção"] para obter informações.

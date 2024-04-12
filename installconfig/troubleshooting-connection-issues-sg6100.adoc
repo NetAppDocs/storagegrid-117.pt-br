@@ -1,0 +1,40 @@
+---
+permalink: installconfig/troubleshooting-connection-issues-sg6100.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6100, troubleshoot, troubleshooting, connection 
+summary: Se você encontrar problemas de conexão durante a instalação do StorageGRID Appliance, execute as etapas de ação corretiva listadas. 
+---
+= Solucionar problemas de conexão (SGF6112)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você encontrar problemas de conexão durante a instalação do StorageGRID Appliance, execute as etapas de ação corretiva listadas.
+
+
+
+== Não foi possível ligar ao aparelho
+
+Se você não conseguir se conetar ao utilitário de serviços, pode haver um problema de rede ou a instalação de hardware pode não ter sido concluída com êxito.
+
+.Passos
+. Tente fazer ping no aparelho usando o endereço IP do aparelho
+`*ping _services_appliance_IP_*`
+. Se não receber resposta do ping, confirme que está a utilizar o endereço IP correto.
++
+Pode utilizar o endereço IP do dispositivo na rede de grelha, na rede de administração ou na rede de cliente.
+
+. Se o endereço IP estiver correto, verifique o cabeamento do dispositivo, transcetores QSFP ou SFP e a configuração da rede.
+. Se o acesso físico ao aparelho estiver disponível, você pode usar uma conexão direta com o IP local de link permanente `169.254.0.1` para verificar a configuração de rede do controlador e atualizar, se necessário. Para obter instruções detalhadas, consulte o passo 2 em link:accessing-storagegrid-appliance-installer.html["Acesse o Instalador de dispositivos StorageGRID"].
++
+Se isso não resolver o problema, entre em Contato com o suporte técnico.
+
+. Se o ping foi bem-sucedido, abra um navegador da Web.
+. Digite o URL do instalador do StorageGRID Appliance
+`*https://_appliances_controller_IP_:8443*`
++
+A página inicial é exibida.
+
+

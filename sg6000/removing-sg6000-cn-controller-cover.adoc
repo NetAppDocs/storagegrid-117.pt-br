@@ -1,0 +1,36 @@
+---
+permalink: sg6000/removing-sg6000-cn-controller-cover.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6000, storage node, storage appliance, sg6000-cn, controller, cover, remove, removing, removal 
+summary: Retire a tampa do controlador para aceder aos componentes internos para manutenção. 
+---
+= Remova a tampa do controlador SG6000-CN
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Retire a tampa do controlador para aceder aos componentes internos para manutenção.
+
+.Antes de começar
+Remova o controlador do gabinete ou rack para acessar a tampa superior.
+
+link:removing-sg6000-cn-controller-from-cabinet-or-rack.html["Remova o controlador SG6000-CN do gabinete ou rack"]
+
+.Passos
+. Certifique-se de que o trinco da tampa do controlador SG6000-CN não está bloqueado. Se necessário, rode o bloqueio do trinco de plástico azul um quarto de volta na direção de desbloqueio, conforme ilustrado no bloqueio do trinco.
+. Rode o trinco para cima e para trás em direção à parte traseira do chassis do controlador SG6000-CN até parar; em seguida, levante cuidadosamente a tampa do chassis e coloque-a de lado.
++
+image::../media/sg6060_cover_latch_open.jpg[SG6060 trava da tampa aberta]
+
++
+
+IMPORTANT: Enrole a extremidade da correia de uma pulseira antiestática em torno do pulso e fixe a extremidade do clipe a uma terra metálica para evitar descarga estática ao trabalhar dentro do controlador SG6000-CN.
+
+
+
+Após a substituição da peça, devolva a peça com falha à NetApp, conforme descrito nas instruções de RMA fornecidas com o kit. Consulte a https://mysupport.netapp.com/site/info/rma["Substituição  Devolução artigo"^] página para obter mais informações.
+
+.Informações relacionadas
+link:removing-fibre-channel-hba.html["Remova o HBA Fibre Channel"]

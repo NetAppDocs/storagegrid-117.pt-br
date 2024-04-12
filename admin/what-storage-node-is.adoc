@@ -1,0 +1,125 @@
+---
+permalink: admin/what-storage-node-is.html 
+sidebar: sidebar 
+keywords: what is a storage node, how many storage nodes 
+summary: Os nós de storage gerenciam e armazenam dados e metadados de objetos. Cada sistema StorageGRID precisa ter pelo menos três nós de storage. Se você tiver vários locais, cada local no sistema StorageGRID também precisará ter três nós de storage. 
+---
+= O que é um nó de storage?
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os nós de storage gerenciam e armazenam dados e metadados de objetos. Cada sistema StorageGRID precisa ter pelo menos três nós de storage. Se você tiver vários locais, cada local no sistema StorageGRID também precisará ter três nós de storage.
+
+Um nó de armazenamento inclui os serviços e processos necessários para armazenar, mover, verificar e recuperar dados de objetos e metadados no disco. Você pode exibir informações detalhadas sobre os nós de storage na página *NÓS*.
+
+
+
+== O que é o serviço ADC?
+
+O serviço controlador de domínio administrativo (ADC) autentica os nós de grade e suas conexões entre si. O serviço ADC é hospedado em cada um dos três primeiros nós de storage em um local.
+
+O serviço ADC mantém informações de topologia, incluindo a localização e disponibilidade dos serviços. Quando um nó de grade requer informações de outro nó de grade ou uma ação a ser executada por outro nó de grade, ele entra em Contato com um serviço ADC para encontrar o melhor nó de grade para processar sua solicitação. Além disso, o serviço ADC retém uma cópia dos pacotes de configuração da implantação do StorageGRID, permitindo que qualquer nó de grade recupere informações de configuração atuais.você pode visualizar informações ADC para um nó de armazenamento na página topologia de Grade (*SUPPORT* > *Grid topology*).
+
+Para facilitar operações distribuídas e desembarcadas, cada serviço ADC sincroniza certificados, pacotes de configuração e informações sobre serviços e topologia com os outros serviços ADC no sistema StorageGRID.
+
+Em geral, todos os nós de grade mantêm uma conexão com pelo menos um serviço ADC. Isso garante que os nós de grade estejam sempre acessando as informações mais recentes. Quando os nós de grade se conetam, eles armazenam em cache certificados de outros nós de grade, permitindo que os sistemas continuem funcionando com nós de grade conhecidos, mesmo quando um serviço ADC não está disponível. Novos nós de grade só podem estabelecer conexões usando um serviço ADC.
+
+A conexão de cada nó de grade permite que o serviço ADC colete informações de topologia. Essas informações de nó de grade incluem a carga da CPU, o espaço disponível em disco (se ele tiver armazenamento), os serviços suportados e o ID do site do nó de grade. Outros serviços pedem ao serviço ADC informações de topologia por meio de consultas de topologia. O serviço ADC responde a cada consulta com as informações mais recentes recebidas do sistema StorageGRID.
+
+
+
+== O que é o serviço DDS?
+
+Hospedado por um nó de armazenamento, o serviço armazenamento de dados distribuído (DDS) faz interface com o banco de dados Cassandra para executar tarefas em segundo plano nos metadados de objetos armazenados no sistema StorageGRID.
+
+
+
+=== Contagens de objetos
+
+O serviço DDS rastreia o número total de objetos ingeridos no sistema StorageGRID, bem como o número total de objetos ingeridos através de cada uma das interfaces suportadas do sistema (S3 ou Swift).
+
+Você pode ver a contagem total de objetos na página nós > guia objetos para qualquer nó de storage.
+
+image::../media/dds_object_counts_queries.png[Página de visão geral do DDS]
+
+
+
+=== Consultas
+
+Você pode identificar o tempo médio que leva para executar uma consulta contra o armazenamento de metadados através do serviço DDS específico, o número total de consultas bem-sucedidas e o número total de consultas que falharam devido a um problema de tempo limite.
+
+Você pode querer revisar as informações de consulta para monitorar a integridade do armazenamento de metadados, Cassandra, que afeta o desempenho de ingestão e recuperação do sistema. Por exemplo, se a latência de uma consulta média for lenta e o número de consultas com falha devido a tempos limite for alto, o armazenamento de metadados pode estar encontrando uma carga maior ou executando outra operação.
+
+Você também pode exibir o número total de consultas que falharam devido a falhas de consistência. Falhas no nível de consistência resultam de um número insuficiente de armazenamentos de metadados disponíveis no momento em que uma consulta é realizada através do serviço DDS específico.
+
+Você pode usar a página Diagnósticos para obter informações adicionais sobre o estado atual da grade. link:../monitor/running-diagnostics.html["Execute o diagnóstico"]Consulte .
+
+
+
+=== Garantias de consistência e controles
+
+O StorageGRID garante consistência de leitura após gravação para objetos recém-criados. Qualquer operação GET após uma operação PUT concluída com êxito poderá ler os dados recém-gravados. As substituições de objetos existentes, atualizações de metadados e exclusões permanecem, eventualmente, consistentes.
+
+
+
+== O que é o serviço LDR?
+
+Hospedado por cada nó de armazenamento, o serviço de roteador de distribuição local (LDR) lida com o transporte de conteúdo para o sistema StorageGRID. O transporte de conteúdo abrange muitas tarefas, incluindo armazenamento de dados, roteamento e manuseio de solicitações. O serviço LDR faz a maior parte do trabalho árduo do sistema StorageGRID, manipulando cargas de transferência de dados e funções de tráfego de dados.
+
+O serviço LDR lida com as seguintes tarefas:
+
+* Consultas
+* Atividade de gerenciamento do ciclo de vida das informações (ILM)
+* Exclusão de objeto
+* Storage de dados de objetos
+* Transferências de dados de objeto de outro serviço LDR (Storage Node)
+* Gerenciamento de storage de dados
+* Interfaces de protocolo (S3 e Swift)
+
+
+O serviço LDR também gerencia o mapeamento de objetos S3 e Swift para os "manipuladores de conteúdo" exclusivos que o sistema StorageGRID atribui a cada objeto ingerido.
+
+
+
+=== Consultas
+
+As consultas LDR incluem consultas para localização de objetos durante operações de recuperação e arquivamento. Você pode identificar o tempo médio que leva para executar uma consulta, o número total de consultas bem-sucedidas e o número total de consultas que falharam devido a um problema de tempo limite.
+
+Você pode revisar as informações de consulta para monitorar a integridade do armazenamento de metadados, o que afeta o desempenho de ingestão e recuperação do sistema. Por exemplo, se a latência de uma consulta média for lenta e o número de consultas com falha devido a tempos limite for alto, o armazenamento de metadados pode estar encontrando uma carga maior ou executando outra operação.
+
+Você também pode exibir o número total de consultas que falharam devido a falhas de consistência. Falhas no nível de consistência resultam de um número insuficiente de armazenamentos de metadados disponíveis no momento em que uma consulta é executada através do serviço LDR específico.
+
+Você pode usar a página Diagnósticos para obter informações adicionais sobre o estado atual da grade. link:../monitor/running-diagnostics.html["Execute o diagnóstico"]Consulte .
+
+
+
+=== Atividade ILM
+
+As métricas de gerenciamento do ciclo de vida das informações (ILM) permitem monitorar a taxa na qual os objetos são avaliados para a implementação do ILM. Você pode visualizar essas métricas no painel ou em *NÓS* > *_Storage Node_* > *ILM*.
+
+
+
+=== Armazenamentos de objetos
+
+O armazenamento de dados subjacente de um serviço LDR é dividido em um número fixo de armazenamentos de objetos (também conhecidos como volumes de armazenamento). Cada armazenamento de objetos é um ponto de montagem separado.
+
+Você pode ver os armazenamentos de objetos para um nó de storage na página nós > guia armazenamento.
+
+image::../media/object_stores.png[Armazenamentos de objetos]
+
+Os armazenamentos de objetos em um nó de armazenamento são identificados por um número hexadecimal de 0000 a 002F, que é conhecido como ID de volume. O espaço é reservado no primeiro armazenamento de objetos (volume 0) para metadados de objetos em um banco de dados Cassandra; qualquer espaço restante nesse volume é usado para dados de objeto. Todos os outros armazenamentos de objetos são usados exclusivamente para dados de objetos, o que inclui cópias replicadas e fragmentos codificados por apagamento.
+
+Para garantir até mesmo o uso de espaço para cópias replicadas, os dados de objeto de um determinado objeto são armazenados em um armazenamento de objetos com base no espaço de storage disponível. Quando um ou mais objetos armazenam preenchimento até a capacidade, os armazenamentos de objetos restantes continuam armazenando objetos até que não haja mais espaço no nó de armazenamento.
+
+
+
+=== Proteção de metadados
+
+Metadados de objeto são informações relacionadas ou uma descrição de um objeto; por exemplo, tempo de modificação de objeto ou local de armazenamento. O StorageGRID armazena metadados de objetos em um banco de dados Cassandra, que faz interface com o serviço LDR.
+
+Para garantir redundância e, portanto, proteção contra perda, três cópias dos metadados de objetos são mantidas em cada local. Esta replicação não é configurável e executada automaticamente.
+
+link:managing-object-metadata-storage.html["Gerenciar o storage de metadados de objetos"]

@@ -1,0 +1,22 @@
+---
+permalink: admin/archiving-to-cloud-through-s3-api.html 
+sidebar: sidebar 
+keywords: archive node to AWS, Amazon Web Services 
+summary: 'Você pode configurar um nó de arquivo para se conetar diretamente ao Amazon Web Services (AWS) ou a qualquer outro sistema que possa fazer interface com o sistema StorageGRID por meio da API S3.' 
+---
+= Arquive para a nuvem por meio da API S3
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode configurar um nó de arquivo para se conetar diretamente à Amazon Web Services (AWS) ou a qualquer outro sistema que possa fazer interface com o sistema StorageGRID por meio da API S3.
+
+[CAUTION]
+====
+O suporte para nós de arquivamento (tanto para arquivamento na nuvem usando a API S3 como para arquivamento em fita usando middleware TSM) está obsoleto e será removido em uma versão futura. Mover objetos de um nó de arquivamento para um sistema de armazenamento de arquivamento externo foi substituído pelo ILM Cloud Storage Pools, que oferece mais funcionalidade.
+
+link:../ilm/what-cloud-storage-pool-is.html["Use Cloud Storage Pools"]Consulte .
+
+====

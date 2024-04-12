@@ -1,0 +1,56 @@
+---
+permalink: sg6000/removing-fibre-channel-hba.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6000, storage node, storage appliance, sg6000-cn, hba, host bus adapter, fibre channel, fiber channel, remove, removing, removal 
+summary: 'Pode ser necessário substituir o adaptador de barramento de host Fibre Channel (HBA) no controlador SG6000-CN se ele não estiver funcionando de forma ideal ou se ele tiver falhado.' 
+---
+= Remova o HBA Fibre Channel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário substituir o adaptador de barramento de host (HBA) Fibre Channel no controlador SG6000-CN se ele não estiver funcionando de forma ideal ou se tiver falhado.
+
+.Antes de começar
+* Tem a HBA Fibre Channel de substituição correta.
+* Você link:verifying-fibre-channel-hba-to-replace.html["Determinado qual controlador SG6000-CN contém o HBA Fibre Channel a substituir"]tem .
+* Você tem link:locating-controller-in-data-center.html["Fisicamente localizado o controlador SG6000-CN"]no data center.
+* Você link:shutting-down-sg6000-cn-controller.html["Desligue o controlador SG6000-CN"]tem .
++
+
+CAUTION: É necessário um desligamento controlado antes de remover o controlador do rack.
+
+* Você link:removing-sg6000-cn-controller-from-cabinet-or-rack.html["removido o controlador do gabinete ou rack"]tem .
+* Você link:removing-sg6000-cn-controller-cover.html["removida a tampa do controlador"]tem .
+
+
+.Sobre esta tarefa
+Para evitar interrupções de serviço, confirme se todos os outros nós de armazenamento estão conetados à grade antes de iniciar a substituição do HBA Fibre Channel ou substitua o adaptador durante uma janela de manutenção programada quando períodos de interrupção de serviço normalmente forem esperados. Consulte as informações sobre link:../monitor/monitoring-system-health.html#monitor-node-connection-states["monitorização dos estados de ligação do nó"]o .
+
+
+IMPORTANT: Se você já usou uma regra ILM que cria apenas uma cópia de um objeto, você deve substituir o HBA Fibre Channel durante uma janela de manutenção agendada. Caso contrário, você pode perder temporariamente o acesso a esses objetos durante este procedimento. Consulte as informações sobre link:../ilm/why-you-should-not-use-single-copy-replication.html["por que você não deve usar replicação de cópia única"].
+
+.Passos
+. Enrole a extremidade da correia da pulseira ESD à volta do pulso e fixe a extremidade do clipe a um solo metálico para evitar descargas estáticas.
+. Localize o conjunto da riser na parte traseira do controlador que contém o HBA Fibre Channel.
++
+image::../media/sg6060_riser_assembly_location.jpg[SG6060 localização do conjunto da riser]
+
+. Segure o conjunto da riser através dos orifícios marcados a azul e levante-o cuidadosamente para cima. Mova o conjunto da riser em direção à parte frontal do chassi enquanto o levanta para permitir que os conetores externos em seus adaptadores instalados evitem o chassi.
+. Coloque a placa riser em uma superfície plana e antiestática com o lado da estrutura metálica voltado para baixo para acessar os adaptadores.
++
+image::../media/sg6060_fc_hba_location.jpg[HBA Fibre Channel de SG6060 GB no conjunto riser]
+
++
+Há dois adaptadores no conjunto da riser: Um HBA Fibre Channel e um adaptador de rede Ethernet. A HBA Fibre Channel é indicada na ilustração.
+
+. Abra a trava azul do adaptador (circulada) e remova cuidadosamente o HBA Fibre Channel do conjunto da riser. Agite ligeiramente o adaptador para ajudar a remover o adaptador do respetivo conetor. Não use força excessiva.
+. Coloque o adaptador numa superfície plana anti-estática.
+
+
+.Depois de terminar
+link:reinstalling-fibre-channel-hba.html["Instale o HBA Fibre Channel de substituição"].
+
+Após a substituição da peça, devolva a peça com falha à NetApp, conforme descrito nas instruções de RMA fornecidas com o kit. Consulte a https://mysupport.netapp.com/site/info/rma["Substituição  Devolução artigo"^] página para obter mais informações.

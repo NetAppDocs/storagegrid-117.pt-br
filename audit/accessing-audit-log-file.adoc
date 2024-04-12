@@ -1,0 +1,39 @@
+---
+permalink: audit/accessing-audit-log-file.html 
+sidebar: sidebar 
+keywords: storagegrid, audit, log, log file, access, accessing 
+summary: O compartilhamento de auditoria contém o arquivo audit.log ativo e todos os arquivos de log de auditoria compatados. Para facilitar o acesso aos logs de auditoria, você pode configurar o acesso do cliente para compartilhamentos de auditoria para NFS. Você também pode acessar arquivos de log de auditoria diretamente da linha de comando do nó Admin. 
+---
+= Acessar o arquivo de log de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O compartilhamento de auditoria contém o arquivo ativo `audit.log` e todos os arquivos de log de auditoria compatados. Para facilitar o acesso aos logs de auditoria, você pode link:../admin/configuring-audit-client-access.html["Configurar acesso de cliente de auditoria para NFS"]. Você também pode acessar arquivos de log de auditoria diretamente da linha de comando do nó Admin.
+
+.Antes de começar
+* Você deve ter permissões de acesso específicas.
+* Tem de ter o `Passwords.txt` ficheiro.
+* Você deve saber o endereço IP de um nó Admin.
+
+
+.Passos
+. Faça login em um nó Admin:
++
+.. Introduza o seguinte comando: `ssh admin@_primary_Admin_Node_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
+
+
+
+. Vá para o diretório que contém os arquivos de log de auditoria:
++
+`cd /var/local/audit/export`
+
+. Visualize o ficheiro de registo de auditoria atual ou guardado, conforme necessário.
+

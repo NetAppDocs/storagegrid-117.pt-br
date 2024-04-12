@@ -1,0 +1,90 @@
+---
+permalink: installconfig/sg5700-appliance-connections.html 
+sidebar: sidebar 
+keywords: network connections, appliance, grid, admin, client, bmc, management 
+summary: Ao instalar um dispositivo SG5700 StorageGRID, você coneta os dois controladores um ao outro e às redes necessárias. 
+---
+= Conexões de rede (SG5700)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ao instalar um dispositivo SG5700 StorageGRID, você coneta os dois controladores um ao outro e às redes necessárias.
+
+A figura mostra os dois controladores no SG5760, com o controlador E2800 na parte superior e o controlador E5700SG na parte inferior. No SG5712, o controlador E2800 está à esquerda do controlador E5700SG.
+
+image::../media/sg5760_connections.gif[Ligações no aparelho SG5760]
+
+[cols="1a,2a,2a,2a"]
+|===
+| Legenda | Porta | Tipo de porta | Utilização 
+
+
+ a| 
+1
+ a| 
+Duas portas de interconexão em cada controlador
+ a| 
+SFP ótico FC de 16GB GB/s.
+ a| 
+Conete os dois controladores um ao outro.
+
+
+
+ a| 
+2
+ a| 
+Porta de gerenciamento 1 no controlador E2800
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga-se à rede onde acede ao Gestor de sistema SANtricity. Pode utilizar a rede de administração para StorageGRID ou uma rede de gestão independente.
+
+
+
+ a| 
+Porta de gerenciamento 2 no controlador E2800
+ a| 
+1 GbE (RJ-45)
+ a| 
+Reservado para suporte técnico.
+
+
+
+ a| 
+3
+ a| 
+Porta de gerenciamento 1 no controlador E5700SG
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga o controlador E5700SG à rede de administração para StorageGRID.
+
+
+
+ a| 
+Porta de gerenciamento 2 no controlador E5700SG
+ a| 
+1 GbE (RJ-45)
+ a| 
+* Pode ser ligado com a porta de gerenciamento 1 se você quiser uma conexão redundante com a rede de administração.
+* Pode ser deixado sem fios e disponível para acesso local temporário (IP 169.254.0.1).
+* Durante a instalação, pode ser utilizado para ligar o controlador E5700SG a um computador portátil de serviço se os endereços IP atribuídos por DHCP não estiverem disponíveis.
+
+
+
+
+ a| 
+4
+ a| 
+Portas 10/25-GbE 1-4 na controladora E5700SG
+ a| 
+10-GbE ou 25-GbE
+
+*Observação:* os transcetores SFP incluídos com o dispositivo suportam velocidades de link de 10 GbE. Se você quiser usar velocidades de link de 25 GbE para as quatro portas de rede, você deve fornecer transcetores de SFP28 GbE.
+ a| 
+Conete-se à rede de grade e à rede de cliente para StorageGRID. link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]Consulte .
+
+|===

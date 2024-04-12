@@ -1,0 +1,374 @@
+---
+permalink: installconfig/viewing-error-codes-for-sg1000-controller-sg100-and-sg1000.html 
+sidebar: sidebar 
+keywords: storagegrid, sg100, sg1000, service appliance, services appliance, gateway Node, admin node, error codes, errors, error, codes, bmc 
+summary: Se ocorrer um erro de hardware quando o aparelho está inicializando, o BMC Registra um código de erro. Conforme necessário, você pode visualizar esses códigos de erro usando a interface do BMC e trabalhar com suporte técnico para resolver o problema. 
+---
+= Ver códigos de erro (SG100 e SG1000)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se ocorrer um erro de hardware quando o aparelho está inicializando, o BMC Registra um código de erro. Conforme necessário, você pode visualizar esses códigos de erro usando a interface do BMC e trabalhar com suporte técnico para resolver o problema.
+
+.Antes de começar
+* Você sabe como acessar o painel do BMC.
+
+
+.Passos
+. No painel do BMC, selecione *Código POST do BIOS*.
+. Reveja as informações apresentadas para o Código atual e o Código anterior.
++
+Se algum dos códigos de erro a seguir for exibido, trabalhe com suporte técnico para resolver o problema.
+
++
+[cols="1a,3a"]
+|===
+| Código | Indica 
+
+
+ a| 
+0x0E
+ a| 
+Microcódigo não encontrado
+
+
+
+ a| 
+0x0F
+ a| 
+Microcódigo não carregado
+
+
+
+ a| 
+0x50
+ a| 
+Erro de inicialização da memória. Tipo de memória inválido ou velocidade de memória incompatível.
+
+
+
+ a| 
+0x51
+ a| 
+Erro de inicialização da memória. A leitura SPD falhou.
+
+
+
+ a| 
+0x52
+ a| 
+Erro de inicialização da memória. O tamanho de memória ou os módulos de memória inválidos não correspondem.
+
+
+
+ a| 
+0x53
+ a| 
+Erro de inicialização da memória. Nenhuma memória utilizável detetada.
+
+
+
+ a| 
+0x54
+ a| 
+Erro de inicialização de memória não especificado
+
+
+
+ a| 
+0x55
+ a| 
+Memória não instalada
+
+
+
+ a| 
+0x56
+ a| 
+Tipo ou velocidade de CPU inválida
+
+
+
+ a| 
+0x57
+ a| 
+Incompatibilidade de CPU
+
+
+
+ a| 
+0x58
+ a| 
+Falha no autoteste da CPU ou possível erro de cache da CPU
+
+
+
+ a| 
+0x59
+ a| 
+O micro-código da CPU não foi encontrado ou a atualização do micro-código falhou
+
+
+
+ a| 
+0x5A
+ a| 
+Erro interno da CPU
+
+
+
+ a| 
+0x5B
+ a| 
+Repor PPI não está disponível
+
+
+
+ a| 
+0x5C
+ a| 
+Falha do autoteste do PEI fase BMC
+
+
+
+ a| 
+0xD0
+ a| 
+Erro de inicialização da CPU
+
+
+
+ a| 
+0xD1
+ a| 
+Erro de inicialização da ponte Norte
+
+
+
+ a| 
+0xD2
+ a| 
+Erro de inicialização da ponte sul
+
+
+
+ a| 
+0xD3
+ a| 
+Alguns protocolos arquitetônicos não estão disponíveis
+
+
+
+ a| 
+0xD4
+ a| 
+Erro de alocação de recursos PCI. Sem recursos.
+
+
+
+ a| 
+0xD5
+ a| 
+Sem espaço para a ROM de opção herdada
+
+
+
+ a| 
+0xD6
+ a| 
+Não foram encontrados dispositivos de saída da consola
+
+
+
+ a| 
+0xD7
+ a| 
+Não foram encontrados dispositivos de entrada da consola
+
+
+
+ a| 
+0xD8
+ a| 
+Palavra-passe inválida
+
+
+
+ a| 
+0xD9
+ a| 
+Erro ao carregar a opção de inicialização (erro loadImage retornado)
+
+
+
+ a| 
+0xDA
+ a| 
+Falha na opção de inicialização (erro retornado pela StartImage)
+
+
+
+ a| 
+0xDB
+ a| 
+Falha na atualização do flash
+
+
+
+ a| 
+0xDC
+ a| 
+O protocolo de reposição não está disponível
+
+
+
+ a| 
+0xDD
+ a| 
+Avaria no autoteste do BMC de fase DXE
+
+
+
+ a| 
+0xE8
+ a| 
+MRC: ERR_NO_MEMORY
+
+
+
+ a| 
+0xE9
+ a| 
+MRC: ERR_LT_LOCK
+
+
+
+ a| 
+0xEA
+ a| 
+MRC: ERR_DDR_INIT
+
+
+
+ a| 
+0xEB
+ a| 
+MRC: ERR_MEM_TEST
+
+
+
+ a| 
+0xEC
+ a| 
+MRC: ERR_VENDOR_SPECIFIC
+
+
+
+ a| 
+0xED
+ a| 
+MRC: ERR_DIMM_COMPAT
+
+
+
+ a| 
+0xEE
+ a| 
+MRC: ERR_MRC_COMPATIBILITY
+
+
+
+ a| 
+0xEF
+ a| 
+RMC: ERR_MRC_STRUCT
+
+
+
+ a| 
+0xF0
+ a| 
+MRC: ERR_SET_VDD
+
+
+
+ a| 
+0xF1
+ a| 
+MRC: ERR_IOT_MEM_BUFFER
+
+
+
+ a| 
+0xF2
+ a| 
+MRC: ERR_RC_INTERNAL
+
+
+
+ a| 
+0xF3
+ a| 
+MRC: ERR_INVALID_REG_ACCESS
+
+
+
+ a| 
+0xF4
+ a| 
+MRC: ERR_SET_MC_FREQ
+
+
+
+ a| 
+0xF5
+ a| 
+MRC: ERR_READ_MC_FREQ
+
+
+
+ a| 
+0x70
+ a| 
+MRC: ERR_DIMM_CHANNEL
+
+
+
+ a| 
+0x74
+ a| 
+MRC: ERR_BIST_CHECK
+
+
+
+ a| 
+0xF6
+ a| 
+MRC: ERR_SMBUS
+
+
+
+ a| 
+0xF7
+ a| 
+MRC: ERR_PCU
+
+
+
+ a| 
+0xF8
+ a| 
+MRC: ERR_NGN
+
+
+
+ a| 
+0xF9
+ a| 
+MRC: ERR_INTERLEAVE_FAILURE
+
+|===
+

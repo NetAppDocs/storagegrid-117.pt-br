@@ -1,0 +1,67 @@
+---
+permalink: upgrade/checking-systems-condition-before-upgrading-software.html 
+sidebar: sidebar 
+keywords: upgrade, grid tasks, firewall, ports 
+summary: Antes de atualizar um sistema StorageGRID, você deve verificar se o sistema está pronto para acomodar a atualização. Você deve garantir que o sistema esteja funcionando normalmente e que todos os nós de grade estejam operacionais. 
+---
+= Verifique o estado do sistema
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de atualizar um sistema StorageGRID, você deve verificar se o sistema está pronto para acomodar a atualização. Você deve garantir que o sistema esteja funcionando normalmente e que todos os nós de grade estejam operacionais.
+
+.Passos
+. Faça login no Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+. Verifique e resolva quaisquer alertas ativos.
+. Confirme se não há tarefas de grade conflitantes ativas ou pendentes.
++
+.. Selecione *SUPPORT* > *Tools* > *Grid topology*.
+.. Selecione *_site_* > *_Main Admin Node_* > *CMN* > *Grid Tasks* > *Configuration*.
++
+As tarefas de avaliação de gerenciamento do ciclo de vida das informações (ILME) são as únicas tarefas de grade que podem ser executadas simultaneamente com a atualização do software.
+
+.. Se quaisquer outras tarefas de grade estiverem ativas ou pendentes, aguarde até que elas terminem ou liberem seu bloqueio.
++
+
+NOTE: Contacte o suporte técnico se uma tarefa não terminar ou libertar o respetivo bloqueio.
+
+
+
+. link:../network/internal-grid-node-communications.html["Comunicações internas do nó da grade"]Consulte e link:../network/external-communications.html["Comunicações externas"] para garantir que todas as portas necessárias para o StorageGRID 11,7 estejam abertas antes de atualizar.
++
+O seguinte link:../network/internal-grid-node-communications.html#storagegrid-internal-ports["portas internas"]deve estar aberto antes de atualizar para o StorageGRID 11,7:
+
++
+[cols="1a,2a"]
+|===
+| Porta | Descrição 
+
+
+ a| 
+1055
+
+8011
+
+10342
+ a| 
+Usado para o protocolo de batida dos controles de firewall.
+
+Antes de atualizar, confirme que esta porta está aberta entre todos os nós de grade na rede de grade.
+
+
+
+ a| 
+18086
+ a| 
+Porta TCP utilizada para o novo serviço LDR.
+
+Antes da atualização, confirme se essa porta está aberta de todos os nós de grade para todos os nós de storage.
+
+|===
+
+
+
+IMPORTANT: Se tiver aberto quaisquer portas de firewall personalizadas, será notificado durante a pré-verificação da atualização. Você deve entrar em Contato com o suporte técnico antes de prosseguir com a atualização.

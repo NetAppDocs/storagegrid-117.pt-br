@@ -1,0 +1,51 @@
+---
+permalink: rhel/index.html 
+sidebar: sidebar 
+keywords: red hat enterprise linux, rhel, centos linux 
+summary: 'A instalação de um sistema StorageGRID em um ambiente Linux Red Hat Enterprise (RHEL) ou CentOS Linux inclui três etapas principais.' 
+---
+= Instale o Red Hat Enterprise Linux ou CentOS: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A instalação de um sistema StorageGRID em um ambiente Linux Red Hat Enterprise (RHEL) ou CentOS Linux inclui três etapas principais.
+
+. *Preparação*: Durante o Planejamento e a preparação, você executa as seguintes tarefas:
++
+** Saiba mais sobre os requisitos de hardware e armazenamento do StorageGRID.
+** Saiba mais sobre os detalhes do link:../network/index.html["Rede StorageGRID"] para que você possa configurar sua rede adequadamente.
+** Identifique e prepare os servidores físicos ou virtuais que você planeja usar para hospedar seus nós de grade do StorageGRID.
+** Nos servidores que você preparou:
++
+*** Instale o Linux
+*** Configure a rede host
+*** Configurar o armazenamento do host
+*** Instale o motor do recipiente
+*** Instale os serviços de host do StorageGRID
+
+
+
+
+. *Implantação*: Implante nós de grade usando a interface de usuário apropriada. Quando você implementa nós de grade, eles são criados como parte do sistema StorageGRID e conetados a uma ou mais redes.
++
+.. Use os arquivos de configuração de nó e linha de comando do Linux para implantar nós de grade baseados em software nos hosts preparados na etapa 1.
+.. Use o Instalador de dispositivos StorageGRID para implantar nós de dispositivos StorageGRID.
++
+
+NOTE: As instruções de instalação e integração específicas de hardware não estão incluídas no procedimento de instalação do StorageGRID. Para saber como instalar dispositivos StorageGRID, consulte link:../installconfig/index.html["Início rápido para instalação de hardware"] para localizar as instruções do seu aparelho.
+
+
+
+. *Configuração*: Quando todos os nós tiverem sido implantados, use o Gerenciador de Grade para configurar a grade e concluir a instalação.
+
+
+Essas instruções recomendam uma abordagem padrão para implantar e configurar um sistema StorageGRID. Consulte também as informações sobre as seguintes abordagens alternativas:
+
+* Usar uma estrutura de orquestração padrão, como Ansible, Puppet ou Chef, para instalar o RHEL ou CentOS, configurar rede e storage, instalar o mecanismo de contêiner e o serviço de host do StorageGRID e implantar nós de grade virtual.
+* Automatize a implantação e configuração do sistema StorageGRID usando um script de configuração Python (fornecido no arquivo de instalação).
+* Automatize a implantação e a configuração dos nós de grade do dispositivo com um script de configuração Python (disponível no arquivo de instalação ou no instalador do dispositivo StorageGRID).
+* Se você é um desenvolvedor avançado de implantações do StorageGRID, use as APIS REST de instalação para automatizar a instalação de nós de grade do StorageGRID.
+

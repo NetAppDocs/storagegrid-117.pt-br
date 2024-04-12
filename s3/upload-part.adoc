@@ -1,0 +1,47 @@
+---
+permalink: s3/upload-part.html 
+sidebar: sidebar 
+keywords: s3 upload part operation 
+summary: A operação Upload Part carrega uma peça em um upload multipart para um objeto. 
+---
+= Carregar artigo
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A operação Upload Part carrega uma peça em um upload multipart para um objeto.
+
+
+
+== Cabeçalhos de solicitação suportados
+
+Os seguintes cabeçalhos de solicitação são suportados:
+
+* `Content-Length`
+* `Content-MD5`
+
+
+
+
+== Cabeçalhos de solicitação para criptografia do lado do servidor
+
+Se você especificou a criptografia SSE-C para a solicitação de carregamento de múltiplas peças iniciada, você também deve incluir os seguintes cabeçalhos de solicitação em cada solicitação de Upload de peça:
+
+* `x-amz-server-side-encryption-customer-algorithm`: Especificar `AES256`.
+* `x-amz-server-side-encryption-customer-key`: Especifique a mesma chave de criptografia fornecida na solicitação Iniciar carregamento Multipart.
+* `x-amz-server-side-encryption-customer-key-MD5`: Especifique o mesmo resumo MD5 que você forneceu na solicitação de Envio de Multipart Iniciar.
+
+
+
+IMPORTANT: As chaves de criptografia que você fornece nunca são armazenadas. Se você perder uma chave de criptografia, perderá o objeto correspondente. Antes de usar chaves fornecidas pelo cliente para proteger os dados do objeto, revise as considerações em "usar criptografia do lado do servidor".
+
+
+
+== Controle de versão
+
+O upload de várias partes consiste em operações separadas para iniciar o upload, listar uploads, carregar peças, montar as peças carregadas e concluir o upload. Os objetos são criados (e versionados, se aplicável) quando a operação completa de Upload Multipart é executada.
+
+.Informações relacionadas
+link:using-server-side-encryption.html["Use a criptografia do lado do servidor"]

@@ -1,0 +1,76 @@
+---
+permalink: maintain/step-4-remove-ilm-references.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, remove ilm reference 
+summary: 'A partir do passo 4 (Remover referências ILM) do assistente Decommission Site, você pode remover a política proposta se existir e excluir ou editar quaisquer regras ILM não utilizadas que ainda se referem ao site.' 
+---
+= Passo 4: Remover referências ILM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+No passo 4 (Remover referências ILM) do assistente Decommission Site, você pode remover a política proposta se existir e excluir ou editar quaisquer regras ILM não utilizadas que ainda se referem ao site.
+
+.Sobre esta tarefa
+Você está impedido de iniciar o procedimento de desativação do site nestes casos:
+
+* Existe uma política proposta de ILM. Se você tem uma política proposta, você deve excluí-la.
+* Qualquer regra ILM refere-se ao site, mesmo que essa regra não seja usada em nenhuma política ILM. Você deve excluir ou editar todas as regras que se referem ao site.
+
+
+.Passos
+. Se uma política proposta for listada, remova-a.
++
+.. Selecione *Excluir Política proposta*.
+.. Selecione *OK* na caixa de diálogo de confirmação.
+
+
+. Determine se quaisquer regras de ILM não utilizadas se referem ao site.
++
+image::../media/decommission_site_step_4_ilm_rules.png[Desativar as regras do Site Step 4 ILM]
+
++
+Todas as regras ILM que estão listadas ainda se referem ao site, mas não são usadas em nenhuma política. No exemplo:
+
++
+** A regra *Make 2 Copies* usa o pool de armazenamento *All Storage Nodes* (StorageGRID 11,6 e anterior), que usa o site *All Sites*.
+** A regra não utilizada *3 cópias para S3 inquilino* refere-se ao pool de armazenamento *Raleigh*.
+** A regra não utilizada *2 copy 2 sites para objetos menores* refere-se ao pool de armazenamento *Raleigh*.
+** As regras não utilizadas para *EC Large Objects* usam o site Raleigh no perfil de codificação de apagamento *All 3 Sites*.
+** Se nenhuma regra ILM estiver listada, selecione *Next* para ir para link:step-5-resolve-node-conflicts.html["Etapa 5: Resolver conflitos de nó (e iniciar a desativação)"].
++
+
+NOTE: Quando o StorageGRID descompacta o site, ele desativará automaticamente quaisquer perfis de codificação de apagamento não utilizados que se referem ao site e excluirá automaticamente todos os pools de armazenamento não utilizados que se referem ao site. O pool de storage de todos os nós de storage (StorageGRID 11,6 e anterior) é removido porque ele usa o site todos os sites.
+
+** Se uma ou mais regras ILM estiverem listadas, vá para a próxima etapa.
+
+
+. Edite ou exclua cada regra não utilizada:
++
+** Para editar uma regra, acesse a página de regras do ILM e atualize todos os canais que usam um perfil de codificação de apagamento ou um pool de armazenamento que se refere ao site. Em seguida, retorne a *Etapa 4 (Remover referências ILM)*.
++
+
+NOTE: Para obter detalhes, consulte as instruções para gerenciar objetos com gerenciamento do ciclo de vida das informações.
+
+** Para excluir uma regra, selecione o ícone de lixeira image:../media/icon_trash_can.png["Ícone Lixeira"]e selecione *OK*.
++
+
+IMPORTANT: Você deve excluir a regra *Make 2 Copies* antes de poder desativar um site.
+
+
+
+. Confirme se não existe nenhuma política de ILM proposta, nenhuma regra de ILM não utilizada se refere ao site e o botão *Next* está ativado.
++
+image::../media/decommission_site_step_4_no_policy_or_rules.png[Etapa 4 do site não há política ou regras]
+
+. Selecione *seguinte*.
++
+
+NOTE: Quaisquer pools de armazenamento restantes e perfis de codificação de apagamento que se refiram ao site tornar-se-ão inválidos quando o site for removido. Quando o StorageGRID descompacta o site, ele desativará automaticamente quaisquer perfis de codificação de apagamento não utilizados que se referem ao site e excluirá automaticamente todos os pools de armazenamento não utilizados que se referem ao site. O pool de storage de todos os nós de storage (StorageGRID 11,6 e anterior) é removido porque ele usa o site todos os sites.
+
++
+A etapa 5 (resolver conflitos de nó) é exibida.
+
+

@@ -1,0 +1,55 @@
+---
+permalink: installconfig/connecting-power-cords-and-applying-power-sg6000.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6000, storage node, storage appliance, wire, wiring, cabling, cable, Connecting, connect, power cords, power, applying power, apply power, turn on, power up, ac, ac power 
+summary: Depois de conetar os cabos de rede, você estará pronto para aplicar energia ao controlador SG6000-CN e aos dois controladores de armazenamento ou compartimentos de expansão opcionais. 
+---
+= Conete os cabos de alimentação e ligue a alimentação (SG6000)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Depois de conetar os cabos de rede, você estará pronto para aplicar energia ao controlador SG6000-CN e aos dois controladores de armazenamento ou compartimentos de expansão opcionais.
+
+.Passos
+. Confirme se as duas controladoras no compartimento de controladora de storage estão desligadas.
++
+
+CAUTION: *Risco de choque elétrico* -- antes de ligar os cabos de alimentação, certifique-se de que os interrutores de alimentação de cada um dos dois controladores de armazenamento estão desligados.
+
+. Se você tiver gavetas de expansão, confirme se ambos os interruptores de energia da IOM estão desligados.
++
+
+CAUTION: *Risco de choque elétrico* -- antes de conetar os cabos de alimentação, certifique-se de que os dois interrutores de alimentação de cada uma das prateleiras de expansão estão desligados.
+
+. Ligue um cabo de alimentação a cada uma das duas unidades de alimentação do controlador SG6000-CN.
+. Conete esses dois cabos de alimentação a duas unidades de distribuição de energia (PDUs) diferentes no gabinete ou no rack.
+. Conete um cabo de alimentação a cada uma das duas unidades de fonte de alimentação no compartimento do controlador de armazenamento.
+. Se você tiver compartimentos de expansão, conete um cabo de alimentação a cada uma das duas unidades de fonte de alimentação em cada compartimento de expansão.
+. Conete os dois cabos de energia em cada compartimento de armazenamento (incluindo as gavetas de expansão opcionais) a duas PDUs diferentes no gabinete ou no rack.
+. Se o botão liga/desliga na parte frontal do controlador SG6000-CN não estiver aceso a azul, prima o botão para ligar o controlador.
++
+Não prima novamente o botão de alimentação durante o processo de ativação.
+
+. Ligue os dois interruptores de energia na parte de trás do compartimento do controlador de armazenamento. Se você tiver compartimentos de expansão, ligue os dois interruptores de energia para cada compartimento.
++
+** Não desligue os interrutores de alimentação durante o processo de ativação.
+** Os ventiladores na gaveta do controlador de storage e nas gavetas de expansão opcionais podem ser muito altos quando são iniciados pela primeira vez. O ruído alto durante o arranque é normal.
+
+
+. Depois que os componentes iniciarem, verifique seu status.
++
+** Verifique o visor de sete segmentos na parte de trás de cada controlador de armazenamento. Consulte o artigo sobre como visualizar códigos de status de inicialização para obter mais informações.
+** Verifique se o botão de alimentação na parte frontal do controlador SG6000-CN está aceso.
+
+
+. Se ocorrerem erros, corrija quaisquer problemas.
+. Fixe a moldura frontal ao controlador SG6000-CN se tiver sido removida.
+
+
+.Informações relacionadas
+* link:viewing-status-indicators.html["Ver indicadores de estado"]
+* link:../sg6000/reinstalling-sg6000-cn-controller-into-cabinet-or-rack.html["Reinstale o controlador SG6000-CN no gabinete ou rack"]
+

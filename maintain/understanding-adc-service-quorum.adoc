@@ -1,0 +1,27 @@
+---
+permalink: maintain/understanding-adc-service-quorum.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, adc, adc quorum 
+summary: 'Talvez você não consiga desativar certos nós de armazenamento em um local de data center se poucos serviços de controlador de domínio administrativo (ADC) permanecessem após a desativação. Esse serviço, que é encontrado em alguns nós de storage, mantém informações de topologia de grade e fornece serviços de configuração para a grade. O sistema StorageGRID requer que um quórum de serviços ADC esteja disponível em cada local e em todos os momentos.' 
+---
+= Entenda o quórum de ADC
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez você não consiga desativar certos nós de armazenamento em um local de data center se muito poucos serviços do controlador de domínio administrativo (ADC) permanecessem após a desativação. Esse serviço, que é encontrado em alguns nós de storage, mantém informações de topologia de grade e fornece serviços de configuração para a grade. O sistema StorageGRID requer que um quórum de serviços ADC esteja disponível em cada local e em todos os momentos.
+
+Não é possível desativar um nó de armazenamento se a remoção do nó fizer com que o quórum de ADC não seja mais atendido. Para satisfazer o quórum de ADC durante a desativação, um mínimo de três nós de armazenamento em cada local de data center deve ter o serviço ADC. Se um local de data center tiver mais de três nós de storage com o serviço ADC, uma maioria simples desses nós deve permanecer disponível após a desativação ((0,5 * `_Storage Nodes with ADC_`) e 1).
+
+Por exemplo, suponha que um site de data center inclua atualmente seis nós de storage com serviços ADC e que você queira desativar três nós de storage. Devido ao requisito de quórum do ADC, você deve concluir dois procedimentos de desativação, como segue:
+
+* No primeiro procedimento de desativação, você deve garantir que quatro nós de armazenamento com serviços ADC permaneçam disponíveis ((0,5 * 6) -1) . Isso significa que você só pode desativar dois nós de storage inicialmente.
+* No segundo procedimento de desativação, você pode remover o terceiro nó de armazenamento porque o quórum de ADC agora requer apenas três serviços ADC para permanecer disponível ((0,5 * 4) e 1).
+
+
+Se você precisar desativar um nó de armazenamento, mas não puder devido ao requisito de quórum de ADC, você deve adicionar um novo nó de armazenamento em uma expansão e especificar que ele deve ter um serviço ADC. Em seguida, você pode desativar o nó de storage existente.
+
+.Informações relacionadas
+link:../expand/index.html["Expanda sua grade"]

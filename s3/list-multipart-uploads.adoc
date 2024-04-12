@@ -1,0 +1,32 @@
+---
+permalink: s3/list-multipart-uploads.html 
+sidebar: sidebar 
+keywords: list multipart uploads, uploads, multipart uploads, bucket 
+summary: A operação List Multipart uploads lista uploads em andamento para um bucket. 
+---
+= Listar carregamentos Multipart
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A operação List Multipart uploads lista uploads em andamento para um bucket.
+
+Os seguintes parâmetros de solicitação são suportados:
+
+* `encoding-type`
+* `key-marker`
+* `max-uploads`
+* `prefix`
+* `upload-id-marker`
+* `Host`
+* `Date`
+* `Authorization`
+
+
+
+
+== Controle de versão
+
+O upload de várias partes consiste em operações separadas para iniciar o upload, listar uploads, carregar peças, montar as peças carregadas e concluir o upload. Quando a operação completa de Upload Multipart é executada, esse é o ponto em que os objetos são criados (e versionados, se aplicável).

@@ -1,0 +1,35 @@
+---
+permalink: vmware/planning-and-preparation.html 
+sidebar: sidebar 
+keywords: how to plan before installation 
+summary: Antes de implantar nós de grade e configurar a grade StorageGRID, você deve estar familiarizado com as etapas e requisitos para concluir o procedimento. 
+---
+= Antes de instalar (VMware)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de implantar nós de grade e configurar a grade StorageGRID, você deve estar familiarizado com as etapas e requisitos para concluir o procedimento.
+
+Os procedimentos de implantação e configuração do StorageGRID presumem que você está familiarizado com a arquitetura e a funcionalidade operacional do sistema StorageGRID.
+
+Você pode implantar um único local ou vários locais de uma só vez. No entanto, todos os locais precisam atender ao requisito mínimo de ter pelo menos três nós de storage.
+
+Antes de iniciar o procedimento de implantação do nó e configuração da grade, você deve:
+
+* Planeje a implantação do StorageGRID.
+* Instale, conete e configure todo o hardware necessário, incluindo quaisquer dispositivos StorageGRID, de acordo com as especificações.
++
+
+IMPORTANT: Se a instalação do StorageGRID não usar nós de armazenamento do StorageGRID Appliance (hardware), você deve usar o armazenamento RAID de hardware com cache de gravação (BBWC) com bateria. O StorageGRID não suporta o uso de redes de área de armazenamento virtual (VSANs), RAID de software ou nenhuma proteção RAID.
+
++
+
+NOTE: As instruções de instalação e integração específicas de hardware não estão incluídas no procedimento de instalação do StorageGRID. Para saber como instalar dispositivos StorageGRID, link:../installconfig/index.html["Instale o hardware do dispositivo"]consulte .
+
+* Compreender o link:../network/index.html["opções de rede disponíveis e como cada opção de rede deve ser implementada em nós de grade"].
+* Reúna todas as informações de rede com antecedência. A menos que você esteja usando DHCP, reúna os endereços IP para atribuir a cada nó de grade e os endereços IP dos servidores DNS e NTP que serão usados.
+* Decida qual das ferramentas de implantação e configuração disponíveis você deseja usar.
+

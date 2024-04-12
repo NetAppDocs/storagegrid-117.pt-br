@@ -1,0 +1,54 @@
+---
+permalink: sg6100/removing-sgf6112-from-cabinet-or-rack.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6100, storage node, storage appliance, remove, removing, removal, cabinet, rack, appliance, sgf6112 
+summary: Retire o SGF6112 de um gabinete ou rack para acessar a tampa superior ou para mover o aparelho para um local diferente. 
+---
+= Remova o SGF6112 do gabinete ou rack
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Retire o SGF6112 de um gabinete ou rack para acessar a tampa superior ou para mover o aparelho para um local diferente.
+
+.Antes de começar
+* Você tem etiquetas para identificar cada cabo conetado ao SGF6112.
+* Você localizou fisicamente o SGF6112 onde está realizando manutenção no data center.
++
+link:locating-sgf6112-in-data-center.html["Localize SGF6112 no data center"]
+
+* Você desligou o SGF6112.
++
+link:shut-down-sgf6112.html["Encerrar SGF6112"]
+
++
+
+CAUTION: Não desligue o aparelho utilizando o interrutor de alimentação.
+
+
+
+.Passos
+. Identifique e, em seguida, desligue os cabos de alimentação do aparelho.
+. Enrole a extremidade da correia da pulseira ESD à volta do pulso e fixe a extremidade do clipe a um solo metálico para evitar descargas estáticas.
+. Identifique e desconete os cabos de dados do dispositivo e quaisquer transcetores SFP ou SFP28.
++
+
+IMPORTANT: Para evitar um desempenho degradado, não torça, dobre, aperte ou pise nos cabos.
+
+. Desaperte os dois parafusos integrados no painel frontal do aparelho.
++
+image::../media/sg6060_rack_retaining_screws.png[SGF6112 parafusos de fixação da cremalheira]
+
+. Deslize o SGF6112 para a frente para fora do rack até que os trilhos de montagem estejam totalmente estendidos e você ouça os trincos em ambos os lados estalarem.
++
+A tampa superior do aparelho está acessível.
+
+. Opcional: Se estiver a remover totalmente o aparelho do armário ou do rack, siga as instruções para o kit de calhas para remover o aparelho dos trilhos.
+
+
+Após a substituição da peça, devolva a peça com falha à NetApp, conforme descrito nas instruções de RMA fornecidas com o kit. Consulte a https://mysupport.netapp.com/site/info/rma["Substituição  Devolução artigo"^] página para obter mais informações.
+
+.Informações relacionadas
+link:removing-sgf6112-cover.html["Remova a tampa SGF6112"]

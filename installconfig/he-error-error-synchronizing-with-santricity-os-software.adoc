@@ -1,0 +1,23 @@
+---
+permalink: installconfig/he-error-error-synchronizing-with-santricity-os-software.html 
+sidebar: sidebar 
+keywords: storage node, storage appliance, troubleshooting, HE, error, synchronize, synchronizing, sunconization, SANtricity OS Software, santricity 
+summary: A exibição de sete segmentos no controlador de computação mostra um código de erro HE se o Instalador de dispositivos StorageGRID não puder sincronizar com o software SANtricity os. 
+---
+= Erro HE: Erro ao sincronizar com o software SANtricity os (SG5700)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+A exibição de sete segmentos no controlador de computação mostra um código de erro HE se o Instalador de dispositivos StorageGRID não puder sincronizar com o software SANtricity os.
+
+.Sobre esta tarefa
+Se for apresentado um código de erro HE, efetue esta ação corretiva.
+
+.Passos
+. Verifique a integridade dos dois cabos de interconexão SAS e confirme se estão bem conetados.
+. Se necessário, substitua um ou ambos os cabos e tente novamente.
+. Se isso não resolver o problema, entre em Contato com o suporte técnico.
+

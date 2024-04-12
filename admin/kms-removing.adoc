@@ -1,0 +1,48 @@
+---
+permalink: admin/kms-removing.html 
+sidebar: sidebar 
+keywords: remove kms, remove key management server 
+summary: Em alguns casos, você pode querer remover um servidor de gerenciamento de chaves. Por exemplo, você pode querer remover um KMS específico do site se você tiver desativado o site. 
+---
+= Remover um servidor de gerenciamento de chaves (KMS)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Em alguns casos, você pode querer remover um servidor de gerenciamento de chaves. Por exemplo, você pode querer remover um KMS específico do site se você tiver desativado o site.
+
+.Antes de começar
+* Você revisou o link:kms-considerations-and-requirements.html["considerações e requisitos para usar um servidor de gerenciamento de chaves"].
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você tem a permissão de acesso root.
+
+
+.Sobre esta tarefa
+Você pode remover um KMS nestes casos:
+
+* Você pode remover um KMS específico do site se o site tiver sido desativado ou se o site não incluir nós de dispositivo com criptografia de nó ativada.
+* Você pode remover o KMS padrão se um KMS específico do site já existir para cada site que tenha nós de dispositivo com criptografia de nó ativada.
+
+
+.Passos
+. Selecione *CONFIGURATION* > *Security* > *Key Management Server*.
++
+A página servidor de gerenciamento de chaves é exibida e mostra todos os servidores de gerenciamento de chaves que foram configurados.
+
+. Selecione o KMS que deseja remover e selecione *ações* > *Remover*.
++
+Você também pode remover um KMS selecionando o nome do KMS na tabela e selecionando *Remover* na página de detalhes do KMS.
+
+. Confirme se o seguinte é verdadeiro:
++
+** Você está removendo um KMS específico do site para um site que não tem nó de dispositivo com criptografia de nó ativada.
+** Você está removendo o KMS padrão, mas um KMS específico do site já existe para cada site com criptografia de nó.
+
+
+. Selecione *Sim*.
++
+A configuração do KMS é removida.
+
+

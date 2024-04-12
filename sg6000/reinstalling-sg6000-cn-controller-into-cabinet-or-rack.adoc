@@ -1,0 +1,55 @@
+---
+permalink: sg6000/reinstalling-sg6000-cn-controller-into-cabinet-or-rack.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6000, storage node, storage appliance, install, installing, installation, cabinet, rack, controller, sg6000-cn 
+summary: Reinstale o controlador em um gabinete ou rack quando a manutenção do hardware estiver concluída. 
+---
+= Reinstale o controlador SG6000-CN no gabinete ou rack
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Reinstale o controlador em um gabinete ou rack quando a manutenção do hardware estiver concluída.
+
+.Antes de começar
+Reinstalou a tampa do controlador.
+
+link:reinstalling-sg6000-cn-controller-cover.html["Reinstale a tampa do controlador SG6000-CN"]
+
+.Passos
+. Pressione o trilho azul libera ambos os trilhos do rack ao mesmo tempo e deslize o controlador SG6000-CN para dentro do rack até que ele esteja totalmente assentado.
++
+Quando não conseguir mover o controlador mais, puxe as travas azuis em ambos os lados do chassi para deslizar o controlador até o fim.
+
++
+image::../media/sg6000_cn_rails_blue_button.gif[SG6000 deslizando sobre trilhos]
+
++
+
+NOTE: Não conete a moldura frontal até que você ligue o controlador.
+
+. Aperte os parafusos integrados no painel frontal do controlador para fixar o controlador no rack.
++
+image::../media/sg6060_rack_retaining_screws.png[SG6060 parafusos de fixação da cremalheira]
+
+. Enrole a extremidade da correia da pulseira ESD à volta do pulso e fixe a extremidade do clipe a um solo metálico para evitar descargas estáticas.
+. Reconecte os cabos de dados do controlador e quaisquer transcetores SFP ou SFP28.
++
+
+IMPORTANT: Para evitar um desempenho degradado, não torça, dobre, aperte ou pise nos cabos.
+
++
+link:../installconfig/cabling-appliance-sg6000.html["Aparelho de cabo (SG6000)"]
+
+. Reconecte os cabos de alimentação do controlador.
++
+link:../installconfig/connecting-power-cords-and-applying-power-sg6000.html["Conete os cabos de alimentação e ligue a alimentação (SG6000)"]
+
+
+
+.Depois de terminar
+O controlador pode ser reiniciado.
+
+link:powering-on-sg6000-cn-controller-and-verifying-operation.html["Ligue o controlador SG6000-CN e verifique a operação"]

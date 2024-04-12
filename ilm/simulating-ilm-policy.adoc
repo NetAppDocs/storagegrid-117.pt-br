@@ -1,0 +1,184 @@
+---
+permalink: ilm/simulating-ilm-policy.html 
+sidebar: sidebar 
+keywords: simulate ilm policy 
+summary: Simule uma política proposta em objetos de teste antes de ativar a política e aplicá-la aos dados de produção. A janela de simulação fornece um ambiente autônomo que é seguro para políticas de teste antes de serem ativadas e aplicadas aos dados no ambiente de produção. 
+---
+= Simule uma política de ILM
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Simule uma política proposta em objetos de teste antes de ativar a política e aplicá-la aos dados de produção. A janela de simulação fornece um ambiente autônomo que é seguro para políticas de teste antes de serem ativadas e aplicadas aos dados no ambiente de produção.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você tem o link:../admin/admin-group-permissions.html["permissões de acesso necessárias"].
+* Você conhece o bucket/object-key do S3 ou o container/object-name do Swift para cada objeto que deseja testar.
+
+
+.Sobre esta tarefa
+Selecione cuidadosamente os objetos que deseja testar a política proposta. Para simular uma política completamente, você deve testar pelo menos um objeto para cada filtro em cada regra.
+
+Por exemplo, se uma política incluir uma regra para combinar objetos no bucket A e outra regra para corresponder objetos no bucket B, você deve selecionar pelo menos um objeto do bucket A e um objeto do bucket B para testar a política completamente. Você também deve selecionar pelo menos um objeto de outro intervalo para testar a regra padrão.
+
+Ao simular uma política, aplicam-se as seguintes considerações:
+
+* Depois de fazer alterações em uma política, salve a política proposta. Em seguida, simule o comportamento da política proposta salva.
+* Ao simular uma política, as regras ILM na política filtram os objetos de teste, para que você possa ver qual regra foi aplicada a cada objeto. No entanto, nenhuma cópia de objeto é feita e nenhum objeto é colocado. Executar uma simulação não modifica seus dados, regras ou política de forma alguma.
+* A janela simular política proposta mantém os objetos testados até selecionar *Clear All* (Limpar tudo) ou o ícone remove (removerimage:../media/icon-x-to-remove.png["Remover ícone"]) para cada objeto na lista Simulation Results (resultados da simulação).
+* Simulação retorna o nome da regra correspondente. Para determinar qual pool de armazenamento ou perfil de codificação de apagamento está em vigor, selecione o nome da regra para ir para a página de detalhes da regra, onde você pode visualizar o diagrama de retenção e outros detalhes sobre a regra.
+* Se o controle de versão S3 estiver ativado, você poderá inserir o ID da versão para a versão do objeto que deseja usar para a simulação.
+
+
+.Passos
+. link:creating-proposed-ilm-policy.html["Criar uma política proposta"].
+. Usando um cliente S3 ou Swift ou o link:../tenant/use-s3-console.html["Console experimental S3"], que está disponível no Gerenciador de inquilinos para cada locatário, ingira os objetos necessários para testar cada regra.
+. Na página de política ILM, guia política proposta, selecione *simular*.
+. No campo *Object*, digite S3 `bucket/object-key` ou Swift `container/object-name` para um objeto de teste. Por exemplo, `bucket-01/filename.png`.
+. Opcionalmente, insira um ID de versão para o objeto no campo *Version ID*.
+. Selecione *simular*.
+. Na seção resultados da simulação, confirme se cada objeto foi correspondido pela regra correta.
+
+
+
+
+== Exemplo 1: Verificar regras ao simular uma política de ILM proposta
+
+Este exemplo descreve como verificar regras ao simular uma política proposta.
+
+Neste exemplo, a política *exemplo de ILM* está sendo simulada contra os objetos ingeridos em dois buckets. A política inclui três regras, como segue:
+
+* A primeira regra, *duas cópias, dois anos para bucket-a*, aplica-se apenas a objetos em bucket-a.
+* A segunda regra, *objetos EC > 1 MB*, aplica-se a todos os intervalos, mas filtros em objetos com mais de 1 MB.
+* A terceira regra, *duas cópias, dois data centers*, é a regra padrão. Ele não inclui nenhum filtro e não usa o tempo de referência não atual.
+
+
+Depois de simular a política, confirme se cada objeto foi correspondido pela regra correta.
+
+image::../media/simulate_policy_screen.png[Simule os resultados da política]
+
+Neste exemplo:
+
+* `bucket-a/bucket-a object.pdf` corresponde corretamente à primeira regra, que filtra os objetos no `bucket-a`.
+* `bucket-b/test object greater than 1 MB.pdf` está em `bucket-b`, por isso não corresponde à primeira regra. Em vez disso, foi corretamente correspondido pela segunda regra, que filtra em objetos com mais de 1 MB.
+* `bucket-b/test object less than 1 MB.pdf` não corresponde aos filtros nas duas primeiras regras, por isso será colocado pela regra padrão, que não inclui filtros.
+
+
+
+
+== Exemplo 2: Reordenar regras ao simular uma política de ILM proposta
+
+Este exemplo mostra como você pode reordenar regras para alterar os resultados ao simular uma política.
+
+Neste exemplo, a política *Demo* está sendo simulada. Esta política, que se destina a encontrar objetos que tenham metadados de usuário de série X-men, inclui três regras, como segue:
+
+* A primeira regra, *PNGs*, filtra os nomes das chaves que terminam em `.png`.
+* A segunda regra, *X-meN*, aplica-se apenas a objetos para o locatário A e filtra os metadados `series=x-men` do usuário.
+* A última regra, *duas cópias dois data centers*, é a regra padrão, que corresponde a quaisquer objetos que não correspondam às duas primeiras regras.
+
+
+.Passos
+. Depois de adicionar as regras e salvar a política, selecione *simular*.
+. No campo *Object*, insira o bucket/object-key S3 ou o container/object-name Swift para um objeto de teste e selecione *Simulate*.
++
+Os resultados da simulação aparecem, mostrando que o `Havok.png` objeto foi correspondido pela regra *PNGs*.
+
++
+image::../media/simulate_reorder_rules_pngs_result.png[Exemplo 2: Reordenando regras ao simular uma política de ILM proposta]
+
++
+No entanto, `Havok.png` foi feito para testar a regra *X-men*.
+
+. Para resolver o problema, reordene as regras.
++
+.. Selecione *Finish* (concluir) para fechar a janela Simulate ILM Policy (simular política ILM).
+.. Selecione *ações* > *Editar* para editar a política.
+.. Arraste a regra *X-man* para o topo da lista.
+.. Selecione *Guardar*.
+
+
+. Selecione *simular*.
++
+Os objetos que você testou anteriormente são reavaliados em relação à política atualizada e os novos resultados da simulação são mostrados. No exemplo, a coluna Rule Matched mostra que o `Havok.png` objeto agora corresponde à regra de metadados X-men, conforme esperado. A coluna correspondência anterior mostra que a regra PNGs correspondia ao objeto na simulação anterior.
+
++
+image::../media/simulate_reorder_rules_correct_result.png[Exemplo 2: Reordenando regras ao simular uma política de ILM proposta]
+
++
+
+NOTE: Se você permanecer na guia de política proposta, poderá simular novamente uma política depois de fazer alterações sem precisar digitar novamente os nomes dos objetos de teste.
+
+
+
+
+
+== Exemplo 3: Corrija uma regra ao simular uma política de ILM proposta
+
+Este exemplo mostra como simular uma política, corrigir uma regra na política e continuar a simulação.
+
+Neste exemplo, a política *Demo* está sendo simulada. Esta política destina-se a localizar objetos que tenham `series=x-men` metadados de usuário. No entanto, resultados inesperados ocorreram ao simular essa política contra o `Beast.jpg` objeto. Em vez de corresponder à regra de metadados X-men, o objeto correspondia à regra padrão, duas cópias de dois data centers.
+
+image::../media/simulate_results_for_object_wrong_metadata.png[Exemplo 3: Corrigindo uma regra ao simular uma política de ILM proposta]
+
+Quando um objeto de teste não é correspondido pela regra esperada na política, você deve examinar cada regra na política e corrigir quaisquer erros.
+
+.Passos
+. Selecione *Finish* (concluir) para fechar a caixa de diálogo Simulate policy (simular política). Na guia política proposta, selecione *Diagrama de retenção*. Em seguida, selecione *expandir tudo* ou *Exibir detalhes* para cada regra conforme necessário.
+. Revise a conta de locatário da regra, o tempo de referência e os critérios de filtragem.
++
+Como exemplo, suponha que os metadados para a regra X-meN foram inseridos como "'x-men01'" em vez de "'x-men."
+
+. Para resolver o erro, corrija a regra da seguinte forma:
++
+** Se a regra fizer parte da política proposta, você pode clonar a regra ou remover a regra da política e editá-la.
+** Se a regra fizer parte da política ativa, você deverá clonar a regra. Não é possível editar ou remover uma regra da política ativa.
++
+[cols="1a,3a"]
+|===
+| Opção | Passos 
+
+
+ a| 
+Clone a regra
+ a| 
+... Selecione *ILM* > *regras*.
+... Selecione a regra incorreta e selecione *Clone*.
+... Insira um nome para a nova regra, altere as informações incorretas e selecione *criar*.
+... Selecione *ILM* > *políticas* > *Política proposta*.
+... Selecione *ações* > *Editar*.
+... Selecione *Selecionar regras* e, em seguida, selecione *continuar* para aceitar a mesma regra padrão.
+... Na etapa Selecionar outras regras, marque a caixa de seleção da nova regra, desmarque a caixa de seleção da regra original e selecione *Selecionar*.
+... Se necessário, reordene as regras arrastando a nova regra para o local correto.
+... Selecione *Guardar*.
+
+
+
+
+ a| 
+Edite a regra
+ a| 
+... Selecione *ILM* > *políticas* > *Política proposta* e remova a regra que deseja editar.
+... Selecione *ILM* > *regras*.
+... Selecione a regra que deseja editar e selecione *Editar*. Ou marque a caixa de seleção da regra e selecione *ações* > *Editar*.
+... Altere as informações incorretas para cada parte do assistente e selecione *Atualizar*.
+... Selecione *ILM* > *políticas* > *Política proposta*.
+... Selecione *ações* > *Editar*.
+... Selecione *Selecionar regras* e, em seguida, selecione *continuar* para aceitar a mesma regra padrão.
+... Na caixa de diálogo Selecionar outras regras, marque a caixa de seleção para a regra corrigida, selecione *Selecionar* e, em seguida, selecione *Salvar*.
+... Arraste as linhas para as regras não padrão para determinar a ordem em que essas regras serão avaliadas.
+
+
+|===
+
+
+. Execute a simulação novamente.
++
+Neste exemplo, a regra X-meN corrigida agora corresponde ao `Beast.jpg` objeto com base nos `series=x-men` metadados do usuário, conforme esperado.
+
++
+image::../media/simulate_results_for_object_corrected_metadata.png[Exemplo 3: Corrigindo uma regra ao simular uma política de ILM proposta]
+
+

@@ -1,0 +1,93 @@
+---
+permalink: s3/operations-for-multipart-uploads.html 
+sidebar: sidebar 
+keywords: operations, multipart uploads, uploads, rest API 
+summary: Esta seção descreve como o StorageGRID suporta operações para uploads de várias partes. 
+---
+= Operações para uploads de várias partes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta seção descreve como o StorageGRID suporta operações para uploads de várias partes.
+
+As seguintes condições e notas aplicam-se a todas as operações de carregamento em várias partes:
+
+* Você não deve exceder 1.000 uploads simultâneos de várias partes para um único bucket, porque os resultados das consultas de uploads de várias partes para esse bucket podem retornar resultados incompletos.
+* O StorageGRID impõe limites de tamanho da AWS para peças multipeças. S3 os clientes devem seguir estas diretrizes:
++
+** Cada parte em um upload de várias partes deve estar entre 5 MIB (5.242.880 bytes) e 5 GiB (5.368.709.120 bytes).
+** A última parte pode ser menor que 5 MIB (5.242.880 bytes).
+** Em geral, os tamanhos das peças devem ser tão grandes quanto possível. Por exemplo, use tamanhos de peças de 5 GiB para um objeto de 100 GiB. Como cada peça é considerada um objeto exclusivo, o uso de tamanhos grandes de peças reduz a sobrecarga de metadados do StorageGRID.
+** Para objetos menores que 5 GiB, considere usar upload não multipart.
+
+
+* O ILM é avaliado para cada parte de um objeto multipart à medida que é ingerido e para o objeto como um todo quando o upload multipart é concluído, se a regra ILM usa o comportamento de ingestão equilibrada ou rigorosa. Você deve estar ciente de como isso afeta o posicionamento do objeto e da peça:
++
+** Se o ILM mudar enquanto um upload multipart S3 estiver em andamento, quando o upload multipart concluir algumas partes do objeto talvez não atendam aos requisitos atuais do ILM. Qualquer peça que não seja colocada corretamente está na fila para reavaliação ILM e é movida para o local correto mais tarde.
+** Ao avaliar o ILM para uma peça, o StorageGRID filtra o tamanho da peça, não o tamanho do objeto. Isso significa que partes de um objeto podem ser armazenadas em locais que não atendem aos requisitos de ILM para o objeto como um todo. Por exemplo, se uma regra especifica que todos os objetos de 10 GB ou maior são armazenados em DC1 enquanto todos os objetos menores são armazenados em DC2, na ingestão cada parte de 1 GB de um upload multipart de 10 partes é armazenado em DC2. Quando ILM é avaliado para o objeto como um todo, todas as partes do objeto são movidas para DC1.
+
+
+* Todas as operações de upload em várias partes suportam controles de consistência do StorageGRID.
+* Conforme necessário, você pode usar a criptografia do lado do servidor com uploads de várias partes. Para usar o SSE (criptografia do lado do servidor com chaves gerenciadas pelo StorageGRID), você inclui o `x-amz-server-side-encryption` cabeçalho da solicitação somente na solicitação de upload de múltiplas partes. Para usar SSE-C (criptografia do lado do servidor com chaves fornecidas pelo cliente), você especifica os mesmos três cabeçalhos de solicitação de chave de criptografia na solicitação de carregamento de múltiplas partes Iniciar e em cada solicitação de peça de carregamento subsequente.
+
+
+[cols="2a,3a"]
+|===
+| Operação | Implementação 
+
+
+ a| 
+Listar carregamentos Multipart
+ a| 
+Consulte link:list-multipart-uploads.html["Listar carregamentos Multipart"]
+
+
+
+ a| 
+Inicie o carregamento de várias peças
+ a| 
+Consulte link:initiate-multipart-upload.html["Inicie o carregamento de várias peças"]
+
+
+
+ a| 
+Carregar artigo
+ a| 
+Consulte link:upload-part.html["Carregar artigo"]
+
+
+
+ a| 
+Carregar artigo - Copiar
+ a| 
+Consulte link:upload-part-copy.html["Carregar artigo - Copiar"]
+
+
+
+ a| 
+Concluir carregamento Multipart
+ a| 
+Consulte link:complete-multipart-upload.html["Concluir carregamento Multipart"]
+
+
+
+ a| 
+Abortar carregamento Multipart
+ a| 
+Implementado com todo o comportamento da API REST do Amazon S3. Sujeito a alterações sem aviso prévio.
+
+
+
+ a| 
+Listar peças
+ a| 
+Implementado com todo o comportamento da API REST do Amazon S3. Sujeito a alterações sem aviso prévio.
+
+|===
+.Informações relacionadas
+* link:consistency-controls.html["Controles de consistência"]
+* link:using-server-side-encryption.html["Use a criptografia do lado do servidor"]
+

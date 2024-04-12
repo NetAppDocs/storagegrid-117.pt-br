@@ -1,0 +1,70 @@
+---
+permalink: maintain/how-site-recovery-is-performed-by-technical-support.html 
+sidebar: sidebar 
+keywords: storagegrid, site recovery, technical support, tech support 
+summary: Se um local StorageGRID inteiro falhar ou se vários nós de storage falharem, entre em Contato com o suporte técnico. O suporte técnico avaliará sua situação, desenvolverá um plano de recuperação e recuperará os nós ou o local com falha de uma maneira que atenda aos objetivos de negócios, otimize o tempo de recuperação e evite a perda desnecessária de dados. 
+---
+= Como a recuperação do local é realizada pelo suporte técnico
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se um local StorageGRID inteiro falhar ou se vários nós de storage falharem, entre em Contato com o suporte técnico. O suporte técnico avaliará sua situação, desenvolverá um plano de recuperação e recuperará os nós ou o local com falha de uma maneira que atenda aos objetivos de negócios, otimize o tempo de recuperação e evite a perda desnecessária de dados.
+
+
+CAUTION: A recuperação do local só pode ser realizada por suporte técnico.
+
+Os sistemas StorageGRID são resilientes a uma grande variedade de falhas e você pode executar com sucesso muitos procedimentos de recuperação e manutenção. No entanto, é difícil criar um procedimento simples e generalizado de recuperação do local, porque as etapas detalhadas dependem de fatores específicos para sua situação. Por exemplo:
+
+* *Seus objetivos de negócios*: Após a perda completa de um site da StorageGRID, você deve avaliar a melhor forma de atender aos seus objetivos de negócios. Por exemplo, você deseja reconstruir o site perdido no local? Pretende substituir o site Lost StorageGRID numa nova localização? A situação de cada cliente é diferente, e seu plano de recuperação deve ser projetado para atender às suas prioridades.
+* * Natureza exata da falha*: Antes de iniciar uma recuperação do local, determine se algum nó no local com falha está intacto ou se algum nó de armazenamento contém objetos recuperáveis. Se você reconstruir nós ou volumes de storage que contenham dados válidos, poderá ocorrer perda desnecessária de dados.
+* *Ative ILM policy*: O número, tipo e localização das cópias de objetos em sua grade é controlado por sua política ILM ativa. As especificidades da sua política de ILM podem afetar a quantidade de dados recuperáveis, bem como as técnicas específicas necessárias para a recuperação.
++
+
+CAUTION: Se um site contém a única cópia de um objeto e o site é perdido, o objeto é perdido.
+
+* *Consistência de bucket (ou container)*: O nível de consistência aplicado a um bucket (ou container) afeta se o StorageGRID replica totalmente os metadados de objetos para todos os nós e sites antes de informar ao cliente que a ingestão de objetos foi bem-sucedida. Se o seu nível de consistência permitir consistência, alguns metadados de objetos podem ter sido perdidos na falha do site. Isso pode afetar a quantidade de dados recuperáveis e, potencialmente, os detalhes do procedimento de recuperação.
+* *Histórico de alterações recentes*: Os detalhes do seu procedimento de recuperação podem ser afetados se algum procedimento de manutenção estava em andamento no momento da falha ou se alguma alteração recente foi feita à sua política de ILM. O suporte técnico deve avaliar o histórico recente de sua grade, bem como sua situação atual antes de iniciar uma recuperação do local.
+
+
+
+
+== Visão geral da recuperação do local
+
+Esta é uma visão geral do processo que o suporte técnico usa para recuperar um site com falha.
+
+
+CAUTION: A recuperação do local só pode ser realizada por suporte técnico.
+
+image::../media/site_recovery_overview.png[Visão geral da recuperação do local]
+
+. Entre em Contato com o suporte técnico.
++
+O suporte técnico faz uma avaliação detalhada da falha e trabalha com você para analisar seus objetivos de negócios. Com base nessas informações, o suporte técnico desenvolve um plano de recuperação adaptado à sua situação.
+
+. O suporte técnico recupera o nó de administração principal se ele tiver falhado.
+. O suporte técnico recupera todos os nós de storage, seguindo este resumo:
++
+.. Substitua o hardware do nó de armazenamento ou as máquinas virtuais conforme necessário.
+.. Restaurar metadados de objetos para o site com falha.
+.. Restaure os dados do objeto para os nós de storage recuperados.
++
+
+CAUTION: A perda de dados ocorrerá se os procedimentos de recuperação para um único nó de armazenamento com falha forem usados.
+
++
+
+NOTE: Quando um site inteiro falhou, comandos especializados são necessários para restaurar objetos e metadados de objetos com sucesso.
+
+
+
+. O suporte técnico recupera outros nós com falha.
++
+Depois que os metadados e os dados do objeto tiverem sido recuperados, os nós de Gateway com falha, os nós de administrador não primários ou os nós de arquivo podem ser recuperados usando procedimentos padrão.
+
+
+
+.Informações relacionadas
+link:site-decommissioning.html["Desativação do site"]

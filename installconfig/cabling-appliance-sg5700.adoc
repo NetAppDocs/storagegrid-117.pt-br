@@ -1,0 +1,197 @@
+---
+permalink: installconfig/cabling-appliance-sg5700.html 
+sidebar: sidebar 
+keywords: storagegrid, sg5700, storage node, storage appliance, cabling, wiring, connecting, cable, wire, connect 
+summary: Você coneta os dois controladores um ao outro, coneta as portas de gerenciamento em cada controlador e coneta as portas 10/25-GbE do controlador E5700SG à rede de Grade e à rede de cliente opcional para StorageGRID. 
+---
+= Aparelho de cabo (SG5700)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você coneta os dois controladores um ao outro, coneta as portas de gerenciamento em cada controlador e coneta as portas 10/25-GbE do controlador E5700SG à rede de Grade e à rede de cliente opcional para StorageGRID.
+
+.Antes de começar
+* Desembalou os seguintes itens, que estão incluídos no aparelho:
++
+** Dois cabos de energia.
+** Dois cabos óticos para as portas de interconexão FC nas controladoras.
+** Oito transcetores SFP mais, que suportam FC de 10 GbE ou 16 Gbps. Os transcetores podem ser usados com as duas portas de interconexão em ambos os controladores e com as quatro portas de rede 10/25-GbE no controlador E5700SG, supondo que você queira que as portas de rede usem uma velocidade de link de 10 GbE.
+
+
+* Obteve os seguintes itens, que não estão incluídos no aparelho:
++
+** Um a quatro cabos óticos para as portas de 10/25 GbE que você planeja usar.
+** Um a quatro transcetores SFP28, se você planeja usar a velocidade de link de 25 GbE.
+** Cabos Ethernet para conexão das portas de gerenciamento.
+
+
+
+
+
+CAUTION: *Risco de exposição à radiação laser* -- não desmonte nem remova qualquer parte de um transcetor SFP. Você pode estar exposto à radiação laser.
+
+.Sobre esta tarefa
+As figuras mostram os dois controladores nos modelos SG5760 e SG5760X, com o controlador de armazenamento da série E2800 na parte superior e o controlador E5700SG na parte inferior. Nos modelos SG5712 e SG5712X, o controlador de armazenamento da série E2800 fica à esquerda do controlador E5700SG quando visto a partir da parte de trás.
+
+SG5760 ligações:
+
+image::../media/sg5760_connections.gif[Ligações no aparelho SG5760]
+
+SG5760X ligações:
+
+image::../media/sg5760X_connections.png[Ligações no aparelho SG5760X]
+
+[cols="1a,2a,2a,2a"]
+|===
+| Legenda | Porta | Tipo de porta | Utilização 
+
+
+ a| 
+1
+ a| 
+Duas portas de interconexão em cada controlador
+ a| 
+SFP ótico FC de 16GB GB/s.
+ a| 
+Conete os dois controladores um ao outro.
+
+
+
+ a| 
+2
+ a| 
+Porta de gerenciamento 1 no controlador da série E2800
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga-se à rede onde acede ao Gestor de sistema SANtricity. Pode utilizar a rede de administração para StorageGRID ou uma rede de gestão independente.
+
+
+
+ a| 
+2
+ a| 
+Porta de gerenciamento 2 no controlador da série E2800
+ a| 
+1 GbE (RJ-45)
+ a| 
+Reservado para suporte técnico.
+
+
+
+ a| 
+3
+ a| 
+Porta de gerenciamento 1 no controlador E5700SG
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga o controlador E5700SG à rede de administração para StorageGRID.
+
+
+
+ a| 
+3
+ a| 
+Porta de gerenciamento 2 no controlador E5700SG
+ a| 
+1 GbE (RJ-45)
+ a| 
+* Pode ser ligado com a porta de gerenciamento 1 se você quiser uma conexão redundante com a rede de administração.
+* Pode ser deixado sem fios e disponível para acesso local temporário (IP 169.254.0.1).
+* Durante a instalação, pode ser utilizado para ligar o controlador E5700SG a um computador portátil de serviço se os endereços IP atribuídos por DHCP não estiverem disponíveis.
+
+
+
+
+ a| 
+4
+ a| 
+Portas 10/25-GbE 1-4 na controladora E5700SG
+ a| 
+10-GbE ou 25-GbE
+
+*Observação:* os transcetores SFP incluídos com o dispositivo suportam velocidades de link de 10 GbE. Se você quiser usar velocidades de link de 25 GbE para as quatro portas de rede, você deve fornecer transcetores de SFP28 GbE.
+ a| 
+Conete-se à rede de grade e à rede de cliente para StorageGRID. link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]Consulte .
+
+|===
+.Passos
+. Conete o controlador E2800 ao controlador E5700SG usando dois cabos óticos e quatro dos oito transcetores SFP.
++
+[cols="1a,1a"]
+|===
+| Ligar esta porta... | Para este porto... 
+
+
+ a| 
+Porta de interconexão 1 no controlador E2800
+ a| 
+Porta de interconexão 1 no controlador E5700SG
+
+
+
+ a| 
+Porta de interconexão 2 no controlador E2800
+ a| 
+Porta de interconexão 2 no controlador E5700SG
+
+|===
+. Se você planeja usar o Gerenciador de sistemas SANtricity, conete a porta de gerenciamento 1 (P1) no controlador E2800 (a porta RJ-45 à esquerda) à rede de gerenciamento do Gerenciador de sistemas SANtricity, usando um cabo Ethernet.
++
+Não use a porta de gerenciamento 2 (P2) no controlador E2800 (a porta RJ-45 à direita). Esta porta está reservada para suporte técnico.
+
+. Se você planeja usar a rede de administração para StorageGRID, conete a porta de gerenciamento 1 no controlador E5700SG (a porta RJ-45 à esquerda) à rede de administração, usando um cabo Ethernet.
++
+Se você planeja usar o modo de ligação de rede de backup ativo para a rede Admin, conete a porta de gerenciamento 2 no controlador E5700SG (a porta RJ-45 à direita) à rede Admin, usando um cabo Ethernet.
+
+. Conete as portas 10/25-GbE no controlador E5700SG aos switches de rede apropriados, usando cabos óticos e transcetores SFP ou SFP28.
++
+
+NOTE: Todas as portas devem usar a mesma velocidade de link. Instale transcetores SFP se você planeja usar velocidades de link de 10 GbE. Instale os transcetores SFP28 se você planeja usar velocidades de link de 25 GbE.
+
++
+** Se você planeja usar o modo de ligação de porta fixa (padrão), conete as portas à rede StorageGRID e às redes de clientes, conforme mostrado na tabela.
++
+[cols="1a,1a"]
+|===
+| Porta | Liga a... 
+
+
+ a| 
+Porta 1
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 2
+ a| 
+Rede de rede
+
+
+
+ a| 
+Porta 3
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 4
+ a| 
+Rede de rede
+
+|===
+** Se você planeja usar o modo de ligação de porta agregada, conete uma ou mais portas de rede a um ou mais switches. Você deve conetar pelo menos duas das quatro portas para evitar ter um único ponto de falha. Se você usar mais de um switch para uma única ligação LACP, os switches devem suportar MLAG ou equivalente.
+
+
+
+
+.Informações relacionadas
+link:accessing-storagegrid-appliance-installer.html["Acesse o Instalador de dispositivos StorageGRID"]

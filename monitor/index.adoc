@@ -1,0 +1,24 @@
+---
+permalink: monitor/index.html 
+sidebar: sidebar 
+keywords: monitor StorageGRID 
+summary: Use estas instruções para monitorar um sistema StorageGRID e avaliar e resolver problemas que possam ocorrer. 
+---
+= Monitorar um sistema StorageGRID: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Use estas instruções para monitorar um sistema StorageGRID e avaliar problemas que possam ocorrer.
+
+Estas instruções descrevem como usar o Gerenciador de Grade para monitorar um sistema StorageGRID. Você aprenderá quais informações você deve monitorar regularmente, como gerenciar alertas e alarmes legados, como usar o SNMP para monitoramento e como obter dados adicionais do StorageGRID, incluindo métricas e diagnósticos.
+
+.Antes de começar
+* Você deve estar conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você deve ter link:../admin/admin-group-permissions.html["permissões de acesso específicas"].
+
+
+
+NOTE: Para alterar unidades para os valores de armazenamento exibidos no Gerenciador de Grade, selecione o usuário suspenso no canto superior direito do Gerenciador de Grade e selecione *Preferências do usuário*.

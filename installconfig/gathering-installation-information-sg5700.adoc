@@ -1,0 +1,375 @@
+---
+permalink: installconfig/gathering-installation-information-sg5700.html 
+sidebar: sidebar 
+keywords: storagegrid, sg5700, storage node, storage appliance, install, information, site, pre-install, preparing, prepare, preinstall, info, preparation 
+summary: Utilizando as tabelas, registe as informações necessárias para cada rede que ligar ao aparelho. Esses valores são necessários para instalar e configurar o hardware. 
+---
+= Reunir informações de instalação (SG5700)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Utilizando as tabelas, registe as informações necessárias para cada rede que ligar ao aparelho. Esses valores são necessários para instalar e configurar o hardware.
+
+
+TIP: Em vez de usar as tabelas, use a pasta de trabalho fornecida com o ConfigBuilder. O uso da pasta de trabalho do ConfigBuilder permite que você carregue as informações do sistema e gere um arquivo JSON para concluir automaticamente algumas etapas de configuração no Instalador do StorageGRID Appliance. link:automating-appliance-installation-and-configuration.html["Automatize a instalação e a configuração do dispositivo"]Consulte .
+
+
+
+== Informações necessárias para se conetar ao Gerenciador de sistemas SANtricity no controlador E2800
+
+Ligue o controlador da série E2800 à rede de gestão que irá utilizar para o Gestor do sistema SANtricity.
+
+[cols="2a,1a"]
+|===
+| Informações necessárias | O seu valor 
+
+
+ a| 
+Porta do switch Ethernet, você se conetará à porta de gerenciamento 1
+ a| 
+
+
+
+ a| 
+Endereço MAC da porta de gerenciamento 1 (impresso em uma etiqueta próxima à porta P1)
+ a| 
+
+
+
+ a| 
+Endereço IP atribuído pelo DHCP para a porta de gerenciamento 1, se disponível após a ativação
+
+*Observação:* se a rede que você se conetará ao controlador E2800 incluir um servidor DHCP, o administrador da rede poderá usar o endereço MAC para determinar o endereço IP atribuído pelo servidor DHCP.
+ a| 
+
+
+
+ a| 
+Velocidade e modo duplex
+
+*Observação:* você deve certificar-se de que o switch Ethernet da rede de gerenciamento do Gerenciador de sistema do SANtricity esteja definido como negociação automática.
+ a| 
+Deve ser:
+
+* Negociação automática (padrão)
+
+
+
+
+ a| 
+Formato do endereço IP
+ a| 
+Escolha uma:
+
+* IPv4
+* IPv6
+
+
+
+
+ a| 
+Endereço IP estático que pretende utilizar para o dispositivo na rede de gestão
+ a| 
+Para IPv4:
+
+* Endereço IPv4:
+* Máscara de sub-rede:
+* Gateway:
+
+
+Para IPv6:
+
+* Endereço IPv6:
+* Endereço IP roteável:
+* Endereço IP do router do controlador E2800:
+
+
+|===
+
+
+== Informações necessárias para conetar o controlador E5700SG à rede de administração
+
+A rede de administração para StorageGRID é uma rede opcional, usada para administração e manutenção do sistema. O dispositivo se coneta à rede Admin usando as portas de gerenciamento de 1 GbE no controlador E5700SG.
+
+[cols="2a,1a"]
+|===
+| Informações necessárias | O seu valor 
+
+
+ a| 
+Rede de administração ativada
+ a| 
+Escolha uma:
+
+* Não
+* Sim (predefinição)
+
+
+
+
+ a| 
+Modo de ligação de rede
+ a| 
+Escolha uma:
+
+* Independente
+* Ative-Backup
+
+
+
+
+ a| 
+Porta do switch para a porta 1
+ a| 
+
+
+
+ a| 
+Porta do switch para a porta 2 (apenas modo de ligação de rede ative-Backup)
+ a| 
+
+
+
+ a| 
+Endereço IP atribuído pelo DHCP para a porta de gerenciamento 1, se disponível após a ativação
+
+*Observação:* se a rede Admin incluir um servidor DHCP, o controlador E5700SG exibirá o endereço IP atribuído pelo DHCP em sua tela de sete segmentos depois que ele for inicializado. Você também pode determinar o endereço IP atribuído pelo DHCP usando o endereço MAC para procurar o IP atribuído.
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+
+
+ a| 
+Endereço IP estático que pretende utilizar para o nó de armazenamento do dispositivo na rede de administração
+
+*Nota:* se a rede não tiver um gateway, especifique o mesmo endereço IPv4 estático para o gateway.
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+
+
+ a| 
+Sub-redes de rede Admin (CIDR)
+ a| 
+
+|===
+
+
+== Informações necessárias para conetar e configurar portas 10/25-GbE no controlador E5700SG
+
+As quatro portas 10/25-GbE no controlador E5700SG conetam-se à rede de Grade StorageGRID e à rede do cliente.
+
+
+NOTE: link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]Consulte .
+
+[cols="2a,1a"]
+|===
+| Informações necessárias | O seu valor 
+
+
+ a| 
+Velocidade da ligação
+
+*Observação:* se você selecionar 25 GbE, instale os transcetores SPF28. A negociação automática não é suportada, portanto você também deve configurar as portas e os switches conetados para 25GbE.
+ a| 
+Escolha uma:
+
+* 10 GbE (padrão)
+* 25 GbE
+
+
+
+
+ a| 
+Modo de ligação da porta
+ a| 
+Escolha uma:
+
+* Fixo (padrão)
+* Agregado
+
+
+
+
+ a| 
+Porta do switch para a porta 1 (rede do cliente)
+ a| 
+
+
+
+ a| 
+Porta do switch para a porta 2 (rede de grade)
+ a| 
+
+
+
+ a| 
+Porta do switch para a porta 3 (rede do cliente)
+ a| 
+
+
+
+ a| 
+Porta do switch para a porta 4 (rede de grade)
+ a| 
+
+|===
+
+
+== Informações necessárias para conetar o controlador E5700SG à rede de Grade
+
+A rede de Grade para StorageGRID é uma rede necessária, usada para todo o tráfego interno de StorageGRID. O dispositivo se coneta à rede de Grade usando as portas 10/25-GbE no controlador E5700SG.
+
+
+NOTE: link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]Consulte .
+
+[cols="2a,1a"]
+|===
+| Informações necessárias | O seu valor 
+
+
+ a| 
+Modo de ligação de rede
+ a| 
+Escolha uma:
+
+* Ative-Backup (padrão)
+* Bola de Futsal (802,3ad)
+
+
+
+
+ a| 
+Marcação de VLAN ativada
+ a| 
+Escolha uma:
+
+* Não (predefinição)
+* Sim
+
+
+
+
+ a| 
+Tag VLAN (se a marcação VLAN estiver ativada)
+ a| 
+Introduza um valor entre 0 e 4095:
+
+
+
+ a| 
+Endereço IP atribuído pelo DHCP para a rede de Grade, se disponível após a ativação
+
+*Observação:* se a rede de Grade incluir um servidor DHCP, o controlador E5700SG exibirá o endereço IP atribuído pelo DHCP para a rede de Grade em sua tela de sete segmentos após a inicialização.
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+
+
+ a| 
+Endereço IP estático que pretende utilizar para o nó de armazenamento do dispositivo na rede de grelha
+
+*Nota:* se a rede não tiver um gateway, especifique o mesmo endereço IPv4 estático para o gateway.
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+
+
+ a| 
+Sub-redes de rede de rede (CIDR)
+
+*Nota:* se a rede do cliente não estiver ativada, a rota padrão no controlador usará o gateway especificado aqui.
+ a| 
+
+|===
+
+
+== Informações necessárias para conetar o controlador E5700SG à rede do cliente
+
+A rede de cliente para StorageGRID é uma rede opcional, normalmente usada para fornecer acesso de protocolo de cliente à grade. O dispositivo se coneta à rede do cliente usando as portas 10/25-GbE no controlador E5700SG.
+
+
+NOTE: link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]Consulte .
+
+[cols="2a,1a"]
+|===
+| Informações necessárias | O seu valor 
+
+
+ a| 
+Rede cliente ativada
+ a| 
+Escolha uma:
+
+* Não (predefinição)
+* Sim
+
+
+
+
+ a| 
+Modo de ligação de rede
+ a| 
+Escolha uma:
+
+* Ative-Backup (padrão)
+* Bola de Futsal (802,3ad)
+
+
+
+
+ a| 
+Marcação de VLAN ativada
+ a| 
+Escolha uma:
+
+* Não (predefinição)
+* Sim
+
+
+
+
+ a| 
+Etiqueta VLAN
+
+(Se a marcação VLAN estiver ativada)
+ a| 
+Introduza um valor entre 0 e 4095:
+
+
+
+ a| 
+Endereço IP atribuído pelo DHCP para a rede do cliente, se disponível após a ligação
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+
+
+ a| 
+Endereço IP estático que pretende utilizar para o nó de armazenamento do dispositivo na rede do cliente
+
+*Nota:* se a rede do cliente estiver ativada, a rota padrão no controlador usará o gateway especificado aqui.
+ a| 
+* Endereço IPv4 (CIDR):
+* Gateway:
+
+
+|===
+.Informações relacionadas
+* link:sg5700-appliance-connections.html["Conexões de rede (SG5700)"]
+* link:port-bond-modes-for-e5700sg-controller-ports.html["Modos de ligação de porta (controlador E5700SG)"]
+* link:configuring-hardware.html["Configurar hardware (SG5700)"]
+

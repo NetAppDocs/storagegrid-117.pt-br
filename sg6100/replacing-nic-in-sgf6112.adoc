@@ -1,0 +1,16 @@
+---
+permalink: sg6100/replacing-nic-in-sgf6112.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6100, sgf6112, storage node, storage appliance, Replacing, replace, nic, network interface card 
+summary: 'Talvez seja necessário substituir uma placa de interface de rede (NIC) no SGF6112 se não estiver funcionando de forma otimizada ou se tiver falhado.' 
+---
+= Substitua a placa de interface de rede no SGF6112
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário substituir uma placa de interface de rede (NIC) no SGF6112 se ele não estiver funcionando de forma ideal ou se tiver falhado.
+
+Use estes procedimentos para: * Verificar a NIC para substituir * Remover a NIC * reinstalar a NIC

@@ -1,0 +1,30 @@
+---
+permalink: expand/adding-grid-nodes-to-existing-site-or-adding-new-site.html 
+sidebar: sidebar 
+keywords: grid node, add node, add site, expand, expansion 
+summary: Você pode seguir este procedimento para adicionar nós de grade a sites existentes ou adicionar um novo site, mas não pode executar ambos os tipos de expansão ao mesmo tempo. 
+---
+= Adicione nós de grade ao site existente ou adicione um novo site
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode seguir este procedimento para adicionar nós de grade a sites existentes ou adicionar um novo site, mas não pode executar ambos os tipos de expansão ao mesmo tempo.
+
+.Antes de começar
+* Você tem a permissão de Acesso root ou Manutenção.
+* Todos os nós existentes na grade estão ativos e em execução em todos os locais.
+* Todos os procedimentos anteriores de expansão, atualização, desativação ou recuperação estão concluídos.
++
+
+NOTE: Você é impedido de iniciar uma expansão enquanto outro procedimento de expansão, atualização, recuperação ou desativação ativa está em andamento. No entanto, se necessário, você pode pausar um procedimento de desativação para iniciar uma expansão.
+
+
+
+.Passos
+. link:updating-subnets-for-grid-network.html["Atualizar sub-redes para rede de Grade"].
+. link:deploying-new-grid-nodes.html["Implantar novos nós de grade"].
+. link:performing-expansion.html["Execute a expansão"].
+

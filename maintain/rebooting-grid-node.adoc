@@ -1,0 +1,22 @@
+---
+permalink: maintain/rebooting-grid-node.html 
+sidebar: sidebar 
+keywords: reboot grid node 
+summary: Você pode reinicializar um nó de grade a partir do Gerenciador de Grade ou do shell de comando do nó. 
+---
+= Reboot grid node: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode reinicializar um nó de grade a partir do Gerenciador de Grade ou do shell de comando do nó.
+
+Quando você reinicializa um nó de grade, o nó desliga e reinicia. Todos os serviços são reiniciados automaticamente.
+
+Se você planeja reinicializar os nós de storage, observe o seguinte:
+
+* Se uma regra ILM especificar um comportamento de ingestão de confirmação dupla ou balanceada e não for possível criar imediatamente todas as cópias necessárias, o StorageGRID enviará imediatamente quaisquer objetos recém-ingeridos para dois nós de armazenamento no mesmo site e avaliará o ILM posteriormente. Se você quiser reinicializar dois ou mais nós de storage em um determinado site, talvez não seja possível acessar esses objetos durante a reinicialização.
+* Para garantir que você possa acessar todos os objetos enquanto um nó de armazenamento estiver reiniciando, pare de ingerir objetos em um site por aproximadamente uma hora antes de reiniciar o nó.
+

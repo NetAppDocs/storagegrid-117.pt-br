@@ -1,0 +1,46 @@
+---
+permalink: tenant/changing-consistency-level.html 
+sidebar: sidebar 
+keywords: how to change bucket consistency level, read after new write, read-after-new-write, strong site, strong-site, strong global, strong-global 
+summary: Se você estiver usando um locatário S3, poderá alterar o nível de consistência das operações executadas nos objetos nos buckets do S3. 
+---
+= Altere o nível de consistência de um balde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Se você estiver usando um locatário S3, poderá alterar o nível de consistência das operações executadas nos objetos nos buckets do S3.
+
+.Antes de começar
+* Você está conetado ao Gerenciador do Locatário usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você pertence a um grupo de usuários que tem o link:tenant-management-permissions.html["Gerencie todos os buckets ou permissão de acesso root"]. Essas permissões substituem as configurações de permissões em políticas de grupo ou bucket.
+
+
+.Sobre esta tarefa
+Os controles de consistência fornecem um equilíbrio entre a disponibilidade dos objetos e a consistência desses objetos em diferentes nós de storage e locais. Em geral, você deve usar o nível de consistência *Read-after-novo-write* para seus buckets.
+
+Se o nível de consistência *Read-after-new-write* não atender aos requisitos do aplicativo cliente, você pode alterar o nível de consistência definindo o nível de consistência do bucket ou usando o `Consistency-Control` cabeçalho. O `Consistency-Control` colhedor substitui o nível de consistência do balde.
+
+
+NOTE: Quando você altera o nível de consistência de um balde, apenas os objetos que são ingeridos após a alteração são garantidos para atender ao nível revisado.
+
+.Passos
+. Selecione *View buckets* no painel ou selecione *STORAGE (S3)* > *Buckets*.
+. Selecione o nome do intervalo na tabela.
++
+É apresentada a página de detalhes do balde.
+
+. Na guia *Opções de balde*, selecione o acordeão *nível de consistência*.
+. Selecione um nível de consistência para as operações realizadas nos objetos neste intervalo.
++
+** *Todos*: Fornece o mais alto nível de consistência. Todos os nós recebem os dados imediatamente, ou a solicitação falhará.
+** *Strong-global*: Garante consistência de leitura após gravação para todas as solicitações de clientes em todos os sites.
+** * Strong-site*: Garante consistência de leitura-após-gravação para todas as solicitações de clientes dentro de um site.
+** *Read-after-novo-write* (padrão): Fornece consistência de leitura-após-gravação para novos objetos e eventual consistência para atualizações de objetos. Oferece alta disponibilidade e garantias de proteção de dados. Recomendado para a maioria dos casos.
+** *Disponível*: Fornece consistência eventual para novos objetos e atualizações de objetos. Para buckets do S3, use somente conforme necessário (por exemplo, para um bucket que contém valores de log raramente lidos, ou para operações HEAD ou GET em chaves que não existem). Não compatível com buckets do FabricPool S3.
+
+
+. Selecione *Salvar alterações*.
+

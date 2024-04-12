@@ -1,0 +1,32 @@
+---
+permalink: maintain/decommissioning-disconnected-storage-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, connected nodes, decommission node, storage node, disconnected storage node 
+summary: Você deve entender o que pode acontecer se você desativar um nó de armazenamento enquanto ele está desconetado. 
+---
+= Desativar nós de storage desconetados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve entender o que pode acontecer se você desativar um nó de armazenamento enquanto ele estiver desconetado (integridade é desconhecido ou administrativamente inativo).
+
+Quando você desativa um nó de storage desconetado da grade, o StorageGRID usa dados de outros nós de storage para reconstruir os dados do objeto e os metadados que estavam no nó desconetado. Ele faz isso iniciando automaticamente os trabalhos de reparo de dados no final do processo de desativação.
+
+Antes de desativar um nó de storage desconetado, esteja ciente do seguinte:
+
+* Você nunca deve desativar um nó desconetado, a menos que tenha certeza de que ele não pode ser trazido on-line ou recuperado.
++
+
+IMPORTANT: Não execute este procedimento se você acredita que pode ser possível recuperar dados de objeto do nó. Em vez disso, entre em Contato com o suporte técnico para determinar se a recuperação do nó é possível.
+
+* Se um nó de armazenamento desconetado contiver a única cópia de um objeto, esse objeto será perdido quando você desativar o nó. As tarefas de reparo de dados só podem reconstruir e recuperar objetos se houver pelo menos uma cópia replicada ou fragmentos codificados de apagamento suficientes nos nós de storage que estão atualmente conetados.
+* Quando você desativa um nó de storage desconetado, o procedimento de desativação é concluído com relativa rapidez. No entanto, os trabalhos de reparo de dados podem levar dias ou semanas para serem executados e não são monitorados pelo procedimento de desativação. Você deve monitorar manualmente esses trabalhos e reiniciá-los conforme necessário. link:checking-data-repair-jobs.html["Verifique os trabalhos de reparação de dados"]Consulte .
+* Se você desativar mais de um nó de storage desconetado de cada vez, poderá ocorrer perda de dados. O sistema pode não conseguir reconstruir dados se houver poucas cópias de dados de objetos, metadados ou fragmentos codificados por apagamento permanecerem disponíveis.
++
+
+IMPORTANT: Se você tiver mais de um nó de armazenamento desconetado que não possa recuperar, entre em Contato com o suporte técnico para determinar o melhor curso de ação.
+
+

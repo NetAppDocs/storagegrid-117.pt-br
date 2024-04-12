@@ -1,0 +1,113 @@
+---
+permalink: s3/custom-operations-on-buckets.html 
+sidebar: sidebar 
+keywords: operations, buckets, custom, custom operations on buckets 
+summary: O sistema StorageGRID dá suporte a operações de bucket personalizadas que são adicionadas à API REST do S3 e são específicas do sistema. 
+---
+= Operações personalizadas em buckets
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O sistema StorageGRID dá suporte a operações de bucket personalizadas que são adicionadas à API REST do S3 e são específicas do sistema.
+
+A tabela a seguir lista as operações de bucket personalizadas suportadas pelo StorageGRID.
+
+[cols="1a,1a,1a"]
+|===
+| Operação | Descrição | Para mais informações 
+
+
+ a| 
+OBTER consistência de balde
+ a| 
+Retorna o nível de consistência que está sendo aplicado a um balde específico.
+ a| 
+link:get-bucket-consistency-request.html["OBTER consistência de balde"]
+
+
+
+ a| 
+COLOQUE a consistência do balde
+ a| 
+Define o nível de consistência aplicado a um balde específico.
+ a| 
+link:put-bucket-consistency-request.html["COLOQUE a consistência do balde"]
+
+
+
+ a| 
+OBTER último tempo de acesso do Bucket
+ a| 
+Retorna se as atualizações da última hora de acesso estão ativadas ou desativadas para um intervalo específico.
+ a| 
+link:get-bucket-last-access-time-request.html["OBTER último tempo de acesso do Bucket"]
+
+
+
+ a| 
+COLOQUE o último tempo de acesso do balde
+ a| 
+Permite-lhe ativar ou desativar as atualizações da última hora de acesso para um intervalo específico.
+ a| 
+link:put-bucket-last-access-time-request.html["COLOQUE o último tempo de acesso do balde"]
+
+
+
+ a| 
+ELIMINAR configuração de notificação de metadados do bucket
+ a| 
+Exclui o XML de configuração de notificação de metadados associado a um bucket específico.
+ a| 
+link:delete-bucket-metadata-notification-configuration-request.html["ELIMINAR configuração de notificação de metadados do bucket"]
+
+
+
+ a| 
+OBTER configuração de notificação de metadados do bucket
+ a| 
+Retorna o XML de configuração de notificação de metadados associado a um intervalo específico.
+ a| 
+link:get-bucket-metadata-notification-configuration-request.html["OBTER configuração de notificação de metadados do bucket"]
+
+
+
+ a| 
+COLOQUE a configuração de notificação de metadados do bucket
+ a| 
+Configura o serviço de notificação de metadados para um bucket.
+ a| 
+link:put-bucket-metadata-notification-configuration-request.html["COLOQUE a configuração de notificação de metadados do bucket"]
+
+
+
+ a| 
+COLOQUE o balde com as definições de conformidade
+ a| 
+Obsoleto e não suportado: Você não pode mais criar novos buckets com a conformidade ativada.
+ a| 
+link:deprecated-put-bucket-request-modifications-for-compliance.html["Obsoleto: COLOQUE o Bucket com as configurações de conformidade"]
+
+
+
+ a| 
+OBTENHA conformidade com o balde
+ a| 
+Obsoleto, mas suportado: Retorna as configurações de conformidade atualmente em vigor para um bucket compatível com legado existente.
+ a| 
+link:deprecated-get-bucket-compliance-request.html["Obsoleto: OBTENHA conformidade com Bucket"]
+
+
+
+ a| 
+COLOQUE a conformidade do balde
+ a| 
+Obsoleto, mas suportado: Permite modificar as configurações de conformidade para um bucket compatível com legado existente.
+ a| 
+link:deprecated-put-bucket-compliance-request.html["Obsoleto: COLOQUE a conformidade com Bucket"]
+
+|===
+.Informações relacionadas
+link:s3-operations-tracked-in-audit-logs.html["S3 operações rastreadas nos logs de auditoria"]

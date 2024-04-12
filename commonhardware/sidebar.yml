@@ -1,0 +1,26 @@
+---
+section: commonhardware
+title: Mantenha a configuração do dispositivo
+entries:
+- title: Visão geral
+  pdf-filename: Manter a configuração do dispositivo (todos os nós)
+  url: "/commonhardware/index.html"
+- title: Coloque o aparelho no modo de manutenção
+  url: "/commonhardware/placing-appliance-into-maintenance-mode.html"
+- title: Altere a definição MTU
+  url: "/commonhardware/changing-mtu-setting.html"
+- title: Verifique a configuração do servidor DNS
+  url: "/commonhardware/checking-dns-server-configuration.html"
+- title: Atualizar referências de endereço MAC
+  url: "/commonhardware/locate-mac-address.html"
+- title: Monitore a criptografia do nó no modo de manutenção
+  url: "/commonhardware/monitoring-node-encryption-in-maintenance-mode.html"
+- title: Clonagem do nó do dispositivo
+  entries:
+  - title: Visão geral
+    pdf-filename: Clonagem do nó do dispositivo
+    url: "/commonhardware/how-appliance-node-cloning-works.html"
+  - title: Considerações e requisitos para clonagem de nós do dispositivo
+    url: "/commonhardware/considerations-and-requirements-for-appliance-node-cloning.html"
+  - title: Nó do dispositivo clone
+    url: "/commonhardware/appliance-node-cloning-procedure.html"

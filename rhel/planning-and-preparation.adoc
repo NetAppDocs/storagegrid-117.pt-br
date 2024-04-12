@@ -1,0 +1,41 @@
+---
+permalink: rhel/planning-and-preparation.html 
+sidebar: sidebar 
+keywords: installation planning red hat linux 
+summary: Antes de implantar nós de grade e configurar a grade StorageGRID, você deve estar familiarizado com as etapas e requisitos para concluir o procedimento. 
+---
+= Antes de instalar (Red Hat ou CentOS)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de implantar nós de grade e configurar o StorageGRID, você deve estar familiarizado com as etapas e requisitos para concluir o procedimento.
+
+Os procedimentos de implantação e configuração do StorageGRID presumem que você está familiarizado com a arquitetura e o funcionamento do sistema StorageGRID.
+
+Você pode implantar um único local ou vários locais de uma só vez. No entanto, todos os locais precisam atender ao requisito mínimo de ter pelo menos três nós de storage.
+
+Antes de iniciar uma instalação do StorageGRID, você deve:
+
+* Entenda os requisitos de computação, incluindo os requisitos mínimos de CPU e RAM para cada nó.
+* Entenda como o StorageGRID oferece suporte a várias redes para separação de tráfego, segurança e conveniência administrativa e tenha um plano para quais redes você pretende anexar a cada nó do StorageGRID.
++
+Consulte o StorageGRID link:../network/index.html["Diretrizes de rede"].
+
+* Compreender os requisitos de storage e desempenho de cada tipo de nó de grade.
+* Identifique um conjunto de servidores (físicos, virtuais ou ambos) que, no agregado, fornecem recursos suficientes para suportar o número e o tipo de nós do StorageGRID que você planeja implantar.
+* Entenda o link:node-container-migration-requirements.html["requisitos para migração de nós"], se você quiser executar a manutenção programada em hosts físicos sem qualquer interrupção do serviço.
+* Reúna todas as informações de rede com antecedência. A menos que você esteja usando DHCP, reúna os endereços IP para atribuir a cada nó de grade e os endereços IP dos servidores DNS e NTP que serão usados.
+* Instale, conete e configure todo o hardware necessário, incluindo quaisquer dispositivos StorageGRID, de acordo com as especificações.
++
+
+IMPORTANT: Se a instalação do StorageGRID não usar nós de armazenamento do StorageGRID Appliance (hardware), você deve usar o armazenamento RAID de hardware com cache de gravação (BBWC) com bateria. O StorageGRID não suporta o uso de redes de área de armazenamento virtual (VSANs), RAID de software ou nenhuma proteção RAID.
+
++
+
+NOTE: As instruções de instalação e integração específicas de hardware não estão incluídas no procedimento de instalação do StorageGRID. Para saber como instalar dispositivos StorageGRID, link:../installconfig/index.html["Instale o hardware do dispositivo"]consulte .
+
+* Decida qual das ferramentas de implantação e configuração disponíveis você deseja usar.
+

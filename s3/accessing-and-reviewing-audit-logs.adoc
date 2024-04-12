@@ -1,0 +1,54 @@
+---
+permalink: s3/accessing-and-reviewing-audit-logs.html 
+sidebar: sidebar 
+keywords: access audit logs, review audit logs, view audit logs 
+summary: As mensagens de auditoria são geradas pelos serviços do StorageGRID e armazenadas em arquivos de log de texto. As mensagens de auditoria específicas da API nos logs de auditoria fornecem dados críticos de monitoramento de segurança, operação e desempenho que podem ajudá-lo a avaliar a integridade do sistema. 
+---
+= Acesse e revise logs de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+As mensagens de auditoria são geradas pelos serviços do StorageGRID e armazenadas em arquivos de log de texto. As mensagens de auditoria específicas da API nos logs de auditoria fornecem dados críticos de monitoramento de segurança, operação e desempenho que podem ajudá-lo a avaliar a integridade do sistema.
+
+.Antes de começar
+* Você tem permissões de acesso específicas.
+* Você tem o `Passwords.txt` arquivo.
+* Você conhece o endereço IP de um nó Admin.
+
+
+.Sobre esta tarefa
+O arquivo de log de auditoria ativo é `audit.log` chamado , e é armazenado em nós de administração.
+
+Uma vez por dia, o arquivo audit.log ativo é salvo e um novo `audit.log` arquivo é iniciado. O nome do ficheiro guardado indica quando foi guardado, no formato `_yyyy-mm-dd.txt_`.
+
+Após um dia, o arquivo salvo é compactado e renomeado, no formato `_yyyy-mm-dd.txt.gz_`, que preserva a data original.
+
+Este exemplo mostra o `audit.log` ficheiro ativo, o ficheiro do dia anterior (`2018-04-15.txt`) e o ficheiro comprimido para o dia anterior (`2018-04-14.txt.gz`).
+
+[listing]
+----
+audit.log
+2018-04-15.txt
+2018-04-14.txt.gz
+----
+.Passos
+. Faça login em um nó Admin:
++
+.. Introduza o seguinte comando: `ssh admin@_primary_Admin_Node_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
+
+
+
+. Vá para o diretório que contém os arquivos de log de auditoria:
++
+`cd /var/local/audit/export`
+
+. Visualize o ficheiro de registo de auditoria atual ou guardado, conforme necessário.
+

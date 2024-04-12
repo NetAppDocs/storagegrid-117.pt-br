@@ -1,0 +1,63 @@
+---
+permalink: s3/support-for-storagegrid-platform-services.html 
+sidebar: sidebar 
+keywords: platform services, cloudmirror replication, notifications, search integration 
+summary: Os serviços da plataforma StorageGRID permitem que as contas de inquilino do StorageGRID aproveitem serviços externos, como um bucket remoto do S3, um endpoint do serviço de notificação simples ou um cluster do Elasticsearch para estender os serviços fornecidos por uma grade. 
+---
+= Suporte para serviços de plataforma StorageGRID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os serviços da plataforma StorageGRID permitem que as contas de locatários do StorageGRID aproveitem serviços externos, como um bucket remoto do S3, um endpoint do Serviço de notificação simples (SNS) ou um cluster do Elasticsearch para estender os serviços fornecidos por uma grade.
+
+A tabela a seguir resume os serviços de plataforma disponíveis e as APIs do S3 usadas para configurá-los.
+
+[cols="1a,2a,1a"]
+|===
+| Serviço de plataforma | Finalidade | S3 API usada para configurar o serviço 
+
+
+ a| 
+Replicação do CloudMirror
+ a| 
+Replica objetos de um bucket do StorageGRID de origem para o bucket do S3 remoto configurado.
+ a| 
+COLOCAR replicação do balde (link:operations-on-buckets.html["Operações em baldes"]consulte )
+
+
+
+ a| 
+Notificações
+ a| 
+Envia notificações sobre eventos em um bucket do StorageGRID de origem para um endpoint configurado do Serviço de notificação simples (SNS).
+ a| 
+NOTIFICAÇÃO DE COLOCAR balde (link:operations-on-buckets.html["Operações em baldes"]consulte )
+
+
+
+ a| 
+Integração de pesquisa
+ a| 
+Envia metadados de objetos para objetos armazenados em um bucket do StorageGRID para um índice Elasticsearch configurado.
+ a| 
+link:put-bucket-metadata-notification-configuration-request.html["COLOQUE a configuração de notificação de metadados do bucket"]
+
+*Observação:* esta é uma API S3D personalizada do StorageGRID.
+
+|===
+Um administrador de grade deve habilitar o uso de serviços de plataforma para uma conta de locatário antes que eles possam ser usados. link:../admin/index.html["Administrar o StorageGRID"]Consulte . Em seguida, um administrador de locatário deve criar um endpoint que represente o serviço remoto na conta de locatário. Esta etapa é necessária antes que um serviço possa ser configurado. link:../tenant/index.html["Use uma conta de locatário"]Consulte .
+
+
+
+== Recomendações para o uso de serviços de plataforma
+
+Antes de usar os serviços de plataforma, você deve estar ciente das seguintes recomendações:
+
+* A NetApp recomenda que você não permita mais de 100 locatários ativos com solicitações do S3 que exigem replicação, notificações e integração de pesquisa do CloudMirror. Ter mais de 100 inquilinos ativos ativos pode resultar em desempenho mais lento do cliente S3.
+* Se um bucket do S3 no sistema StorageGRID tiver o controle de versão e a replicação do CloudMirror habilitado, o NetApp recomenda que o endpoint de destino também tenha o controle de versão do bucket do S3 habilitado. Isso permite que a replicação do CloudMirror gere versões de objetos semelhantes no endpoint.
+* A replicação do CloudMirror não é suportada se o bucket de origem tiver o S3 Object Lock ativado.
+* A replicação do CloudMirror falhará com um erro AccessDenied se o intervalo de destino tiver conformidade legada habilitada.
+

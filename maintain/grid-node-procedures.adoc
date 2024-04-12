@@ -1,0 +1,22 @@
+---
+permalink: maintain/grid-node-procedures.html 
+sidebar: sidebar 
+keywords: storagegrid, grid node procedure 
+summary: Talvez seja necessário executar procedimentos em um nó de grade específico. Embora você possa executar alguns desses procedimentos no Gerenciador de Grade, a maioria dos procedimentos exige que você acesse o Gerenciador de servidor a partir da linha de comando. 
+---
+= Procedimentos do nó de grade: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário executar procedimentos em um nó de grade específico. Embora você possa executar alguns desses procedimentos no Gerenciador de Grade, a maioria dos procedimentos exige que você acesse o Gerenciador de servidor a partir da linha de comando do nó.
+
+O Gerenciador de servidores é executado em cada nó de grade para supervisionar o início e a parada dos serviços e garantir que os serviços se juntem e saiam do sistema StorageGRID. O Gerenciador de servidores também monitora os serviços em cada nó de grade e tentará reiniciar automaticamente quaisquer serviços que relatem falhas.
+
+
+IMPORTANT: Você deve acessar o Server Manager somente se o suporte técnico o tiver direcionado para isso.
+
+
+NOTE: Você deve fechar a sessão de shell de comando atual e fazer logout depois de terminar com o Gerenciador de servidor. Introduza: `exit`

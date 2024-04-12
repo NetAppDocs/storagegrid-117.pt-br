@@ -1,0 +1,29 @@
+---
+permalink: maintain/grid-node-decommissioning.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission 
+summary: Você pode usar o procedimento de desativação do nó para remover um ou mais nós de storage, nós de gateway ou nós de administração não primários em um ou mais locais. Não é possível desativar o nó de administração principal ou um nó de arquivo. 
+---
+= Desativação do nó de grade: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar o procedimento de desativação do nó para remover um ou mais nós de storage, nós de gateway ou nós de administração não primários em um ou mais locais. Não é possível desativar o nó de administração principal ou um nó de arquivo.
+
+Em geral, você deve desativar os nós de grade somente enquanto eles estiverem conetados ao sistema StorageGRID e todos os nós estiverem em estado normal (tenha ícones verdes nas páginas *NÓS* e na página *NÓS de desintegração*). No entanto, se necessário, você pode desativar um nó de grade que está desconetado. Antes de remover um nó desconetado, certifique-se de entender as implicações e restrições desse processo.
+
+Use o procedimento de desativação do nó quando qualquer uma das seguintes situações for verdadeira:
+
+* Você adicionou um nó de storage maior ao sistema e deseja remover um ou mais nós de storage menores, preservando ao mesmo tempo objetos.
+* Você exige menos storage total.
+* Você não precisa mais de um nó de gateway.
+* Você não precisa mais de um nó de administrador não primário.
+* Sua grade inclui um nó desconetado que você não pode recuperar ou trazer de volta on-line.
+
+
+O fluxograma mostra as etapas de alto nível para a desativação de nós de grade.
+
+image::../media/overview_decommission_nodes.png[fluxograma de alto nível de etapas de desativação]

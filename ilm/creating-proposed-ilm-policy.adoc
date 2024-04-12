@@ -1,0 +1,182 @@
+---
+permalink: ilm/creating-proposed-ilm-policy.html 
+sidebar: sidebar 
+keywords: how to create ILM policy, proposed policy 
+summary: Você pode criar uma política de ILM proposta do zero ou clonar a política ativa atual se quiser começar com o mesmo conjunto de regras. 
+---
+= Crie uma política de ILM proposta
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode criar uma política de ILM proposta do zero ou clonar a política ativa atual se quiser começar com o mesmo conjunto de regras.
+
+Antes de criar sua própria política, verifique se o link:creating-ilm-policy.html#default-ilm-policy["Política ILM padrão"]não atende aos requisitos de storage.
+
+
+NOTE: Se o link:enabling-s3-object-lock-globally.html["A definição Global S3 Object Lock foi ativada"], você deve garantir que a diretiva ILM esteja em conformidade com os requisitos dos buckets que têm o bloqueio de objeto S3 ativado. Nesta seção, siga as instruções que mencionam ter o bloqueio de objeto S3 ativado.
+
+.Antes de começar
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você tem o link:../admin/admin-group-permissions.html["permissões de acesso necessárias"].
+* Você link:access-create-ilm-rule-wizard.html["Regras ILM criadas"] tem baseado se o bloqueio de objeto S3 está ativado.
+
+
+[role="tabbed-block"]
+====
+.S3 bloqueio de objetos não ativado
+--
+* Você link:what-ilm-rule-is.html["Criou as regras ILM"]deseja adicionar à política proposta. Conforme necessário, você pode salvar uma política proposta, criar regras adicionais e editar a política proposta para adicionar as novas regras.
+* Você tem link:creating-default-ilm-rule.html["Criou uma regra ILM padrão"] que não contém nenhum filtro.
+
+
+--
+.S3 bloqueio de objetos ativado
+--
+* link:enabling-s3-object-lock-globally.html["A definição Global S3 Object Lock já está ativada"]O para o sistema StorageGRID.
+* Você link:what-ilm-rule-is.html["Criou as regras ILM em conformidade e não compatível"]deseja adicionar à política proposta. Conforme necessário, você pode salvar uma política proposta, criar regras adicionais e editar a política proposta para adicionar as novas regras.
+* Você tem link:creating-default-ilm-rule.html["Criou uma regra ILM padrão"] para a política que é compatível.
+
+
+--
+====
+* Opcionalmente, você assistiu ao vídeo: https://netapp.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0009ebe1-3665-4cdc-a101-afbd009a0466["Vídeo: Políticas de gerenciamento do ciclo de vida das informações no StorageGRID 11,7"^]
++
+[link=https://netapp.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=0009ebe1-3665-4cdc-a101-afbd009a0466]
+image::../media/video-screenshot-ilm-policies-117.png[Vídeo: Políticas de gerenciamento do ciclo de vida das informações no StorageGRID 11,7]
+
+
+
+Consulte também link:creating-ilm-policy.html["Criar uma política ILM: Visão geral"].
+
+.Sobre esta tarefa
+As razões típicas para criar uma política de ILM proposta incluem:
+
+* Você adicionou um novo site e precisa usar novas regras ILM para colocar objetos nesse site.
+* Você está desativando um site e você precisa remover todas as regras ILM que se referem ao site.
+* Você adicionou um novo locatário com requisitos especiais de proteção de dados.
+* Você começou a usar um Cloud Storage Pool.
+
+
+
+IMPORTANT: Utilize apenas a política fornecida pelo sistema, a política de cópias Baseline 2, em sistemas de teste. Para o StorageGRID 11,6 e versões anteriores, a regra padrão dessa política usa o pool de storage de todos os nós de storage, que contém todos os sites. Se o seu sistema StorageGRID tiver mais de um local, duas cópias de um objeto poderão ser colocadas no mesmo local.
+
+.Passos
+. Selecione *ILM* > *políticas*.
++
+Se a configuração Global S3 Object Lock estiver ativada, a página ILM Policies (políticas ILM) indica quais regras ILM são compatíveis.
+
+. Determine como você deseja criar a política de ILM proposta. E
+
+
+[role="tabbed-block"]
+====
+.Comece do zero
+--
+. Se uma política de ILM proposta existir atualmente, selecione *Política proposta* > *ações* > *Remover*.
++
+Não é possível criar uma nova política proposta se uma política proposta já existir.
+
+. Selecione *criar política proposta* > *criar nova política*.
+
+
+--
+.Comece com as regras da política ativa
+--
+. Se uma política de ILM proposta existir atualmente, selecione *Política proposta* > *ações* > *Remover*.
++
+Não é possível clonar a política ativa se uma política proposta já existir.
+
+. Selecione *criar política proposta* > *Clone política ativa*.
+
+
+--
+.Editar a política proposta existente
+. Selecione *Política proposta* > *ações* > *Editar*.
+
+
+====
+. No campo *Nome da política proposta*, insira um nome exclusivo para a política proposta.
+. No campo *motivo da mudança*, insira o motivo pelo qual você está criando uma nova política proposta.
+. Para adicionar regras à política, selecione *Selecionar regras*. Selecione um nome de regra para exibir as configurações dessa regra.
++
+
+NOTE: Periodicamente, a lista de regras é atualizada automaticamente para refletir adições ou remoções. Se uma regra for removida depois de selecioná-la, será exibida uma mensagem de erro.
+
++
+Se você estiver clonando uma política:
+
++
+** As regras usadas pela política de clonagem são selecionadas.
+** Se a política que você está clonando usou quaisquer regras sem filtros que não eram a regra padrão, você será solicitado a remover todas, exceto uma dessas regras.
+** Se a regra padrão usou um filtro, você será solicitado a selecionar uma nova regra padrão.
+** Se a regra padrão não for a última regra, você poderá mover a regra para o fim da nova política.
+
+
+
+
+[role="tabbed-block"]
+====
+.S3 bloqueio de objetos não ativado
+--
+. Selecione uma regra padrão para a política proposta. Para criar uma nova regra padrão, selecione *ILM rules page* image:../media/icon_nms_more_details.gif["ícone mais detalhes"].
++
+A regra padrão se aplica a quaisquer objetos que não correspondam a outra regra na política. A regra padrão não pode usar nenhum filtro e é sempre avaliada por último.
+
++
+
+IMPORTANT: Não use a regra fazer cópias 2 como regra padrão para uma política. A regra fazer 2 cópias usa um único pool de storage, todos os nós de storage, que contém todos os locais. Se o seu sistema StorageGRID tiver mais de um local, duas cópias de um objeto poderão ser colocadas no mesmo local.
+
+
+
+--
+.S3 bloqueio de objetos ativado
+--
+. Selecione uma regra padrão para a política proposta. Para criar uma nova regra padrão, selecione *ILM rules page* image:../media/icon_nms_more_details.gif["ícone mais detalhes"].
++
+A lista de regras contém apenas as regras que são compatíveis e não usam filtros.
+
++
+
+IMPORTANT: Não use a regra fazer cópias 2 como regra padrão para uma política. A regra fazer 2 cópias usa um único pool de storage, todos os nós de storage, que contém todos os locais. Se você usar essa regra, várias cópias de um objeto podem ser colocadas no mesmo site.
+
+. Se você precisar de uma regra diferente de "falha" para objetos em buckets S3 não compatíveis, selecione *incluir uma regra sem filtros para buckets S3 não compatíveis* e selecione uma regra não compatível que não use um filtro.
++
+Por exemplo, você pode querer usar um pool de armazenamento em nuvem para armazenar objetos em buckets que não têm o bloqueio de objeto S3 ativado.
+
++
+
+NOTE: Você só pode selecionar uma regra não compatível que não use um filtro.
+
+
+
+Consulte também link:example-7-compliant-ilm-policy-for-s3-object-lock.html["Exemplo 7: Política de ILM compatível para bloqueio de objetos S3"].
+
+--
+====
+. Quando terminar de selecionar a regra padrão, selecione *continuar*.
+. Para a etapa outras regras, selecione quaisquer outras regras que você deseja adicionar à política. Essas regras usam pelo menos um filtro (conta de locatário, nome do bucket, filtro avançado ou tempo de referência não atual). Em seguida, selecione *Select*.
++
+A janela criar uma política proposta agora lista as regras selecionadas. A regra padrão está no final, com as outras regras acima dela.
+
++
+Se o bloqueio de objeto S3 estiver ativado e você também tiver selecionado uma regra "falha" não compatível, essa regra será adicionada como a regra de segunda a última na política.
+
++
+
+NOTE: Um aviso aparece se qualquer regra não reter objetos para sempre. Quando você ativa essa política, você deve confirmar que deseja que o StorageGRID exclua objetos quando as instruções de posicionamento da regra padrão decorrerem (a menos que um ciclo de vida de bucket mantenha os objetos por um período de tempo mais longo).
+
+. Arraste as linhas para as regras não padrão para determinar a ordem em que essas regras serão avaliadas.
++
+Não é possível mover a regra padrão. Se o bloqueio de objetos S3 estiver ativado, você também não poderá mover a regra "falha" não compatível se uma tiver sido selecionada.
+
++
+
+IMPORTANT: Você deve confirmar se as regras ILM estão na ordem correta. Quando a política é ativada, objetos novos e existentes são avaliados pelas regras na ordem listada, começando na parte superior.
+
+. Conforme necessário, selecione *Selecionar regras* para adicionar ou remover regras.
+. Quando terminar, selecione *Guardar*.
+. Vá para link:simulating-ilm-policy.html["Simule uma política de ILM"]. Você deve sempre simular uma política proposta antes de ativá-la para garantir que funcione como esperado.
+

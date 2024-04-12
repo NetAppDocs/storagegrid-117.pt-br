@@ -1,0 +1,117 @@
+---
+permalink: admin/kms-editing.html 
+sidebar: sidebar 
+keywords: edit kms, edit key management server, change kms configuration, expired certificate 
+summary: Talvez seja necessário editar a configuração de um servidor de gerenciamento de chaves, por exemplo, se um certificado estiver prestes a expirar. 
+---
+= Editar um servidor de gerenciamento de chaves (KMS)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Talvez seja necessário editar a configuração de um servidor de gerenciamento de chaves, por exemplo, se um certificado estiver prestes a expirar.
+
+.Antes de começar
+* Você revisou o link:kms-considerations-and-requirements.html["considerações e requisitos para usar um servidor de gerenciamento de chaves"].
+* Se pretende atualizar o site selecionado para um KMS, analisou o link:kms-considerations-for-changing-for-site.html["Considerações para alterar o KMS para um site"].
+* Você está conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você tem a permissão de acesso root.
+
+
+.Passos
+. Selecione *CONFIGURATION* > *Security* > *Key Management Server*.
++
+A página servidor de gerenciamento de chaves é exibida e mostra todos os servidores de gerenciamento de chaves que foram configurados.
+
+. Selecione o KMS que deseja editar e selecione *ações* > *Editar*.
++
+Você também pode editar um KMS selecionando o nome do KMS na tabela e selecionando *Editar* na página de detalhes do KMS.
+
+. Opcionalmente, atualize os detalhes em *Etapa 1 (detalhes do KMS)* do assistente Editar um servidor de gerenciamento de chaves.
++
+[cols="1a,3a"]
+|===
+| Campo | Descrição 
+
+
+ a| 
+KMS nome
+ a| 
+Um nome descritivo para ajudá-lo a identificar este KMS. Deve ter entre 1 e 64 carateres.
+
+
+
+ a| 
+Nome da chave
+ a| 
+O alias exato da chave para o cliente StorageGRID no KMS. Deve ter entre 1 e 255 carateres.
+
+Você só precisa editar o nome da chave em casos raros. Por exemplo, você deve editar o nome da chave se o alias for renomeado no KMS ou se todas as versões da chave anterior tiverem sido copiadas para o histórico de versões do novo alias.
+
+[CAUTION]
+====
+Nunca tente girar uma chave alterando o nome da chave (alias) para o KMS. Em vez disso, gire a chave atualizando a versão da chave no software KMS. O StorageGRID requer que todas as versões de chave usadas anteriormente (bem como quaisquer versões futuras) sejam acessíveis a partir do KMS com o mesmo alias de chave. Se você alterar o alias de chave para um KMS configurado, o StorageGRID pode não conseguir descriptografar seus dados.
+
+link:kms-considerations-and-requirements.html["Considerações e requisitos para usar um servidor de gerenciamento de chaves"]
+
+====
+
+
+ a| 
+Gere as chaves para
+ a| 
+Se você estiver editando um KMS específico do site e ainda não tiver um KMS padrão, opcionalmente selecione *Sites não gerenciados por outro KMS (KMS padrão)*. Esta seleção converte um KMS específico do site para o KMS padrão, que se aplicará a todos os sites que não têm um KMS dedicado e a quaisquer sites adicionados em uma expansão.
+
+*Observação:* se você estiver editando um KMS específico do site, não poderá selecionar outro site. Se você estiver editando o KMS padrão, não será possível selecionar um site específico.
+
+
+
+ a| 
+Porta
+ a| 
+A porta que o servidor KMS usa para comunicações KMIP (Key Management Interoperability Protocol). O padrão é 5696, que é a porta padrão KMIP.
+
+
+
+ a| 
+Nome do anfitrião
+ a| 
+O nome de domínio ou endereço IP totalmente qualificado para o KMS.
+
+*Nota:* o campo Nome alternativo (SAN) do assunto do certificado do servidor deve incluir o FQDN ou o endereço IP que você inserir aqui. Caso contrário, o StorageGRID não poderá se conetar ao KMS ou a todos os servidores em um cluster KMS.
+
+|===
+. Se você estiver configurando um cluster KMS, selecione *Adicionar outro nome de host* para adicionar um nome de host para cada servidor no cluster.
+. Selecione *continuar*.
++
+A etapa 2 (carregar certificado do servidor) do assistente Editar um servidor de gerenciamento de chaves é exibida.
+
+. Se precisar substituir o certificado do servidor, selecione *Procurar* e carregue o novo arquivo.
+. Selecione *continuar*.
++
+A etapa 3 (carregar certificados de cliente) do assistente Editar um servidor de gerenciamento de chaves é exibida.
+
+. Se precisar substituir o certificado de cliente e a chave privada do certificado de cliente, selecione *Procurar* e carregue os novos arquivos.
+. Selecione *testar e salvar*.
++
+As conexões entre o servidor de gerenciamento de chaves e todos os nós de dispositivos criptografados por nós nos locais afetados são testadas. Se todas as conexões de nó forem válidas e a chave correta for encontrada no KMS, o servidor de gerenciamento de chaves será adicionado à tabela na página servidor de gerenciamento de chaves.
+
+. Se for apresentada uma mensagem de erro, reveja os detalhes da mensagem e selecione *OK*.
++
+Por exemplo, você pode receber um erro de entidade 422: Não processável se o site selecionado para este KMS já for gerenciado por outro KMS, ou se um teste de conexão falhou.
+
+. Se você precisar salvar a configuração atual antes de resolver os erros de conexão, selecione *Force save*.
++
+
+CAUTION: Selecionar *Force save* salva a configuração do KMS, mas não testa a conexão externa de cada dispositivo para esse KMS. Se houver um problema com a configuração, talvez você não consiga reinicializar os nós de dispositivo que têm a criptografia de nó ativada no site afetado. Você pode perder o acesso aos seus dados até que os problemas sejam resolvidos.
+
++
+A configuração do KMS é salva.
+
+. Reveja o aviso de confirmação e selecione *OK* se tiver a certeza de que pretende forçar a gravação da configuração.
++
+A configuração do KMS é salva, mas a conexão com o KMS não é testada.
+
+

@@ -1,0 +1,470 @@
+---
+permalink: primer/storagegrid-architecture-and-network-topology.html 
+sidebar: sidebar 
+keywords: architecture, deployment, topology, site, node redundancy, services, nodes 
+summary: Um sistema StorageGRID consiste em vários tipos de nós de grade em um ou mais locais de data center. 
+---
+= Topologia de rede e arquitetura StorageGRID
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Um sistema StorageGRID consiste em vários tipos de nós de grade em um ou mais locais de data center.
+
+Para obter informações adicionais sobre topologia de rede, requisitos e comunicações em grade do StorageGRID, consulte o link:../network/index.html["Diretrizes de rede"].
+
+
+
+== Topologias de implantação
+
+O sistema StorageGRID pode ser implantado em um único local de data center ou em vários locais de data center.
+
+
+
+=== Um único local
+
+Em uma implantação com um único local, a infraestrutura e as operações do sistema StorageGRID são centralizadas.
+
+image::../media/data_center_site_single.png[Um único local de data center]
+
+
+
+=== Vários locais
+
+Em uma implantação com vários sites, diferentes tipos e números de recursos do StorageGRID podem ser instalados em cada local. Por exemplo, pode ser necessário mais armazenamento em um data center do que em outro.
+
+Diferentes locais são frequentemente localizados em locais geograficamente diferentes em diferentes domínios de falha, como uma linha de falha de Terremoto ou planície de inundação. O compartilhamento de dados e a recuperação de desastres são obtidos pela distribuição automatizada de dados para outros sites.
+
+image::../media/data_center_sites_multiple.png[Vários locais de data center]
+
+Vários locais lógicos também podem existir em um único data center para permitir o uso de replicação distribuída e codificação de apagamento para aumentar a disponibilidade e a resiliência.
+
+
+
+=== Redundância de nó de grade
+
+Em uma implantação de um único local ou de vários locais, você pode incluir opcionalmente mais de um nó de administrador ou nó de gateway para redundância. Por exemplo, você pode instalar mais de um nó de administrador em um único site ou em vários sites. No entanto, cada sistema StorageGRID só pode ter um nó de administração principal.
+
+
+
+== Arquitetura do sistema
+
+Este diagrama mostra como os nós de grade são organizados dentro de um sistema StorageGRID.
+
+image::../media/grid_nodes_and_components.png[diagrama descrito pelo texto circundante]
+
+Os clientes S3 e Swift armazenam e recuperam objetos no StorageGRID. Outros clientes são usados para enviar notificações por e-mail, acessar a interface de gerenciamento do StorageGRID e, opcionalmente, acessar o compartilhamento de auditoria.
+
+Os clientes S3 e Swift podem se conetar a um nó de gateway ou a um nó de administrador para usar a interface de balanceamento de carga aos nós de storage. Como alternativa, os clientes S3 e Swift podem se conectar diretamente aos nós de storage usando HTTPS.
+
+Os objetos podem ser armazenados no StorageGRID em nós de storage baseados em software ou hardware ou em pools de storage de nuvem, que consistem em buckets externos do S3 ou contêineres de storage Azure Blob.
+
+
+
+== Nós e serviços de grade
+
+O componente básico básico de um sistema StorageGRID é o nó de grade. Os nós contêm serviços, que são módulos de software que fornecem um conjunto de recursos para um nó de grade.
+
+O sistema StorageGRID usa quatro tipos de nós de grade:
+
+* *Admin Nodes* fornecem serviços de gerenciamento, como configuração do sistema, monitoramento e Registro. Quando você entra no Gerenciador de Grade, você está se conetando a um nó Admin. Cada grade deve ter um nó de administração principal e pode ter nós de administração não primários adicionais para redundância. Você pode se conetar a qualquer nó de administrador e cada nó de administrador exibe uma exibição semelhante do sistema StorageGRID. No entanto, os procedimentos de manutenção devem ser executados usando o nó de administração principal.
++
+Os nós Admin também podem ser usados para equilibrar o tráfego de clientes S3 e Swift.
+
+* *Nós de storage* gerenciam e armazenam dados e metadados de objetos. Cada sistema StorageGRID precisa ter pelo menos três nós de storage. Se você tiver vários locais, cada local no sistema StorageGRID também precisará ter três nós de storage.
+* *Os nós de gateway (opcional)* fornecem uma interface de balanceamento de carga que os aplicativos clientes podem usar para se conetar ao StorageGRID. Um balanceador de carga direciona os clientes de forma otimizada para um nó de storage ideal, de modo que a falha de nós ou até mesmo um local inteiro seja transparente. Você pode usar uma combinação de nós de Gateway e nós de administrador para balanceamento de carga ou implementar um balanceador de carga HTTP de terceiros.
+* *Os nós de arquivo (obsoletos)* fornecem uma interface opcional através da qual os dados de objeto podem ser arquivados em fita.
+
+
+Para saber mais, link:../admin/index.html["Administrar o StorageGRID"]consulte .
+
+
+
+=== Nós baseados em software
+
+Os nós de grade baseados em software podem ser implantados das seguintes maneiras:
+
+* Como máquinas virtuais (VMs) no VMware vSphere
+* Dentro dos motores de contentor em hosts Linux. Os seguintes sistemas operacionais são suportados:
++
+** Red Hat Enterprise Linux
+** CentOS
+** Ubuntu
+** Debian
+
+
+
+
+Consulte o seguinte para obter mais informações:
+
+* link:../vmware/index.html["Instale o VMware"]
+* link:../rhel/index.html["Instale o Red Hat Enterprise Linux ou CentOS"]
+* link:../ubuntu/index.html["Instale Ubuntu ou Debian"]
+
+
+Utilize o https://imt.netapp.com/matrix/#welcome["Ferramenta de Matriz de interoperabilidade NetApp (IMT)"^] para obter uma lista de versões suportadas.
+
+
+
+=== Nós de dispositivos StorageGRID
+
+Os aparelhos de hardware StorageGRID são especialmente projetados para uso em um sistema StorageGRID. Alguns dispositivos podem ser usados como nós de storage. Outros dispositivos podem ser usados como nós de administrador ou nós de gateway. Você pode combinar nós de dispositivo com nós baseados em software ou implantar grades totalmente projetadas e totalmente compatíveis com dispositivos que não têm dependências de hipervisores externos, storage ou hardware de computação.
+
+Os seguintes tipos de dispositivos StorageGRID estão disponíveis:
+
+* O *dispositivo de storage SGF6112* é um servidor all-flash de 1 unidades de rack (1UU) que possui 12 unidades SSD NVMe (nonvolatile memory Express) com controladores integrados de computação e armazenamento.
+* Os dispositivos de serviços *SG100 e SG1000* são servidores de 1 unidades de rack (1UU) que podem operar cada um como nó de administrador principal, um nó de administrador não primário ou um nó de gateway. Ambos os dispositivos podem operar como nós de gateway e nós de administração (primários e não primários) ao mesmo tempo.
+* O *SG6000 Storage Appliance* funciona como um nó de armazenamento e combina o controlador de computação 1U SG6000-CN com uma gaveta de controladora de armazenamento 2U ou 4U. O SG6000 está disponível em dois modelos:
++
+** *SGF6024*: Combina o controlador de computação SG6000-CN com um compartimento de controladora de armazenamento 2U que inclui 24 unidades de estado sólido (SSDs) e controladores de armazenamento redundantes.
+** *SG6060*: Combina a controladora de computação SG6000-CN com um compartimento 4U que inclui 58 unidades NL-SAS, SSDs de 2 TB e controladores de storage redundantes. Cada dispositivo SG6060 dá suporte a uma ou duas gavetas de expansão de 60 unidades, fornecendo até 178 unidades dedicadas ao storage de objetos.
+
+
+* O *SG5700 Storage Appliance* é uma plataforma de storage e computação integrada que opera como nó de armazenamento. O SG5700 está disponível em dois modelos:
++
+** *SG5712*: Um compartimento de 2U U que inclui 12 unidades NL-SAS e controladores de computação e storage integrados.
+** *SG5760*: Um compartimento de 4U U que inclui 60 unidades NL-SAS e controladores de computação e storage integrados.
+
+
+
+
+Consulte o seguinte para obter mais informações:
+
+* https://hwu.netapp.com["NetApp Hardware Universe"^]
+* link:../installconfig/hardware-description-sg6100.html["SGF6112 dispositivo de armazenamento"]
+* link:../installconfig/hardware-description-sg100-and-1000.html["Aparelhos de serviços SG100 e SG1000"]
+* link:../installconfig/hardware-description-sg6000.html["SG6000 dispositivos de armazenamento"]
+* link:../installconfig/hardware-description-sg5700.html["SG5700 dispositivos de armazenamento"]
+
+
+
+
+=== Serviços primários para nós de administração
+
+A tabela a seguir mostra os serviços primários para nós de administração; no entanto, essa tabela não lista todos os serviços de nó.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Sistema de Gestão de Auditoria (AMS)
+ a| 
+Monitoriza a atividade e os eventos do sistema.
+
+
+
+ a| 
+Nó de gerenciamento de configuração (CMN)
+ a| 
+Gerencia a configuração em todo o sistema. Somente nó de administração principal.
+
+
+
+ a| 
+Interface do programa de aplicação de gerenciamento (mgmt-api)
+ a| 
+Processa solicitações da API de gerenciamento de grade e da API de gerenciamento do locatário.
+
+
+
+ a| 
+Alta disponibilidade
+ a| 
+Gerencia endereços IP virtuais de alta disponibilidade para grupos de nós de administração e nós de gateway.
+
+*Nota:* este serviço também é encontrado em nós de Gateway.
+
+
+
+ a| 
+Balanceador de carga
+ a| 
+Fornece balanceamento de carga de tráfego S3 e Swift de clientes para nós de storage.
+
+*Nota:* este serviço também é encontrado em nós de Gateway.
+
+
+
+ a| 
+Sistema de gerenciamento de rede (NMS)
+ a| 
+Fornece funcionalidade para o Gerenciador de Grade.
+
+
+
+ a| 
+Prometheus
+ a| 
+Coleta e armazena métricas de séries temporais dos serviços em todos os nós.
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===
+
+
+=== Serviços primários para nós de storage
+
+A tabela a seguir mostra os serviços primários para nós de storage; no entanto, essa tabela não lista todos os serviços de nós.
+
+
+NOTE: Alguns serviços, como o serviço ADC e o serviço RSM, normalmente existem apenas em três nós de storage em cada local.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Conta (acct)
+ a| 
+Gerencia contas de locatários.
+
+
+
+ a| 
+Controlador de domínio administrativo (ADC)
+ a| 
+Mantém a topologia e a configuração em toda a grade.
+
+
+
+ a| 
+Cassandra
+ a| 
+Armazena e protege metadados de objetos.
+
+
+
+ a| 
+Cassandra Reaper
+ a| 
+Executa reparos automáticos de metadados de objetos.
+
+
+
+ a| 
+Chunk
+ a| 
+Gerencia dados codificados por apagamento e fragmentos de paridade.
+
+
+
+ a| 
+Transferência de dados (dmv)
+ a| 
+Move dados para Cloud Storage Pools.
+
+
+
+ a| 
+Armazenamento de dados distribuídos (DDS)
+ a| 
+Monitora o armazenamento de metadados de objetos.
+
+
+
+ a| 
+Identidade (idnt)
+ a| 
+Federa identidades de usuários do LDAP e do ative Directory.
+
+
+
+ a| 
+Roteador de distribuição local (LDR)
+ a| 
+Processa solicitações de protocolo de storage de objetos e gerencia dados de objetos em disco.
+
+
+
+ a| 
+Máquina de estado replicado (RSM)
+ a| 
+Garante que as solicitações de serviços da plataforma S3 sejam enviadas para seus respetivos endpoints.
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===
+
+
+=== Serviços primários para nós de gateway
+
+A tabela a seguir mostra os serviços primários para nós de Gateway; no entanto, essa tabela não lista todos os serviços de nós.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Alta disponibilidade
+ a| 
+Gerencia endereços IP virtuais de alta disponibilidade para grupos de nós de administração e nós de gateway.
+
+*Observação:* este serviço também é encontrado em nós de administração.
+
+
+
+ a| 
+Balanceador de carga
+ a| 
+Fornece balanceamento de carga de camada 7 de tráfego S3 e Swift de clientes para nós de storage. Este é o mecanismo de balanceamento de carga recomendado.
+
+*Observação:* este serviço também é encontrado em nós de administração.
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===
+
+
+=== Serviços primários para nós de arquivamento
+
+A tabela a seguir mostra os serviços primários para nós de Arquivo (agora obsoletos); no entanto, essa tabela não lista todos os serviços de nó.
+
+
+NOTE: O suporte para nós de arquivo está obsoleto e será removido em uma versão futura.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Arquivo (ARC)
+ a| 
+Comunica com um sistema de armazenamento de fita externo do Tivoli Storage Manager (TSM).
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===
+
+
+=== Serviços da StorageGRID
+
+A seguir está uma lista completa de serviços do StorageGRID.
+
+* * Agente de Serviço de conta*
++
+Fornece uma interface para o serviço Load Balancer para consultar o Serviço de conta em hosts remotos e fornece notificações de alterações de configuração do Load Balancer Endpoint no serviço Load Balancer. O serviço Load Balancer está presente em nós de administração e nós de gateway.
+
+* *ADC Service (Administrative Domain Controller)*
++
+Mantém informações de topologia, fornece serviços de autenticação e responde a consultas dos serviços LDR e CMN. O serviço ADC está presente em cada um dos três primeiros nós de storage instalados em um local.
+
+* *AMS Service (sistema de Gestão de Auditoria)*
++
+Monitora e Registra todos os eventos e transações do sistema auditados em um arquivo de log de texto. O serviço AMS está presente nos nós de administração.
+
+* *Serviço ARC (Arquivo)*
++
+Fornece a interface de gerenciamento com a qual você configura conexões para armazenamento de arquivamento externo, como a nuvem por meio de uma interface S3 ou fita por meio de middleware TSM. O serviço ARC está presente nos nós de arquivo.
+
+* *Cassandra Reaper serviço*
++
+Executa reparos automáticos de metadados de objetos. O serviço Cassandra Reaper está presente em todos os nós de storage.
+
+* *Serviço Chunk*
++
+Gerencia dados codificados por apagamento e fragmentos de paridade. O serviço Chunk está presente nos nós de storage.
+
+* *Serviço CMN (Configuration Management Node)*
++
+Gerencia configurações e tarefas de grade em todo o sistema. Cada grade tem um serviço CMN, que está presente no nó Admin principal.
+
+* *Serviço DDS (armazenamento de dados distribuído)*
++
+Interfaces com o banco de dados Cassandra para gerenciar metadados de objetos. O serviço DDS está presente nos nós de storage.
+
+* *Serviço DMV (Data Mover)*
++
+Move dados para pontos de extremidade da nuvem. O serviço DMV está presente nos nós de storage.
+
+* *Serviço IP dinâmico*
++
+Monitora a grade para alterações dinâmicas de IP e atualiza configurações locais. O serviço Dynamic IP (dynip) está presente em todos os nós.
+
+* *Serviço Grafana*
++
+Usado para visualização de métricas no Gerenciador de Grade. O serviço Grafana está presente nos nós de administração.
+
+* *Serviço de alta disponibilidade*
++
+Gerencia IPs virtuais de alta disponibilidade em nós configurados na página grupos de alta disponibilidade. O serviço de alta disponibilidade está presente em nós de administração e nós de gateway. Este serviço também é conhecido como o serviço keepalived.
+
+* *Serviço de identidade (idnt)*
++
+Federa identidades de usuários do LDAP e do ative Directory. O serviço de identidade (idnt) está presente em três nós de storage em cada local.
+
+* *Serviço de árbitro Lambda*
++
+Gerencia S3 Selecione SelectObjectContent Requests.
+
+* *Serviço de balanceador de carga*
++
+Fornece balanceamento de carga de tráfego S3 e Swift de clientes para nós de storage. O serviço Load Balancer pode ser configurado através da página de configuração Load Balancer Endpoints. O serviço Load Balancer está presente em nós de administração e nós de gateway. Este serviço também é conhecido como o serviço nginx-gw.
+
+* *Serviço LDR (Roteador de distribuição local)*
++
+Gerencia o armazenamento e a transferência de conteúdo dentro da grade. O serviço LDR está presente nos nós de armazenamento.
+
+* *MISCd Information Service Control Daemon Service*
++
+Fornece uma interface para consultar e gerenciar serviços em outros nós e para gerenciar configurações ambientais no nó, como consultar o estado dos serviços em execução em outros nós. O serviço MISCd está presente em todos os nós.
+
+* *serviço nginx*
++
+Atua como um mecanismo de autenticação e comunicação segura para vários serviços de grade (como Prometheus e Dynamic IP) para poder falar com serviços em outros nós através de APIs HTTPS. O serviço nginx está presente em todos os nós.
+
+* *serviço nginx-gw*
++
+Alimenta o serviço Load Balancer. O serviço nginx-gw está presente em nós de administração e nós de gateway.
+
+* *Serviço NMS (sistema de Gestão de rede)*
++
+Alimenta as opções de monitoramento, relatórios e configuração que são exibidas pelo Gerenciador de Grade. O serviço NMS está presente nos nós de administração.
+
+* *Serviço de persistência*
++
+Gerencia arquivos no disco raiz que precisam persistir ao longo de uma reinicialização. O serviço de persistência está presente em todos os nós.
+
+* *Serviço Prometheus*
++
+Coleta métricas de séries temporais de serviços em todos os nós. O serviço Prometheus está presente nos nós de administração.
+
+* *Serviço RSM (Serviço de Máquina de Estado replicado)*
++
+Garante que as solicitações de serviço da plataforma sejam enviadas para seus respetivos endpoints. O serviço RSM está presente nos nós de storage que usam o serviço ADC.
+
+* *Serviço SSM (Monitor de status do servidor)*
++
+Monitora as condições de hardware e os relatórios para o serviço NMS. Uma instância do serviço SSM está presente em todos os nós da grade.
+
+* *Trace Collector Service*
++
+Executa a coleta de rastreamento para coletar informações para uso pelo suporte técnico. O serviço de coletor de rastreamento usa o software Jaeger de código aberto e está presente nos nós de administração.
+
+

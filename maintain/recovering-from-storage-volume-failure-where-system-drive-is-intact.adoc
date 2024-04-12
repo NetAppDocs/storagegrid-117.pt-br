@@ -1,0 +1,21 @@
+---
+permalink: maintain/recovering-from-storage-volume-failure-where-system-drive-is-intact.html 
+sidebar: sidebar 
+keywords: storagegrid, recover, storage volume failure, volume failure, system drive intact 
+summary: Você deve concluir uma série de tarefas para recuperar um nó de storage baseado em software em que um ou mais volumes de armazenamento no nó de armazenamento falharam, mas a unidade do sistema está intacta. Se apenas os volumes de armazenamento tiverem falhado, o nó de armazenamento ainda estará disponível para o sistema StorageGRID. 
+---
+= Recuperar de uma falha de volume de storage em que a unidade do sistema está intacta: Fluxo de trabalho
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve concluir uma série de tarefas para recuperar um nó de storage baseado em software em que um ou mais volumes de armazenamento no nó de armazenamento falharam, mas a unidade do sistema está intacta. Se apenas os volumes de armazenamento tiverem falhado, o nó de armazenamento ainda estará disponível para o sistema StorageGRID.
+
+
+NOTE: Este procedimento de recuperação aplica-se apenas a nós de storage baseados em software. Se os volumes de armazenamento tiverem falhado num nó de armazenamento de dispositivo, utilize o procedimento do dispositivo: link:recovering-storagegrid-appliance-storage-node.html["Recupere o nó de storage do dispositivo"].
+
+Como mostrado no diagrama de fluxo de trabalho, você deve identificar e desmontar volumes de storage com falha, recuperar os volumes, reconstruir o banco de dados Cassandra e restaurar dados de objeto.
+
+image::../media/storage_node_recovery_storage_vol_only.gif[visão geral do fluxograma da recuperação do volume de armazenamento]

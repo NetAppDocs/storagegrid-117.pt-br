@@ -1,0 +1,46 @@
+---
+permalink: admin/what-archive-node-is.html 
+sidebar: sidebar 
+keywords: archive node 
+summary: 'Opcionalmente, cada local de data center do StorageGRID pode ser implantado com um nó de arquivo, que permite que você se conete a um sistema de armazenamento de arquivamento externo direcionado, como o Gerenciador de armazenamento do Tivoli (TSM).' 
+---
+= O que é um nó de arquivo?
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Opcionalmente, cada local de data center do StorageGRID pode ser implantado com um nó de arquivo, que permite que você se conete a um sistema de armazenamento de arquivamento externo direcionado, como o Gerenciador de armazenamento do Tivoli (TSM).
+
+[CAUTION]
+====
+O suporte para nós de arquivamento (tanto para arquivamento na nuvem usando a API S3 como para arquivamento em fita usando middleware TSM) está obsoleto e será removido em uma versão futura. Mover objetos de um nó de arquivamento para um sistema de armazenamento de arquivamento externo foi substituído pelo ILM Cloud Storage Pools, que oferece mais funcionalidade.
+
+Consulte:
+
+* link:../admin/migrating-objects-from-cloud-tiering-s3-to-cloud-storage-pool.html["Migre objetos para um Cloud Storage Pool"]
+* link:../ilm/what-cloud-storage-pool-is.html["Use Cloud Storage Pools"]
+
+
+Além disso, você deve remover nós de arquivamento da política ILM ativa no StorageGRID 11,7 ou anterior. A remoção de dados de objetos armazenados nos nós de arquivamento simplificará futuras atualizações. link:../ilm/working-with-ilm-rules-and-ilm-policies.html["Trabalhando com regras de ILM e políticas de ILM"]Consulte .
+
+====
+O Archive Node fornece uma interface através da qual você pode segmentar um sistema de storage de arquivamento externo para o armazenamento de dados de objetos a longo prazo. O nó de arquivo também monitora essa conexão e a transferência de dados de objetos entre o sistema StorageGRID e o sistema de armazenamento de arquivamento externo direcionado.
+
+Depois de configurar as ligações ao destino externo, pode configurar o nó de arquivo para otimizar o desempenho do TSM, colocar um nó de arquivo offline quando um servidor TSM estiver a aproximar-se da capacidade ou indisponível, e configurar as definições de replicação e recuperação. Também pode definir alarmes personalizados para o nó de arquivo.
+
+Os dados de objetos que não podem ser excluídos, mas não são acessados regularmente, podem, a qualquer momento, ser movidos dos discos giratórios de um nó de storage e para um storage de arquivamento externo, como a nuvem ou a fita. Este arquivamento de dados de objetos é realizado através da configuração do nó de arquivo de um site de data center e, em seguida, a configuração de regras ILM em que este nó de arquivo é selecionado como o "destino" para instruções de posicionamento de conteúdo. O nó de arquivo não gerencia os dados de objeto arquivados em si; isso é obtido pelo dispositivo de arquivamento externo.
+
+
+NOTE: Os metadados de objetos não são arquivados, mas permanecem em nós de storage.
+
+
+
+== O que é o serviço ARC
+
+O serviço de arquivamento (ARC) em nós de arquivamento fornece a interface de gerenciamento que você pode usar para configurar conexões com armazenamento de arquivamento externo, como fita por meio do middleware TSM.
+
+É o serviço ARC que interage com um sistema de armazenamento de arquivos externo, enviando dados de objetos para armazenamento near-line e realizando recuperações quando um aplicativo cliente solicita um objeto arquivado. Quando um aplicativo cliente solicita um objeto arquivado, um nó de armazenamento solicita os dados do objeto do serviço ARC. O serviço ARC faz uma solicitação para o sistema de armazenamento de arquivos externo, que recupera os dados de objeto solicitados e os envia para o serviço ARC. O serviço ARC verifica os dados do objeto e os encaminha para o nó de armazenamento, que por sua vez retorna o objeto para o aplicativo cliente solicitante.
+
+As solicitações de dados de objetos arquivados em fita por meio do middleware TSM são gerenciadas para eficiência de recuperações. As solicitações podem ser solicitadas para que os objetos armazenados em ordem sequencial na fita sejam solicitados na mesma ordem sequencial. As solicitações são então enfileiradas para envio para o dispositivo de armazenamento. Dependendo do dispositivo de arquivamento, várias solicitações de objetos em diferentes volumes podem ser processadas simultaneamente.

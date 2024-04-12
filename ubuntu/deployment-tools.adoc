@@ -1,0 +1,25 @@
+---
+permalink: ubuntu/deployment-tools.html 
+sidebar: sidebar 
+keywords: deployment tools 
+summary: Você pode se beneficiar da automação de toda ou parte da instalação do StorageGRID. 
+---
+= Ferramentas de implantação
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode se beneficiar da automação de toda ou parte da instalação do StorageGRID.
+
+Automatizar a implantação pode ser útil em qualquer um dos seguintes casos:
+
+* Você já usa uma estrutura de orquestração padrão, como Ansible, Puppet ou Chef, para implantar e configurar hosts físicos ou virtuais.
+* Você pretende implantar várias instâncias do StorageGRID.
+* Você está implantando uma instância grande e complexa do StorageGRID.
+
+
+O serviço de host do StorageGRID é instalado por um pacote e impulsionado por arquivos de configuração que podem ser criados interativamente durante uma instalação manual ou preparados com antecedência (ou programaticamente) para permitir a instalação automatizada usando estruturas de orquestração padrão. O StorageGRID fornece scripts Python opcionais para automatizar a configuração de dispositivos StorageGRID e todo o sistema StorageGRID (a "grade"). Você pode usar esses scripts diretamente ou inspecioná-los para saber como usar a API REST de instalação do StorageGRID nas ferramentas de implantação e configuração de grade que você mesmo desenvolve.
+
+Se você estiver interessado em automatizar toda ou parte da implantação do StorageGRID, revise link:automating-installation.html["Automatize a instalação"] antes de iniciar o processo de instalação.

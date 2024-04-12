@@ -1,0 +1,49 @@
+---
+permalink: tenant/use-s3-console.html 
+sidebar: sidebar 
+keywords: how to use s3 console 
+summary: Você pode usar o Console S3 para exibir os objetos em um bucket do S3. 
+---
+= Use o experimental S3 Console
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode usar o Console S3 para exibir os objetos em um bucket do S3.
+
+Você também pode usar o console S3 para fazer o seguinte:
+
+* Adicione e exclua objetos, versões de objetos e pastas
+* Renomeie objetos
+* Mover e copiar objetos entre buckets e pastas
+* Gerenciar tags de objeto
+* Exibir metadados de objetos
+* Transferir objetos
+
+
+
+NOTE: O console S3 está marcado como "experimental" porque ainda não está completo ou aprovado para uso em um ambiente de produção. Os locatários só devem usar o Console S3 ao executar funções para um pequeno número de objetos, como ao carregar objetos para simular uma nova política de ILM, solucionar problemas de ingestão ou usar grades de prova de conceito ou não de produção.
+
+.Antes de começar
+* Você está conetado ao Gerenciador do Locatário usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
+* Você pertence a um grupo de usuários que tenha a permissão de acesso raiz ou que tenha os dois buckets Gerenciar todos e Gerenciar objetos com o Console S3 link:tenant-management-permissions.html["permissões"].
++
+
+NOTE: Os usuários que têm a permissão Gerenciar objetos com o Console S3, mas que não têm a permissão Gerenciar todos os buckets, ainda podem navegar diretamente para o Console experimental S3.
+
+* Você criou um bucket.
+* Uma política de grupo S3 ou balde foi configurada para o utilizador.
+* Você sabe o ID da chave de acesso do usuário e a chave de acesso secreta. Opcionalmente, você tem um `.csv` arquivo contendo essas informações. Consulte link:creating-your-own-s3-access-keys.html["instruções para criar chaves de acesso"].
+
+
+.Passos
+. Selecione *baldes*.
+. image:../media/s3_console_link.png["S3 ligação da consola"]Selecione . Você também pode acessar este link a partir da página de detalhes do bucket.
+. Na página experimental de login do Console S3, cole o ID da chave de acesso e a chave de acesso secreta nos campos. Caso contrário, selecione *carregar chaves de acesso* e selecione o seu `.csv` ficheiro.
+. Selecione *entrar*.
+. Gerencie objetos conforme necessário.
+
+
+image::../media/s3_console_example.png[S3 exemplo de console]

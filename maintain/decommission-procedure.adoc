@@ -1,0 +1,29 @@
+---
+permalink: maintain/decommission-procedure.html 
+sidebar: sidebar 
+keywords: how to decommission 
+summary: Você pode executar um procedimento de desativação para remover permanentemente nós de grade ou um site inteiro do sistema StorageGRID. 
+---
+= Procedimento de desativação: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode executar um procedimento de desativação para remover permanentemente nós de grade ou um site inteiro do sistema StorageGRID.
+
+Para remover um nó de grade ou um local, execute um dos seguintes procedimentos de desativação:
+
+* Execute um link:grid-node-decommissioning.html["desativação do nó de grade"] para remover um ou mais nós, que podem estar em um ou mais locais. Os nós removidos podem estar online e conetados ao sistema StorageGRID, ou podem estar offline e desconetados.
+* Execute um link:site-decommissioning.html["desativação do site"] para remover um site. Você executa um *desativação do site conetado* se todos os nós estiverem conetados ao StorageGRID. Você executa um *desativação do site desconetada* se todos os nós estiverem desconetados do StorageGRID.
++
+
+IMPORTANT: Antes de executar uma desativação do site desconetada, você deve entrar em Contato com seu representante da conta do NetApp. O NetApp revisará seus requisitos antes de ativar todas as etapas no assistente do site de desintegração. Você não deve tentar uma desativação de site desconetada se você acredita que pode ser possível recuperar o site ou recuperar dados de objeto do site.
+
+
+
+Se um site contiver uma mistura de nós conetados (image:../media/icon_alert_green_checkmark.png["Marca de verificação Icon Alert Green"]) e desconetados (image:../media/icon_alarm_gray_administratively_down.png["Ícone alarme cinza administrativamente para baixo"] ou image:../media/icon_alarm_blue_unknown.png["Ícone alarme azul desconhecido"]), você deverá colocar todos os nós offline novamente online.
+
+
+NOTE: Se precisar executar um segundo procedimento de manutenção, você pode link:pausing-and-resuming-decommission-process-for-storage-nodes.html["Interrompa o procedimento de desativação enquanto os nós de storage estão sendo removidos"]. O botão *Pausa* é ativado somente quando os estágios de avaliação ILM ou desativação de dados codificados por apagamento forem alcançados; no entanto, a avaliação ILM (migração de dados) continuará a ser executada em segundo plano. Depois de concluído o segundo procedimento de manutenção, pode retomar a desativação.

@@ -1,0 +1,87 @@
+---
+permalink: tenant/tenant-management-permissions.html 
+sidebar: sidebar 
+keywords: tenant management permissions 
+summary: Antes de criar um grupo de inquilinos, considere quais permissões você deseja atribuir a esse grupo. As permissões de gerenciamento do locatário determinam quais tarefas os usuários podem executar usando o Gerenciador do locatário ou a API de gerenciamento do locatário. Um usuário pode pertencer a um ou mais grupos. As permissões são cumulativas se um usuário pertencer a vários grupos. 
+---
+= Permissões de gerenciamento do locatário
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de criar um grupo de inquilinos, considere quais permissões você deseja atribuir a esse grupo. As permissões de gerenciamento do locatário determinam quais tarefas os usuários podem executar usando o Gerenciador do locatário ou a API de gerenciamento do locatário. Um usuário pode pertencer a um ou mais grupos. As permissões são cumulativas se um usuário pertencer a vários grupos.
+
+Para fazer login no Gerenciador do Locatário ou usar a API de Gerenciamento do Locatário, os usuários devem pertencer a um grupo que tenha pelo menos uma permissão. Todos os usuários que podem entrar podem executar as seguintes tarefas:
+
+* Visualizar o painel de instrumentos
+* Alterar sua própria senha (para usuários locais)
+
+
+Para todas as permissões, a configuração do modo de acesso do grupo determina se os usuários podem alterar configurações e executar operações ou se eles podem exibir somente as configurações e recursos relacionados.
+
+
+NOTE: Se um usuário pertencer a vários grupos e qualquer grupo estiver definido como somente leitura, o usuário terá acesso somente leitura a todas as configurações e recursos selecionados.
+
+Pode atribuir as seguintes permissões a um grupo. Observe que S3 locatários e locatários Swift têm permissões de grupo diferentes.
+
+[cols="1a,3a"]
+|===
+| Permissão | Descrição 
+
+
+ a| 
+Acesso à raiz
+ a| 
+Fornece acesso total ao Gerenciador do Locatário e à API de Gerenciamento do Locatário.
+
+*Observação:* os usuários do Swift devem ter permissão de acesso root para entrar na conta do locatário.
+
+
+
+ a| 
+Administrador
+ a| 
+Apenas inquilinos Swift. Fornece acesso total aos contentores e objetos Swift para essa conta de locatário
+
+*Observação:* os usuários do Swift devem ter a permissão Swift Administrator para executar qualquer operação com a Swift REST API.
+
+
+
+ a| 
+Gerencie suas próprias credenciais S3
+ a| 
+Permite que os usuários criem e removam suas próprias chaves de acesso S3. Os utilizadores que não têm esta permissão não veem a opção de menu *STORAGE (S3)* > *My S3 Access Keys*.
+
+
+
+ a| 
+Gerenciar todos os buckets
+ a| 
+* S3 locatários: Permite que os usuários usem o Gerenciador do locatário e a API de gerenciamento do locatário para criar e excluir buckets do S3 e gerenciar as configurações de todos os buckets do S3 na conta do locatário, independentemente das políticas de bucket ou grupo do S3.
++
+Os usuários que não têm essa permissão não veem a opção de menu *Buckets*.
+
+* Swift tenants: Permite que usuários Swift controlem o nível de consistência para contentores Swift usando a API de Gerenciamento do locatário.
+
+
+*Observação:* você só pode atribuir a permissão Gerenciar todos os buckets aos grupos Swift a partir da API de Gerenciamento do locatário. Não é possível atribuir essa permissão a grupos Swift usando o Gerenciador de Locações.
+
+
+
+ a| 
+Gerenciar endpoints
+ a| 
+Permite que os usuários usem o Gerenciador do Locatário ou a API de Gerenciamento do Locatário para criar ou editar endpoints de serviço da plataforma, que são usados como o destino dos serviços da plataforma StorageGRID.
+
+Os usuários que não têm essa permissão não veem a opção de menu *endpoints de serviços da plataforma*.
+
+
+
+ a| 
+Gerencie objetos com o Console S3
+ a| 
+Quando combinado com a permissão Gerenciar todos os buckets, permite que os usuários acessem o console experimental S3 na página Buckets. Os usuários que têm essa permissão, mas que não têm a permissão Gerenciar todos os buckets, ainda podem navegar diretamente para o experimental S3 Console.
+
+|===

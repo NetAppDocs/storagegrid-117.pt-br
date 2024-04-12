@@ -1,0 +1,25 @@
+---
+permalink: upgrade/changes-to-tenant-management-api.html 
+sidebar: sidebar 
+keywords: tenant management api, api, api version, swagger, rest api 
+summary: O StorageGRID 11,7 usa a versão 3 da API de gerenciamento do locatário. A versão 3 desconsidera a versão 2; no entanto, a versão 1 e a versão 2 ainda são suportadas. 
+---
+= Alterações na API de gerenciamento do locatário
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O StorageGRID 11,7 usa a versão 3 da API de gerenciamento do locatário. A versão 3 desconsidera a versão 2; no entanto, a versão 1 e a versão 2 ainda são suportadas.
+
+
+IMPORTANT: Você pode continuar usando a versão 1 e a versão 2 da API de gerenciamento com o StorageGRID 11,7; no entanto, o suporte para essas versões da API será removido em uma versão futura do StorageGRID. Depois de atualizar para o StorageGRID 11,7, as APIs v1 e v2 obsoletas podem ser desativadas usando a `PUT /grid/config/management` API.
+
+
+
+== Novos endpoints para federação de grade
+
+Você pode usar os endpoints da API *Grid-Federation-Connections* para listar as conexões de federação de grade para o locatário atual e limpar o último erro de replicação entre grade para o locatário atual e a conexão de federação de grade selecionada.
+
+Para saber mais, link:../tenant/understanding-tenant-management-api.html["Entenda a API de gerenciamento do locatário"]acesse .

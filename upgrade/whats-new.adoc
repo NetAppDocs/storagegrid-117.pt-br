@@ -1,0 +1,245 @@
+---
+permalink: upgrade/whats-new.html 
+sidebar: sidebar 
+keywords: what is new in StorageGRID 11.7 
+summary: Esta versão do StorageGRID apresenta os seguintes recursos. 
+---
+= Novidades do StorageGRID 11,7
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Esta versão do StorageGRID introduz os seguintes recursos e alterações funcionais.
+
+
+
+== Novas funcionalidades
+
+
+
+=== Federação de grade
+
+Você pode configurar uma conexão de federação de grade entre dois sistemas StorageGRID para clonar informações de conta de locatário e replicar objetos de bucket entre as grades para recuperação de desastres. Consulte link:../admin/grid-federation-overview.html["O que é a federação de grade?"], link:../admin/grid-federation-what-is-account-clone.html["O que é o clone de conta"], e link:../admin/grid-federation-what-is-cross-grid-replication.html["O que é replicação entre grades"].
+
+
+
+=== Melhor disponibilidade de leitura
+
+O controle de consistência read-after-new-write (padrão) foi aprimorado para estar mais disponível. As SOLICITAÇÕES DE OBTENÇÃO/CABEÇALHO de objetos inexistentes terão sucesso com até um nó de armazenamento offline em cada site. Os buckets não são mais necessários para serem definidos para o controle de consistência disponível para esse cenário. Por exemplo, os aplicativos que verificam a existência de um objeto antes da criação funcionarão adequadamente com leitura após nova gravação, mesmo durante a atualização de software quando um nó de armazenamento está offline.
+
+
+
+=== Renomeie grade, sites e nós
+
+Um novo procedimento de manutenção permite alterar os nomes de exibição exibidos no Gerenciador de Grade. Você pode atualizar nomes de exibição com segurança e sempre que precisar. link:../maintain/rename-grid-site-node-overview.html["Renomeie grade, sites e nós"]Consulte .
+
+
+
+=== Assistente de configuração FabricPool e S3
+
+O assistente de configuração FabricPool e S3 orienta você em cada etapa da configuração do StorageGRID para uso com o ONTAP FabricPool ou outro aplicativo cliente S3 e produz um arquivo que você pode usar ao inserir os valores necessários no outro aplicativo. link:../fabricpool/use-fabricpool-setup-wizard.html["Use o assistente de configuração do FabricPool"]Consulte e link:../admin/use-s3-setup-wizard.html["Utilize o assistente de configuração S3"].
+
+Relacionado a essa alteração, um banner agora é exibido no painel para lembrar aos novos usuários para configurar link:../admin/configuring-s3-api-endpoint-domain-names.html["S3 nomes de domínio de endpoint"]solicitações de estilo hospedado virtual S3 e configurar link:../monitor/email-alert-notifications.html["notificações por e-mail para alertas"]o .
+
+
+
+=== Controles de firewall
+
+A página de controle do Firewall permite gerenciar o acesso externo de portas nos nós da grade e definir endereços de host e sub-redes IP que têm permissão para acessar portas fechadas. A nova página também inclui as configurações de rede de cliente não confiável, que agora permitem selecionar portas adicionais que você deseja abrir quando a rede de cliente não confiável está configurada. link:../admin/configure-firewall-controls.html["Configurar firewall interno"]Consulte .
+
+
+
+=== Políticas de segurança aprimoradas
+
+Agora você pode determinar quais protocolos e cifras são usados para estabelecer conexões TLS seguras com aplicativos cliente e conexões SSH seguras com serviços StorageGRID internos. link:../admin/manage-tls-ssh-policy.html["Gerencie a política TLS e SSH"]Consulte .
+
+
+
+=== Alterações no ponto final do balanceador de carga
+
+Quando link:../admin/configuring-load-balancer-endpoints.html["configuração dos pontos de extremidade do balanceador de carga"], pode agora:
+
+* Permitir que todos os locatários acessem o endpoint (padrão) ou especifique uma lista de locatários permitidos ou bloqueados para fornecer um melhor isolamento de segurança entre os locatários e seus endpoints.
+* Use o modo de vinculação *tipo de nó* para exigir que os clientes usem o endereço IP (ou FQDN correspondente) de qualquer nó Admin ou o endereço IP de qualquer nó Gateway, com base no tipo de nó selecionado.
+
+
+
+
+== Dispositivo all-flash SGF6112
+
+O novo dispositivo de storage StorageGRID SGF6112 apresenta um design compacto com controlador de computação e controlador de storage integrados a um chassi de 1U U. O dispositivo dá suporte a 12 unidades SSD NVMe com capacidade de storage de até 15,3 TB por unidade. As unidades SSD estão em um RAID que fornece armazenamento de objetos resiliente. link:../installconfig/hardware-description-sg6100.html["Aparelho SGF6112: Visão geral"]Consulte .
+
+
+
+== Outros aprimoramentos do Grid Manager
+
+
+
+=== Melhorias DE ILM
+
+O assistente ILM aprimorado facilita a especificação de filtros, a inserção de períodos de tempo e posicionamentos e a visualização de diagramas de retenção. Os perfis de codificação de apagamento são criados automaticamente quando você seleciona um pool de storage e um esquema de EC para um posicionamento. Para novas instalações do StorageGRID 11,7 (não atualizações), um pool de armazenamento é criado automaticamente para cada site e a nova regra padrão *1 cópia por local* garante que novas instalações de vários locais terão proteção contra perda de site por padrão. link:../ilm/index.html["Gerenciar objetos com ILM"]Consulte .
+
+
+
+=== Painel personalizável
+
+Agora você pode configurar painéis personalizados para o Gerenciador de Grade. link:../monitor/viewing-dashboard.html["Visualizar e gerenciar o painel"]Consulte .
+
+
+
+=== UI de restauração de volume
+
+A restauração do volume de armazenamento permite restaurar dados de objetos se um volume de armazenamento falhar. Para o StorageGRID 11,7, você pode iniciar a restauração de volume do Gerenciador de Grade, além do método existente de inserir comandos manualmente. Usar o Gerenciador de Grade agora é o método preferido para restaurar dados de objeto. link:../maintain/restoring-volume.html["Restaure dados de objetos usando o Gerenciador de Grade"]Consulte .
+
+
+
+=== Atualização e hotfix UI
+
+Ao atualizar para o StorageGRID 11,7, você pode aplicar o hotfix 11,7 mais recente ao mesmo tempo. A página de atualização do StorageGRID mostra o caminho de atualização recomendado e links diretamente para as páginas de download corretas. link:performing-upgrade.html["Execute a atualização"]Consulte .
+
+
+
+=== Unidades para valores de armazenamento
+
+Agora, você pode selecionar unidades base 10 ou base 2 para os valores de armazenamento exibidos no Gerenciador de Grade e no Gerenciador de Tenant. Selecione o menu suspenso usuário no canto superior direito do Gerenciador de Grade ou Gerenciador de Locatário e selecione *Preferências do usuário*.
+
+
+
+=== Acesse o MIB do Gerenciador de Grade
+
+Agora você pode acessar arquivos MIB compatíveis com SNMP do Gerenciador de Grade usando a página do agente SNMP. link:../monitor/access-snmp-mib.html["Acesse arquivos MIB"]Consulte .
+
+
+
+=== Categorias de storage personalizadas para novos nós
+
+Quando você executa uma expansão para adicionar um novo local ou novos nós de storage, agora é possível atribuir um grau de storage personalizado a cada novo nó. link:../expand/performing-expansion.html["Execute a expansão"]Consulte .
+
+
+
+== Atualizações do Gerenciador de locatários
+
+
+
+=== Replicação entre grade
+
+As contas de locatários que têm permissão para usar um <<grid-federation,conexão de federação de grade>> podem clonar grupos de locatários, usuários e chaves S3 de uma grade para outra e usar replicação entre grade para replicar objetos de bucket entre duas grades. link:../tenant/grid-federation-account-clone.html["Clonar grupos de locatários e usuários"]Consulte e link:../tenant/grid-federation-manage-cross-grid-replication.html["Gerenciar a replicação entre grades"].
+
+
+
+=== Exclua todos os objetos do bucket
+
+Os usuários do Gerenciador de locatários agora podem excluir todos os objetos em um bucket, para que o bucket possa ser excluído. link:../tenant/deleting-s3-bucket-objects.html["Excluir objetos no bucket"]Consulte .
+
+
+
+=== S3 retenção padrão do bloqueio de objetos
+
+Agora, os usuários do Gerenciador de locatários podem ativar e configurar a retenção padrão ao criar buckets do S3 Object Lock. link:../tenant/creating-s3-bucket.html["Crie um bucket do S3"]Consulte .
+
+
+
+== S3 atualizações
+
+
+
+=== S3 modo de governança de bloqueio de objetos
+
+Ao especificar as configurações de bloqueio de objeto S3 para um objeto ou as configurações de retenção padrão para um bucket, agora você pode usar o modo de governança. Este modo de retenção permite que os usuários com permissão especial ignorem determinadas configurações de retenção. link:../tenant/using-s3-object-lock.html["Use o bloqueio de objetos S3D para reter objetos"]Consulte e link:../s3/use-s3-api-for-s3-object-lock.html["Use a API REST do S3 para configurar o bloqueio de objetos do S3"].
+
+
+
+=== Política de grupo do S3 para mitigação de ransomware
+
+Quando adicionada como política de grupo para uma conta de locatário do S3, a política de exemplo ajuda a mitigar ataques de ransomware. Ele impede que versões de objetos mais antigas sejam excluídas permanentemente. link:../tenant/creating-groups-for-s3-tenant.html["Crie grupos para um locatário do S3"]Consulte .
+
+
+
+=== Limiar de NewerNoncurrentVersions para buckets S3
+
+A `NewerNoncurrentVersions` ação na configuração do ciclo de vida do bucket especifica o número de versões não atuais retidas em um bucket S3 com versão. Esse limite substitui as regras de ciclo de vida fornecidas pelo ILM. link:../ilm/how-objects-are-deleted.html["Como os objetos são excluídos"]Consulte .
+
+
+
+=== S3 Selecione atualizações
+
+S3 SelectObjectContent agora oferece suporte para objetos Parquet. Além disso, agora você pode usar os endpoints do balanceador de carga S3 Select com Admin e Gateway que são nós de metal nu executando um kernel com cgroup v2 habilitado. link:../s3/select-object-content.html["S3 SelecioneObjectContent"]Consulte .
+
+
+
+== Outras melhorias
+
+
+
+=== Assunto do certificado opcional
+
+O campo de assunto do certificado agora é opcional. Se este campo for deixado em branco, o certificado gerado usará o primeiro nome de domínio ou endereço IP como o nome comum do assunto (CN). link:../admin/using-storagegrid-security-certificates.html["Gerenciar certificados de segurança"]Consulte .
+
+
+
+=== Categoria de mensagens de auditoria ILM e novas mensagens
+
+Uma categoria de mensagem de auditoria foi adicionada para operações ILM e inclui as mensagens IDEL, LKCU e ORLM. Esta nova categoria está definida como *normal*. link:../audit/ilm-audit-messages.html["Mensagens de auditoria de operações ILM"]Consulte .
+
+Além disso, novas mensagens de auditoria foram adicionadas para suportar a nova funcionalidade 11,7:
+
+* link:../audit/bror-bucket-read-only-request.html["BROR: Pedido apenas de leitura do balde"]
+* link:../audit/cgrr-cross-grid-replication-request.html["CGRR: Solicitação de replicação de Grade cruzada"]
+* link:../audit/ebdl-empty-bucket-delete.html["EBDL: Apagar balde vazio"]
+* link:../audit/ebkr-empty-bucket-request.html["EBKR: Pedido de balde vazio"]
+* link:../audit/s3-select-request.html["S3SL: S3 Selecione o pedido"]
+
+
+
+
+=== Novos alertas
+
+Os seguintes novos alertas foram adicionados para o StorageGRID 11,7:
+
+* Detectada avaria na unidade DAS do aparelho
+* Reconstrução da unidade DAS do dispositivo
+* Detetada avaria na ventoinha do aparelho
+* Detectada falha na NIC do aparelho
+* Aviso crítico de SSD do dispositivo
+* Falha ao enviar a mensagem AutoSupport
+* Erro de gravação de tamanho excessivo do Cassandra
+* Falha na solicitação permanente de replicação entre redes
+* Recursos de replicação entre grades indisponíveis
+* Impacto no desempenho de depuração
+* Expiração do certificado de federação de grade
+* O balde FabricPool tem uma definição de consistência do balde não suportada
+* Falha na configuração do firewall
+* Falha na conexão da federação da grade
+* Detectada avaria na ventoinha do aparelho de armazenamento
+* Nó de storage não no estado de storage desejado
+* O volume de armazenamento precisa de atenção
+* O volume de storage precisa ser restaurado
+* Volume de armazenamento offline
+* Configuração do traçado ativada
+* Falha ao iniciar o reparo de dados replicados
+
+
+
+
+=== Alterações na documentação
+
+* Uma nova referência rápida resume como o StorageGRID oferece suporte às APIs do Amazon Simple Storage Service (S3). link:../s3/quick-reference-support-for-aws-apis.html["Referência rápida: Solicitações de API S3 suportadas"]Consulte .
+* A nova link:../primer/quick-start.html["Início rápido do StorageGRID"] lista as etapas de alto nível para configurar e usar um sistema StorageGRID e fornece links para as instruções relevantes.
+* As instruções de instalação do hardware do dispositivo foram combinadas e consolidadas para facilitar a utilização. Um início rápido foi adicionado como um guia de alto nível para a instalação de hardware. link:../installconfig/index.html["Início rápido para instalação de hardware"]Consulte .
+* As instruções de manutenção comuns a todos os modelos de aparelhos foram combinadas, consolidadas e movidas para a seção de manutenção do local do documento. link:../commonhardware/index.html["Manutenção de nó comum: Visão geral"]Consulte .
+* As instruções de manutenção específicas para cada modelo de aparelho também foram movidas para a secção de manutenção:
++
+link:../sg6100/index.html["Mantenha o hardware SGF6112"]
+
++
+link:../sg6000/index.html["Mantenha o hardware SG6000"]
+
++
+link:../sg5700/index.html["Mantenha o hardware SG5700"]
+
++
+link:../sg100-1000/index.html["Mantenha o hardware SG100 e SG1000"]
+
+

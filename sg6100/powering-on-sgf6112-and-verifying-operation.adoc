@@ -1,0 +1,75 @@
+---
+permalink: sg6100/powering-on-sgf6112-and-verifying-operation.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6100, sgf6112,storage node, storage appliance, power on, turn on, start 
+summary: Ligue o aparelho depois de concluir a manutenção. 
+---
+= Ligue o SGF6112 e verifique a operação
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ligue o controlador após concluir a manutenção.
+
+.Antes de começar
+* Você instalou o controlador em um gabinete ou rack e conetou os cabos de dados e alimentação.
++
+link:reinstalling-sgf6112-into-cabinet-or-rack.html["Reinstale o controlador SGF6112 no gabinete ou rack"]
+
+* Você localizou fisicamente o controlador no data center.
++
+link:locating-sgf6112-in-data-center.html["Localize o dispositivo SGF6112 no data center"]
+
+
+
+.Passos
+. Ligue o aparelho.
++
+Poderá ter de remover a moldura para aceder ao interrutor de alimentação; em caso afirmativo, lembre-se de a voltar a instalá-la posteriormente.
+
+. Monitore os LEDs do controlador e os códigos de inicialização usando um dos seguintes métodos:
++
+** Prima o interrutor de alimentação na parte frontal do controlador.
+** Use a interface BMC do controlador:
++
+... Acesse a interface BMC do controlador.
++
+link:../installconfig/accessing-bmc-interface.html["Acesse a interface BMC"]
+
+... Selecione *Power Control*.
+... Selecione *ligar* e, em seguida, selecione *Executar ação*.
++
+image::../media/sgf6112_power_on_from_bmc.png[Ligue o aparelho da BMC]
+
++
+Use a interface BMC para monitorar o status de inicialização.
+
+
+
+
+
+. Confirme se o controlador do dispositivo é apresentado no Gestor de grelha e sem alertas.
++
+Pode levar até 20 minutos para o controlador ser exibido no Gerenciador de Grade.
+
++
+
+CAUTION: Não coloque outro nó de dispositivo offline a menos que este dispositivo tenha um ícone verde.
+
+. Confirme se o novo dispositivo está totalmente operacional fazendo login no nó da grade usando PuTTY ou outro cliente ssh:
++
+.. Introduza o seguinte comando: `ssh _Appliance_IP_`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
+.. Digite o seguinte comando para mudar para root: `su -`
+.. Introduza a palavra-passe listada no `Passwords.txt` ficheiro.
++
+Quando você estiver conetado como root, o prompt mudará de `$` para `#`.
+
+
+
+
+
+.Informações relacionadas
+link:../installconfig/viewing-status-indicators.html["Ver indicadores de estado"]

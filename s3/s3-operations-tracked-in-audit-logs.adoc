@@ -1,0 +1,51 @@
+---
+permalink: s3/s3-operations-tracked-in-audit-logs.html 
+sidebar: sidebar 
+keywords: audit log actions tracked 
+summary: Várias operações de bucket e operações de objetos são rastreadas nos logs de auditoria do StorageGRID. 
+---
+= S3 operações rastreadas nos logs de auditoria
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Várias operações de bucket e operações de objetos são rastreadas nos logs de auditoria do StorageGRID.
+
+
+
+== Operações de bucket rastreadas nos logs de auditoria
+
+* ELIMINAR balde
+* ELIMINAR marcação de intervalo
+* Excluir vários objetos
+* OBTER balde (Listar objetos)
+* OBTER versões Objeto balde
+* OBTER marcação Bucket
+* Balde DA cabeça
+* COLOQUE o balde
+* COLOQUE a conformidade do balde
+* COLOQUE a marcação de balde
+* COLOQUE o controle de versão do Bucket
+
+
+
+
+== Operações de objeto rastreadas nos logs de auditoria
+
+* Concluir carregamento Multipart
+* Carregar artigo (quando a regra ILM usa comportamentos de ingestão equilibrados ou rigorosos)
+* Carregar artigo - Copiar (quando a regra ILM usa os comportamentos de ingestão equilibrada ou rigorosa)
+* Objeto DELETE
+* Objeto GET
+* Objeto HEAD
+* Restauração PÓS-objeto
+* Objeto PUT
+* COLOCAR Objeto - Copiar
+
+
+.Informações relacionadas
+link:operations-on-buckets.html["Operações em baldes"]
+
+link:operations-on-objects.html["Operações em objetos"]

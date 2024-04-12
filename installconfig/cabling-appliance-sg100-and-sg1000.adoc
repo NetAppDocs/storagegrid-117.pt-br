@@ -1,0 +1,197 @@
+---
+permalink: installconfig/cabling-appliance-sg100-and-sg1000.html 
+sidebar: sidebar 
+keywords: storagegrid, sg100, sg1000, service appliance, services appliance, gateway Node, admin node, cabling, wiring, connecting, cable, wire, connect 
+summary: Você deve conetar a porta de gerenciamento do dispositivo ao laptop de serviço e conetar as portas de rede do dispositivo à rede de grade e à rede de cliente opcional para StorageGRID. 
+---
+= Aparelho para cabos (SG100 e SG1000)
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você deve conetar a porta de gerenciamento do dispositivo ao laptop de serviço e conetar as portas de rede do dispositivo à rede de grade e à rede de cliente opcional para StorageGRID.
+
+.Antes de começar
+* Você tem um cabo Ethernet RJ-45 para conetar a porta de gerenciamento.
+* Tem uma das seguintes opções para as portas de rede. Estes itens não são fornecidos com o aparelho.
++
+** Um a quatro cabos Twinax para ligar as quatro portas de rede.
+** Para o SG100, um a quatro transcetores SFP ou SFP28 se você planeja usar cabos óticos para as portas.
+** Para o SG1000, um a quatro transcetores QSFP ou QSFP28 se você planeja usar cabos óticos para as portas.
+
+
+
+
+
+CAUTION: *Risco de exposição à radiação laser* -- não desmonte ou remova qualquer parte de um transcetor SFP ou QSFP. Você pode estar exposto à radiação laser.
+
+.Sobre esta tarefa
+As figuras a seguir mostram as portas na parte traseira do aparelho.
+
+Conexões de porta SG100:
+
+image::../media/sg100_connections.png[SG100 conetores traseiros]
+
+Conexões de porta SG1000:
+
+image::../media/sg1000_connections.png[Conexões de SG1000 portas]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo de porta | Utilização 
+
+
+ a| 
+1
+ a| 
+Porta de gerenciamento BMC no dispositivo
+ a| 
+1 GbE (RJ-45)
+ a| 
+Liga-se à rede onde acede à interface BMC.
+
+
+
+ a| 
+2
+ a| 
+Quatro portas de rede no dispositivo
+ a| 
+* Para o SG100: 10/25-GbE
+* Para o SG1000: 10/25/40/100-GbE
+
+ a| 
+Conete-se à rede de grade e à rede de cliente para StorageGRID.
+
+
+
+ a| 
+3
+ a| 
+Porta de rede de administração no dispositivo (identificada como P1 nas figuras)
+ a| 
+1 GbE (RJ-45)
+
+*Importante:* esta porta funciona apenas a 1000 BaseT/full e não suporta velocidades de 10 ou 100 megabits.
+ a| 
+Liga o dispositivo à rede de administração para StorageGRID.
+
+
+
+ a| 
+ a| 
+Porta RJ-45 mais à direita no aparelho
+ a| 
+1 GbE (RJ-45)
+
+*Importante:* esta porta funciona apenas a 1000 BaseT/full e não suporta velocidades de 10 ou 100 megabits.
+ a| 
+* Pode ser ligado com a porta de gerenciamento 1 se você quiser uma conexão redundante com a rede de administração.
+* Pode ser deixado desconetado e disponível para acesso local temporário (IP 169.254.0.1).
+* Durante a instalação, pode ser utilizado para ligar o dispositivo a um computador portátil de serviço se os endereços IP atribuídos por DHCP não estiverem disponíveis.
+
+
+|===
+.Passos
+. Conete a porta de gerenciamento BMC do dispositivo à rede de gerenciamento, usando um cabo Ethernet.
++
+Embora essa conexão seja opcional, recomenda-se facilitar o suporte.
+
+. Ligue as portas de rede do aparelho aos comutadores de rede adequados, utilizando cabos Twinax ou cabos óticos e transcetores.
++
+[NOTE]
+====
+Todas as quatro portas de rede devem usar a mesma velocidade de link. Consulte a tabela a seguir para saber o equipamento necessário para o hardware e a velocidade da ligação.
+
+[cols="2a,2a"]
+|===
+| Velocidade da ligação de SG100 (GbE) | Equipamento necessário 
+
+
+ a| 
+10
+ a| 
+Transceptor SFP
+
+
+
+ a| 
+25
+ a| 
+Transcetor SFP28
+
+
+
+| Velocidade da ligação de SG1000 (GbE) | Equipamento necessário 
+
+
+ a| 
+10
+ a| 
+Transceptor QSA e SFP
+
+
+
+ a| 
+25
+ a| 
+Transcetor QSA e SFP28
+
+
+
+ a| 
+40
+ a| 
+Transceptor QSFP
+
+
+
+ a| 
+100
+ a| 
+Transcetor QFSP28
+
+|===
+====
++
+** Se você planeja usar o modo de ligação de porta fixa (padrão), conete as portas à rede StorageGRID e às redes de clientes, conforme mostrado na tabela.
++
+[cols="1a,2a"]
+|===
+| Porta | Liga a... 
+
+
+ a| 
+Porta 1
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 2
+ a| 
+Rede de rede
+
+
+
+ a| 
+Porta 3
+ a| 
+Rede cliente (opcional)
+
+
+
+ a| 
+Porta 4
+ a| 
+Rede de rede
+
+|===
+** Se você planeja usar o modo de ligação de porta agregada, conete uma ou mais portas de rede a um ou mais switches. Você deve conetar pelo menos duas das quatro portas para evitar ter um único ponto de falha. Se você usar mais de um switch para uma única ligação LACP, os switches devem suportar MLAG ou equivalente.
+
+
+. Se pretender utilizar a rede de administração para StorageGRID, ligue a porta de rede de administração do dispositivo à rede de administração, utilizando um cabo Ethernet.
+

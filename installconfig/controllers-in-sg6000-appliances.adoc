@@ -1,0 +1,398 @@
+---
+permalink: installconfig/controllers-in-sg6000-appliances.html 
+sidebar: sidebar 
+keywords: storagegrid, sg6000, controller, controllers, SG6000-CN, compute controller, E2800, storage controller, E-Series storage controller 
+summary: Cada modelo do dispositivo StorageGRID SG6000 inclui um controlador de computação SG6000-CN em um compartimento 1U e controladores de storage duplex e-Series em um compartimento 2U ou 4U, dependendo do modelo. Reveja os diagramas para saber mais sobre cada tipo de controlador. 
+---
+= SG6000 controladoras
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cada modelo do dispositivo StorageGRID SG6000 inclui um controlador de computação SG6000-CN em um compartimento 1U e controladores de storage duplex e-Series em um compartimento 2U ou 4U, dependendo do modelo. Reveja os diagramas para saber mais sobre cada tipo de controlador.
+
+
+
+== Controlador de computação SG6000-CN
+
+* Fornece recursos de computação para o dispositivo.
+* Inclui o instalador do dispositivo StorageGRID.
++
+
+NOTE: O software StorageGRID não está pré-instalado no dispositivo. Este software é recuperado a partir do Admin Node quando você implementa o dispositivo.
+
+* Pode se conetar a todas as três redes StorageGRID, incluindo a rede de Grade, a rede Admin e a rede cliente.
+* Conecta-se aos controladores de storage e-Series e opera como iniciador.
+
+
+
+
+=== Conetores SG6000-CN
+
+image::../media/sg6000_cn_rear_connectors.gif[Conetores traseiros SG6000-CN]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo | Utilização 
+
+
+ a| 
+1
+ a| 
+Portas de interconexão 1-4
+ a| 
+Fibre Channel (FC) de 16 GB/s, com ótica integrada
+ a| 
+Ligue o controlador SG6000-CN aos controladores E2800 (duas ligações a cada E2800).
+
+
+
+ a| 
+2
+ a| 
+Portas de rede 1-4
+ a| 
+10 GbE ou 25 GbE, com base no tipo de transcetor de cabo ou SFP, na velocidade do switch e na velocidade do link configurada
+ a| 
+Conete-se à rede de grade e à rede de cliente para StorageGRID.
+
+
+
+ a| 
+3
+ a| 
+Porta de gerenciamento de BMC
+ a| 
+1 GbE (RJ-45)
+ a| 
+Conete-se ao controlador de gerenciamento de placa base SG6000-CN.
+
+
+
+ a| 
+4
+ a| 
+Portas de diagnóstico e suporte
+ a| 
+* VGA
+* Série, 115200 8-N-1
+* USB
+
+ a| 
+Reservado para uso de suporte técnico.
+
+
+
+ a| 
+5
+ a| 
+Admin Network port 1
+ a| 
+1 GbE (RJ-45)
+ a| 
+Ligue o SG6000-CN à rede de administração para StorageGRID.
+
+
+
+ a| 
+6
+ a| 
+Admin Network port 2
+ a| 
+1 GbE (RJ-45)
+ a| 
+Opções:
+
+* Vincular com a porta de gerenciamento 1 para uma conexão redundante com a rede de administração para StorageGRID.
+* Deixe desconetado e disponível para acesso local temporário (IP 169.254.0.1).
+* Durante a instalação, use a porta 2 para configuração IP se os endereços IP atribuídos pelo DHCP não estiverem disponíveis.
+
+
+|===
+
+
+== SGF6024: EF570 controladoras de storage
+
+* Duas controladoras para suporte a failover.
+* Gerenciar o armazenamento de dados nas unidades.
+* Funciona como controladores padrão da série e em uma configuração duplex.
+* Inclua o software SANtricity os (firmware do controlador).
+* Inclua o Gerenciador do sistema do SANtricity para monitorar o hardware de armazenamento e gerenciar alertas, o recurso AutoSupport e o recurso de segurança da unidade.
+* Conete-se ao controlador SG6000-CN e forneça acesso ao armazenamento flash.
+
+
+
+
+=== Conetores EF570
+
+image::../media/ef570_rear_connectors.gif[EF570 conetores traseiros]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo | Utilização 
+
+
+ a| 
+1
+ a| 
+Portas de interconexão 1 e 2
+ a| 
+SFP ótico FC de 16 GB/s.
+ a| 
+Ligue cada um dos controladores EF570 ao controlador SG6000-CN.
+
+Existem quatro ligações ao controlador SG6000-CN (duas de cada EF570).
+
+
+
+ a| 
+2
+ a| 
+Portas de diagnóstico e suporte
+ a| 
+* Porta serial RJ-45
+* Porta serial micro USB
+* Porta de USB
+
+ a| 
+Reservado para uso de suporte técnico.
+
+
+
+ a| 
+3
+ a| 
+Portas de expansão da unidade
+ a| 
+SAS de 12GB GB/s.
+ a| 
+Não utilizado. O dispositivo SGF6024 não é compatível com compartimentos de unidades de expansão.
+
+
+
+ a| 
+4
+ a| 
+Portas de gerenciamento 1 e 2
+ a| 
+Ethernet de 1 GB (RJ-45)
+ a| 
+* A porta 1 coneta-se à rede onde você acessa o Gerenciador de sistema do SANtricity em um navegador.
+* A porta 2 está reservada para uso de suporte técnico.
+
+
+|===
+
+
+== SG6060 e SG6060X: E2800 controladoras de storage
+
+* Duas controladoras para suporte a failover.
+* Gerenciar o armazenamento de dados nas unidades.
+* Funciona como controladores padrão da série e em uma configuração duplex.
+* Inclua o software SANtricity os (firmware do controlador).
+* Inclua o Gerenciador do sistema do SANtricity para monitorar o hardware de armazenamento e gerenciar alertas, o recurso AutoSupport e o recurso de segurança da unidade.
+* Conete-se ao controlador SG6000-CN e forneça acesso ao armazenamento.
+
+
+O SG6060 e o SG6060X usam controladores de storage E2800.
+
+[cols="1a,2a,2a"]
+|===
+| Aparelho | Controlador | Controlador HIC 
+
+
+ a| 
+SG6060
+ a| 
+Dois controladores de storage E2800A
+ a| 
+Nenhum
+
+
+
+ a| 
+SG6060X
+ a| 
+Dois controladores de storage E2800B
+ a| 
+HIC de quatro portas
+
+|===
+Os controladores de storage E2800A e E2800B são idênticos em especificações e funções, exceto para a localização das portas de interconexão.
+
+
+CAUTION: Não utilize um E2800A e um E2800B no mesmo aparelho.
+
+
+
+=== Conetores E2800A
+
+image::../media/e2800_controller_with_callouts.gif[Conetores no controlador E2800A]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo | Utilização 
+
+
+ a| 
+1
+ a| 
+Portas de interconexão 1 e 2
+ a| 
+SFP ótico FC de 16 GB/s.
+ a| 
+Ligue cada um dos controladores E2800A ao controlador SG6000-CN.
+
+Existem quatro ligações ao controlador SG6000-CN (duas de cada E2800A).
+
+
+
+ a| 
+2
+ a| 
+Portas de gerenciamento 1 e 2
+ a| 
+Ethernet de 1 GB (RJ-45)
+ a| 
+* Opções da porta 1:
++
+** Conete-se a uma rede de gerenciamento para permitir o acesso direto TCP/IP ao Gerenciador de sistemas SANtricity
+** Deixe sem fio para salvar uma porta do switch e um endereço IP. Acesse o Gerenciador de sistema do SANtricity usando as UIs do instalador do Gerenciador de Grade ou do dispositivo de Grade de armazenamento.
+
+
+
+
+*Nota*: Algumas funcionalidades opcionais do SANtricity, como a sincronização NTP para carimbos de data/hora precisos de registo, não estão disponíveis quando optar por deixar a porta 1 sem fios.
+
+*Nota*: StorageGRID 11,5 ou superior e SANtricity 11,70 ou superior são necessários quando você deixa a porta 1 sem fio.
+
+* A porta 2 está reservada para uso de suporte técnico.
+
+
+
+
+ a| 
+3
+ a| 
+Portas de diagnóstico e suporte
+ a| 
+* Porta serial RJ-45
+* Porta serial micro USB
+* Porta de USB
+
+ a| 
+Reservado para uso de suporte técnico.
+
+
+
+ a| 
+4
+ a| 
+Portas de expansão da unidade 1 e 2
+ a| 
+SAS de 12GB GB/s.
+ a| 
+Conete as portas às portas de expansão da unidade nas IOMs no compartimento de expansão.
+
+|===
+
+
+=== Conetores E2800B
+
+image::../media/e2800B_controller_with_callouts.gif[Conetores no controlador E2800B]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo | Utilização 
+
+
+ a| 
+1
+ a| 
+Portas de interconexão 1 e 2
+ a| 
+SFP ótico FC de 16 GB/s.
+ a| 
+Ligue cada um dos controladores E2800B ao controlador SG6000-CN.
+
+Existem quatro ligações ao controlador SG6000-CN (duas de cada E2800B).
+
+
+
+ a| 
+2
+ a| 
+Portas de gerenciamento 1 e 2
+ a| 
+Ethernet de 1 GB (RJ-45)
+ a| 
+* Opções da porta 1:
++
+** Conete-se a uma rede de gerenciamento para permitir o acesso direto TCP/IP ao Gerenciador de sistemas SANtricity
+** Deixe sem fio para salvar uma porta do switch e um endereço IP. Acesse o Gerenciador de sistema do SANtricity usando as UIs do instalador do Gerenciador de Grade ou do dispositivo de Grade de armazenamento.
+
+
+
+
+*Nota*: Algumas funcionalidades opcionais do SANtricity, como a sincronização NTP para carimbos de data/hora precisos de registo, não estão disponíveis quando optar por deixar a porta 1 sem fios.
+
+*Nota*: StorageGRID 11,5 ou superior e SANtricity 11,70 ou superior são necessários quando você deixa a porta 1 sem fio.
+
+* A porta 2 está reservada para uso de suporte técnico.
+
+
+
+
+ a| 
+3
+ a| 
+Portas de diagnóstico e suporte
+ a| 
+* Porta serial RJ-45
+* Porta serial micro USB
+* Porta de USB
+
+ a| 
+Reservado para uso de suporte técnico.
+
+
+
+ a| 
+4
+ a| 
+Portas de expansão da unidade 1 e 2
+ a| 
+SAS de 12GB GB/s.
+ a| 
+Conete as portas às portas de expansão da unidade nas IOMs no compartimento de expansão.
+
+|===
+
+
+== SG6060 e SG6060X: IOMs para compartimentos de expansão opcionais
+
+O compartimento de expansão contém dois módulos de entrada/saída (IOMs) que se conectam aos controladores de storage ou a outros compartimentos de expansão.
+
+
+
+=== Conetores IOM
+
+image::../media/iom_connectors.gif[Traseira IOM]
+
+[cols="1a,2a,2a,3a"]
+|===
+| Legenda | Porta | Tipo | Utilização 
+
+
+ a| 
+1
+ a| 
+Portas de expansão da unidade 1-4
+ a| 
+SAS de 12GB GB/s.
+ a| 
+Conecte cada porta aos controladores de storage ou ao compartimento de expansão adicional (se houver).
+
+|===

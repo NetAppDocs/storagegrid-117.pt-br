@@ -1,0 +1,31 @@
+---
+permalink: maintain/considerations-for-decommissioning-grid-nodes.html 
+sidebar: sidebar 
+keywords: storagegrid, decommission 
+summary: Antes de iniciar este procedimento para desativar um ou mais nós, você deve entender as implicações da remoção de cada tipo de nó. Após a desativação bem-sucedida de um nó, seus serviços serão desativados e o nó será desligado automaticamente. 
+---
+= Considerações gerais para desativação do nó de grade
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Antes de iniciar este procedimento para desativar um ou mais nós, você deve entender as implicações da remoção de cada tipo de nó. Após a desativação bem-sucedida de um nó, seus serviços serão desativados e o nó será desligado automaticamente.
+
+Você não pode desativar um nó se isso deixar o StorageGRID em um estado inválido. As seguintes regras são aplicadas:
+
+* Não é possível desativar o nó de administração principal.
+* Não é possível desativar os nós de arquivo.
+* Não é possível desativar um nó de administrador ou um nó de gateway se uma de suas interfaces de rede fizer parte de um grupo de alta disponibilidade (HA).
+* Não é possível desativar um nó de armazenamento se a sua remoção afetar o quórum de ADC.
+* Não é possível desativar um nó de storage se for necessário para a política ILM ativa.
+* Você não deve desativar mais de 10 nós de storage em um único procedimento de nó de compactação.
+* Não é possível desativar um nó conetado se a grade incluir qualquer nó desconetado (nós cuja integridade é desconhecida ou administrativamente inoperante). Primeiro, você deve desativar ou recuperar os nós desconetados.
+* Se sua grade contiver vários nós desconetados, o software exige que você os desative todos ao mesmo tempo, o que aumenta o potencial de resultados inesperados.
+* Se um nó desconetado não puder ser removido (por exemplo, um nó de armazenamento que é necessário para o quórum de ADC), nenhum outro nó desconetado poderá ser removido.
+* Se você quiser substituir um dispositivo mais antigo por um dispositivo mais novo, considere link:../commonhardware/how-appliance-node-cloning-works.html["clonar o nó do dispositivo"] em vez de desativar o nó antigo e adicionar o novo nó em uma expansão.
+
+
+
+IMPORTANT: Não remova a máquina virtual de um nó de grade ou outros recursos até que seja instruído a fazê-lo em procedimentos de desativação.

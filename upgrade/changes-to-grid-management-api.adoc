@@ -1,0 +1,37 @@
+---
+permalink: upgrade/changes-to-grid-management-api.html 
+sidebar: sidebar 
+keywords: grid management api, api, api version, swagger, rest api 
+summary: O StorageGRID 11,7 usa a versão 3 da API de gerenciamento de grade. A versão 3 desconsidera a versão 2; no entanto, a versão 1 e a versão 2 ainda são suportadas. 
+---
+= Alterações na API Grid Management
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+O StorageGRID 11,7 usa a versão 3 da API de gerenciamento de grade. A versão 3 desconsidera a versão 2; no entanto, a versão 1 e a versão 2 ainda são suportadas.
+
+
+IMPORTANT: Você pode continuar usando a versão 1 e a versão 2 da API de gerenciamento com o StorageGRID 11,7; no entanto, o suporte para essas versões da API será removido em uma versão futura do StorageGRID. Depois de atualizar para o StorageGRID 11,7, as APIs v1 e v2 obsoletas podem ser desativadas usando a `PUT /grid/config/management` API.
+
+Para saber mais, link:../admin/using-grid-management-api.html["Use a API de gerenciamento de grade"]acesse .
+
+
+
+== Nomes de exibição agora incluídos nas respostas às solicitações de integridade do nó
+
+Relacionado ao novo link:../maintain/rename-grid-site-node-overview.html["Renomeie a grade, os locais e os nós procedimento"], depois de renomear um site ou nó, o nome do item (seu nome de sistema) e seu nome de exibição são retornados pela API *node-health*.
+
+
+
+== Pode criar bucket e chaves de acesso para o novo locatário S3
+
+Novas `s3Bucket` opções e `s3AccessKey` foram adicionadas à API *Accounts*. Quando você cria uma conta de locatário do S3 usando a API Grid Management, você pode criar opcionalmente um bucket para esse locatário, bem como o ID da chave de acesso e a chave secreta para o usuário raiz do locatário.
+
+
+
+== Pode alterar o estado de storage para nó de storage
+
+Você pode usar os novos endpoints da API *node-storage-State* para determinar e alterar o estado do armazenamento em um nó de armazenamento (on-line, off-line, somente leitura).

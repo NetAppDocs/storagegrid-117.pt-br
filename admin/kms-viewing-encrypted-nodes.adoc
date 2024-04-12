@@ -1,0 +1,103 @@
+---
+permalink: admin/kms-viewing-encrypted-nodes.html 
+sidebar: sidebar 
+keywords: view encrypted nodes, kms nodes, appliances with kms 
+summary: Você pode exibir informações sobre os nós do dispositivo no sistema StorageGRID que têm a configuração criptografia do nó ativada. 
+---
+= Exibir nós criptografados
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Você pode exibir informações sobre os nós do dispositivo no seu sistema StorageGRID que têm a configuração *criptografia de nó* ativada.
+
+.Passos
+. Selecione *CONFIGURATION* > *Security* > *Key Management Server*.
++
+A página Key Management Server (servidor de gerenciamento de chaves) é exibida. A guia Detalhes da configuração mostra todos os servidores de gerenciamento de chaves que foram configurados.
+
+. Na parte superior da página, selecione a guia *nós criptografados*.
++
+A guia nós criptografados lista os nós do dispositivo no sistema StorageGRID que têm a configuração *criptografia de nó* ativada.
+
+. Revise as informações na tabela para cada nó de dispositivo.
++
+[cols="1a,2a"]
+|===
+| Coluna | Descrição 
+
+
+ a| 
+Nome do nó
+ a| 
+O nome do nó do dispositivo.
+
+
+
+ a| 
+Tipo de nó
+ a| 
+O tipo de nó: Storage, Admin ou Gateway.
+
+
+
+ a| 
+Local
+ a| 
+O nome do site do StorageGRID onde o nó está instalado.
+
+
+
+ a| 
+KMS nome
+ a| 
+O nome descritivo do KMS usado para o nó.
+
+Se nenhum KMS estiver listado, selecione a guia Detalhes da configuração para adicionar um KMS.
+
+link:kms-adding.html["Adicionar um servidor de gerenciamento de chaves (KMS)"]
+
+
+
+ a| 
+UID da chave
+ a| 
+O ID exclusivo da chave de criptografia usada para criptografar e descriptografar dados no nó do dispositivo. Para visualizar um UID de chave inteiro, posicione o cursor sobre a célula.
+
+Um traço (--) indica que a chave UID é desconhecida, possivelmente por causa de um problema de conexão entre o nó do aparelho e o KMS.
+
+
+
+ a| 
+Estado
+ a| 
+O status da conexão entre o KMS e o nó do dispositivo. Se o nó estiver conetado, o carimbo de data/hora será atualizado a cada 30 minutos. Pode levar vários minutos para que o status da conexão seja atualizado após as alterações de configuração do KMS.
+
+*Observação:* você deve atualizar seu navegador para ver os novos valores.
+
+|===
+. Se a coluna Status indicar um problema KMS, solucione o problema imediatamente.
++
+Durante as operações normais de KMS, o status será *conectado ao KMS*. Se um nó for desconetado da grade, o estado de conexão do nó é mostrado (administrativamente para baixo ou desconhecido).
+
++
+Outras mensagens de status correspondem a alertas StorageGRID com os mesmos nomes:
+
++
+** Falha ao carregar a configuração DE KMS
+** Erro de conetividade DE KMS
+** Nome da chave de encriptação KMS não encontrado
+** Falha na rotação da chave de CRIPTOGRAFIA KMS
+** A chave KMS falhou ao desencriptar um volume de aparelho
+** KMS não está configurado
+
+
++
+Execute as ações recomendadas para esses alertas.
+
+
+
+
+CAUTION: Você deve resolver quaisquer problemas imediatamente para garantir que seus dados estejam totalmente protegidos.

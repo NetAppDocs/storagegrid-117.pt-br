@@ -1,0 +1,70 @@
+= 
+:allow-uri-read: 
+
+
+A tabela a seguir mostra os serviços primários para nós de administração; no entanto, essa tabela não lista todos os serviços de nó.
+
+[cols="1a,2a"]
+|===
+| Serviço | Função de chave 
+
+
+ a| 
+Sistema de Gestão de Auditoria (AMS)
+ a| 
+Monitoriza a atividade e os eventos do sistema.
+
+
+
+ a| 
+Nó de gerenciamento de configuração (CMN)
+ a| 
+Gerencia a configuração em todo o sistema. Somente nó de administração principal.
+
+
+
+ a| 
+Interface do programa de aplicação de gerenciamento (mgmt-api)
+ a| 
+Processa solicitações da API de gerenciamento de grade e da API de gerenciamento do locatário.
+
+
+
+ a| 
+Alta disponibilidade
+ a| 
+Gerencia endereços IP virtuais de alta disponibilidade para grupos de nós de administração e nós de gateway.
+
+*Nota:* este serviço também é encontrado em nós de Gateway.
+
+
+
+ a| 
+Balanceador de carga
+ a| 
+Fornece balanceamento de carga de tráfego S3 e Swift de clientes para nós de storage.
+
+*Nota:* este serviço também é encontrado em nós de Gateway.
+
+
+
+ a| 
+Sistema de gerenciamento de rede (NMS)
+ a| 
+Fornece funcionalidade para o Gerenciador de Grade.
+
+
+
+ a| 
+Prometheus
+ a| 
+Coleta e armazena métricas de séries temporais dos serviços em todos os nós.
+
+
+
+ a| 
+Monitor de status do servidor (SSM)
+ a| 
+Monitora o sistema operacional e o hardware subjacente.
+
+|===

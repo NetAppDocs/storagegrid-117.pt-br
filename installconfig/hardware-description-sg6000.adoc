@@ -1,0 +1,248 @@
+---
+permalink: installconfig/hardware-description-sg6000.html 
+sidebar: sidebar 
+keywords: sg6000, sg6060, sg6060x, storage appliance 
+summary: Os dispositivos StorageGRID SG6060 e SG6060X incluem um controlador de computação e um compartimento de controladores de storage que contém duas controladoras de storage e 60 unidades. 
+---
+= Aparelhos SG6060 e SG6060X: Visão geral
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Os dispositivos StorageGRID SG6060 e SG6060X incluem um controlador de computação e um compartimento de controladores de storage que contém duas controladoras de storage e 60 unidades.
+
+Opcionalmente, é possível adicionar gavetas de expansão de 60 unidades a ambos os dispositivos. Não existem diferenças funcionais ou de especificação entre o SG6060 e o SG6060X, exceto para a localização das portas de interconexão no controlador de armazenamento.
+
+
+
+== Componentes SG6060 e SG6060X
+
+Os aparelhos SG6060 e SG6060X incluem os seguintes componentes:
+
+[cols="1a,2a"]
+|===
+| Componente | Descrição 
+
+
+ a| 
+Controlador de computação
+ a| 
+Controlador SG6000-CN, um servidor de unidade de um rack (1UU) que inclui:
+
+* 40 núcleos (80 threads)
+* 192 GB DE RAM
+* Até 4 x 25 Gbps de largura de banda agregada Ethernet
+* Interconexão Fibre Channel (FC) de 4 x 16 Gbps
+* Controlador de gerenciamento de placa base (BMC) que simplifica o gerenciamento de hardware
+* Fontes de alimentação redundantes
+
+
+
+
+ a| 
+Compartimento do controlador de storage
+ a| 
+Compartimento de controladora e-Series E2860 (storage array), um compartimento de 4U TB que inclui:
+
+* Dois controladores da série E2800 (configuração duplex) para fornecer suporte a failover do controlador de armazenamento
++
+** O SG6060 contém E2800A controladores de storage
+** O SG6060X contém E2800B controladores de storage
+
+
+* Compartimento de unidade de cinco gavetas com capacidade para sessenta unidades de 3,5 polegadas (2 unidades de estado sólido, ou SSDs e 58 unidades NL-SAS)
+* Fontes de alimentação e ventiladores redundantes
+
+
+
+
+ a| 
+Opcional: Prateleiras de expansão de storage
+
+*Observação:* as prateleiras de expansão podem ser instaladas durante a implantação inicial ou adicionadas posteriormente.
+ a| 
+Compartimento e-Series DE460C, um compartimento de 4U TB que inclui:
+
+* Dois módulos de entrada/saída (IOMs)
+* Cinco gavetas, cada uma com capacidade para 12 unidades NL-SAS, para um total de 60 unidades
+* Fontes de alimentação e ventiladores redundantes
+
+
+Cada dispositivo SG6060 e SG6060X pode ter um ou dois compartimentos de expansão para um total de 180 unidades (duas dessas unidades são reservadas para o cache de leitura e-Series).
+
+|===
+
+
+== Diagramas SG6060D e SG6060XD.
+
+As frentes dos anos SG6060 e SG6060X são idênticas.
+
+
+
+=== Vista frontal SG6060 ou SG6060X
+
+Esta figura mostra a frente do SG6060 ou SG6060X, que inclui uma controladora de computação de 1U TB e uma gaveta de 4U TB que contém duas controladoras de storage e 60 unidades em cinco gavetas de unidades.
+
+image::../media/sg6060_front_view_with_and_without_bezels.gif[SG6060 Vista frontal]
+
+[cols="1a,2a"]
+|===
+| Legenda | Descrição 
+
+
+ a| 
+1
+ a| 
+Controlador de computação SG6000-CN com moldura frontal
+
+
+
+ a| 
+2
+ a| 
+Compartimento do controlador E2860 com painel frontal (compartimento de expansão opcional aparece idêntico)
+
+
+
+ a| 
+3
+ a| 
+Controlador de computação SG6000-CN com painel frontal removido
+
+
+
+ a| 
+4
+ a| 
+Compartimento do controlador E2860 com painel frontal removido (o compartimento de expansão opcional aparece idêntico)
+
+|===
+
+
+=== Vista traseira de SG6060 mm
+
+Essa figura mostra a parte traseira do SG6060, incluindo controladores de computação e storage, ventiladores e fontes de alimentação.
+
+image::../media/sg6060_rear_view.gif[SG6060 Vista traseira]
+
+[cols="1a,2a"]
+|===
+| Legenda | Descrição 
+
+
+ a| 
+1
+ a| 
+Fonte de alimentação (1 de 2) para o controlador de computação SG6000-CN
+
+
+
+ a| 
+2
+ a| 
+Conetores para controlador de computação SG6000-CN
+
+
+
+ a| 
+3
+ a| 
+Ventilador (1 de 2) para compartimento do controlador E2860
+
+
+
+ a| 
+4
+ a| 
+Controlador de armazenamento e-Series E2800A (1 de 2) e conetores
+
+
+
+ a| 
+5
+ a| 
+Fonte de alimentação (1 de 2) para o compartimento do controlador E2860
+
+|===
+
+
+=== Vista traseira de SG6060X mm
+
+Esta figura mostra a parte de trás do SG6060X.
+
+image::../media/sg6060x_rear_view.gif[SG6060x Vista traseira]
+
+[cols="1a,2a"]
+|===
+| Legenda | Descrição 
+
+
+ a| 
+1
+ a| 
+Fonte de alimentação (1 de 2) para o controlador de computação SG6000-CN
+
+
+
+ a| 
+2
+ a| 
+Conetores para controlador de computação SG6000-CN
+
+
+
+ a| 
+3
+ a| 
+Ventilador (1 de 2) para compartimento do controlador E2860
+
+
+
+ a| 
+4
+ a| 
+Controlador de armazenamento e-Series E2800B (1 de 2) e conetores
+
+
+
+ a| 
+5
+ a| 
+Fonte de alimentação (1 de 2) para o compartimento do controlador E2860
+
+|===
+
+
+=== Compartimento de expansão
+
+Esta figura mostra a parte traseira do compartimento de expansão opcional para o SG6060 e SG6060X, incluindo os módulos de entrada/saída (IOMs), ventiladores e fontes de alimentação. Cada SG6060 pode ser instalado com uma ou duas prateleiras de expansão, que podem ser incluídas na instalação inicial ou adicionadas posteriormente.
+
+image::../media/de460c_expansion_shelf_rear_view.gif[Prateleira de expansão traseira]
+
+[cols="1a,2a"]
+|===
+| Legenda | Descrição 
+
+
+ a| 
+1
+ a| 
+Ventilador (1 de 2) para a prateleira de expansão
+
+
+
+ a| 
+2
+ a| 
+IOM (1 de 2) para compartimento de expansão
+
+
+
+ a| 
+3
+ a| 
+Fonte de alimentação (1 de 2) para o compartimento de expansão
+
+|===
