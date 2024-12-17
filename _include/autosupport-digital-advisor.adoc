@@ -1,0 +1,9 @@
+= 
+:allow-uri-read: 
+
+
+O consultor digital é baseado na nuvem e aproveita as análises preditivas e o conhecimento da comunidade fornecidos pela base instalada da NetApp. Suas avaliações de risco contínuas, alertas preditivos, orientações prescritivas e ações automatizadas ajudam a evitar problemas antes que eles ocorram, levando a uma melhor integridade do sistema e maior disponibilidade do sistema.
+
+Você deve habilitar o AutoSupport se quiser usar os painéis e a funcionalidade do consultor digital no site de suporte da NetApp.
+
+https://docs.netapp.com/us-en/active-iq/index.html["Documentação do Digital Advisor"^]
