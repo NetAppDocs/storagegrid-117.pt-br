@@ -11,7 +11,7 @@ summary: Quando o alerta *Objects Lost* é acionado, você deve investigar imedi
 
 
 [role="lead"]
-Quando o alerta *Objects Lost* é acionado, você deve investigar imediatamente. Colete informações sobre os objetos afetados e entre em Contato com o suporte técnico.
+Quando o alerta de objetos perdidos for acionado, você deve investigar imediatamente. Colete informações sobre os objetos afetados e entre em contato com o suporte técnico.
 
 .Antes de começar
 * Você deve estar conetado ao Gerenciador de Grade usando um link:../admin/web-browser-requirements.html["navegador da web suportado"].
